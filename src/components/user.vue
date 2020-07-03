@@ -1,6 +1,5 @@
 <template>
   <div>
-
   <vxe-table border height="300" :data="userData">
       <vxe-table-column field="id" title="ID" width="70" sortable></vxe-table-column>
       <vxe-table-column field="name" title="名前" width="200"></vxe-table-column>
@@ -108,6 +107,22 @@ data() {
         age: 30,
         sex: "男",
         address: "大阪市大阪府"
+      },
+      {
+        id: 2,
+        name: "近藤勇",
+        kanaName:"コンドウイサム",
+        age: 36,
+        sex: "男",
+        address: "東京都江戸川区"
+      },
+      {
+        id: 3,
+        name: "神崎空",
+        kanaName: "カンザキソラ",
+        age: 24,
+        sex: "男",
+        address: "沖縄県那覇市"
       }
     ],
       selectRow: null,
@@ -131,6 +146,7 @@ data() {
   
 },
 methods: {
+  
    formatterSex({ cellValue }) {
       const item = this.sexList.find(item => item.value === cellValue);
       return item ? item.label : "";
