@@ -20,36 +20,26 @@ export default new Vuex.Store({
       state.coronaData = []
       state.coronaData.push(data)
     },
-    setTotal(state, data) {
-      state.coronaDataTotal = data
-    }
-    
+
   },
   actions: {
-    rankingData({ commit }){
+    rankingData({ commit }) {
       const params = {
-        applicationId: 
-        process.env.VUE_APP_applicationId
+        applicationId:
+          process.env.VUE_APP_applicationId
       }
-      axios.get("https://app.rakuten.co.jp/services/api/IchibaItem/Ranking/20170628",{ params })
-      .then((res) => {
-        commit('shopData', res.data.Items)
-      })
+      axios.get("https://app.rakuten.co.jp/services/api/IchibaItem/Ranking/20170628", { params })
+        .then((res) => {
+          commit('shopData', res.data.Items)
+        })
     },
     //都道府県別
     coronaPrefectures({ commit }, url) {
       axios.get(url)
-      .then((res) => {
-        commit('setPrefectures', res.data)
-      })
+        .then((res) => {
+          commit('setPrefectures', res.data)
+        })
     },
-    coronaTotal({ commit }, url) {
-      axios.get(url)
-      .then((res) => {
-        console.log(res)
-        commit('setTotal',res.data)
-      })
-    }
   },
   modules: {
   }
