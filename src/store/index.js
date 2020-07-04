@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
+import prefs from '../assets/prefectures.json';
+
 
 Vue.use(Vuex)
 
@@ -9,7 +11,8 @@ export default new Vuex.Store({
     rankingData: [],
     coronaData: [],
     coronaTotalData: {},
-    coronaPrefData: []
+    coronaPrefData: [],
+    prefs: []
   },
   mutations: {
     shopData(state, data) {
@@ -21,10 +24,11 @@ export default new Vuex.Store({
       state.coronaData.push(data)
     },
     setTotalData(state, total) {
+      console.log(total)
       state.coronaTotalData = total
     },
     prefInfo(state, data) {
-      state.coronaPrefData = data
+      state.coronaPrefData.push(data)
     }
 
   },
@@ -47,25 +51,20 @@ export default new Vuex.Store({
         })
     },
     //都道府県別の詳細
-    prefInfomation({ commit }, pref) {
-      const params = {
-        prefecture: pref
-      }
-      axios.get("https://covid19-japan-web-api.now.sh/api/v1/positives", {params})
-      .then((res) => {
-        console.log(res)
-        commit('prefInfo', res.data)
+    prefInfomation({ commit }) {
+      let total = []
+      prefs.forEach((pref) => {
+        let params = {
+          prefecture: pref.name
+        }
+        axios.get("https://covid19-japan-web-api.now.sh/api/v1/positives", { params })
+          .then((res) => {
+            total.push(res)
+          })
       })
+      commit('prefInfo', total)
+      console.log(total)
     },
-    //都道府県取得
-    prefectures() {
-      axios.get("/prefectures")
-      .then((res) => {
-        console.log(res)
-      })
-    }
-
-
   },
   modules: {
   }

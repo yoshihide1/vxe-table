@@ -39,29 +39,38 @@ export default {
   },
 
   computed: {
-    ...mapState(["coronaData", "coronaTotalData"])
+    ...mapState(["coronaData", "coronaTotalData", "coronaPrefData"])
   },
   watch: {
     coronaData() {
       this.setData(this.coronaData);
     },
     coronaTotalData() {
+      //coronaDataの合計値
       console.log(this.coronaTotalData);
     },
     selected() {
-      this.$store.dispatch("prefInfomation", this.selected);
+      // this.$store.dispatch("prefInfomation", this.selected);
     }
   },
   methods: {
+    // test(sample) {
+    //   //各都道府県の年代と性別分け
+    //   console.log(sample[0]);
+    //   console.log(sample[0].data);
+    //   for (let i = 0; i < 47; i++) {
+    //     console.log(sample[i].data);
+    //   }
+    // },
     aggregate() {
       this.$store.dispatch("coronaPrefectures");
-      this.$store.dispatch("prefInfomation", this.selected);
-      this.$store.dispatch("prefectures");
+      this.$store.dispatch("prefInfomation");
+      // this.$store.dispatch("test");
     },
     setData(prefData) {
-      console.log(this.pref);
       this.coronaPref = prefData[0];
       this.totalData(prefData[0]);
+      this.test(this.coronaPrefData);
     },
 
     totalData(data) {
@@ -84,4 +93,5 @@ export default {
 </script>
 
 <style>
+
 </style>
