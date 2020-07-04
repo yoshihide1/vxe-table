@@ -4,9 +4,11 @@
       <vxe-table-column field="id" title="ID" width="70" sortable></vxe-table-column>
       <vxe-table-column field="name" title="名前" width="200"></vxe-table-column>
       <vxe-table-column field="kanaName" title="フリガナ" width="200" sortable></vxe-table-column>
-      <vxe-table-column field="age" title="年齢" widrh="100" sortable></vxe-table-column>
-      <vxe-table-column field="sex" title="性別" width="100" sortable></vxe-table-column>
+      <vxe-table-column field="age" title="年齢" width="100" sortable></vxe-table-column>
+      <vxe-table-column field="sex" title="性別" width="100"></vxe-table-column>
       <vxe-table-column field="address" title="住所" width="300" show-overflow></vxe-table-column>
+      <vxe-table-column field="" title="サンプル１" show-overflow></vxe-table-column>
+      <vxe-table-column field="" title="サンプル２" show-overflow></vxe-table-column>
       <vxe-table-column title="編集" width="100" show-overflow>
         <template v-slot="{ row }">
           <vxe-button type="text" status="primary" @click="editEvent(row)">

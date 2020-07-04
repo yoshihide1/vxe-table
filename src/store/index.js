@@ -8,18 +8,24 @@ export default new Vuex.Store({
   state: {
     rankingData: [],
     coronaData: [],
-    coronaDataTotal: {}
+    coronaTotalData: {},
+    coronaPrefData: []
   },
   mutations: {
     shopData(state, data) {
       state.rankingData = []
       state.rankingData.push(data)
-
     },
-    setPrefectures(state, data) {
+    prefectures(state, data) {
       state.coronaData = []
       state.coronaData.push(data)
     },
+    setTotalData(state, total) {
+      state.coronaTotalData = total
+    },
+    prefInfo(state, data) {
+      state.coronaPrefData = data
+    }
 
   },
   actions: {
@@ -34,12 +40,32 @@ export default new Vuex.Store({
         })
     },
     //都道府県別
-    coronaPrefectures({ commit }, url) {
-      axios.get(url)
+    coronaPrefectures({ commit }) {
+      axios.get("https://covid19-japan-web-api.now.sh/api/v1/prefectures")
         .then((res) => {
-          commit('setPrefectures', res.data)
+          commit('prefectures', res.data)
         })
     },
+    //都道府県別の詳細
+    prefInfomation({ commit }, pref) {
+      const params = {
+        prefecture: pref
+      }
+      axios.get("https://covid19-japan-web-api.now.sh/api/v1/positives", {params})
+      .then((res) => {
+        console.log(res)
+        commit('prefInfo', res.data)
+      })
+    },
+    //都道府県取得
+    prefectures() {
+      axios.get("/prefectures")
+      .then((res) => {
+        console.log(res)
+      })
+    }
+
+
   },
   modules: {
   }

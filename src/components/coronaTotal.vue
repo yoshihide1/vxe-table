@@ -11,16 +11,22 @@
       <vxe-table-column field="pcr" title="PCR検査数" sortable></vxe-table-column>
       <vxe-table-column field="population" title="人口" sortable></vxe-table-column>
     </vxe-table>
+    
+    <select v-model="setPref" name="pref" id="pref">
+      <option v-for="(pref, index) in prefs" :key="index" :value="pref.name">{{ pref.name}}</option>
+    </select>
   </div>
 </template>
 
 <script>
+import prefs from "../assets/prefectures.json";
 import { mapState } from "vuex";
 export default {
   data() {
     return {
+      prefs: prefs,
+      setPref: "都道府県別詳細",
       coronaPref: [],
-      coronaTotal: {},
       cases: 0,
       deaths: 0,
       discharge: 0,
@@ -28,53 +34,47 @@ export default {
       pcr: 0,
       population: 0,
       severe: 0,
-      prefectures: "https://covid19-japan-web-api.now.sh/api/v1/prefectures",
-      total: "https://covid19-japan-web-api.now.sh/api/v1/total"
+      total: {}
     };
   },
 
   computed: {
-    ...mapState(["coronaData"])
+    ...mapState(["coronaData", "coronaTotalData"])
   },
   watch: {
     coronaData() {
       this.setData(this.coronaData);
     },
-    coronaDataTotal() {
-      this.setTotalData(this.coronaDataTotal);
+    coronaTotalData() {
+      console.log(this.coronaTotalData);
     }
   },
   methods: {
     aggregate() {
-      this.$store.dispatch("coronaPrefectures", this.prefectures);
+      this.$store.dispatch("coronaPrefectures");
+      this.$store.dispatch("prefInfomation", "北海道");
+      this.$store.dispatch("prefectures");
     },
     setData(prefData) {
-      console.log(prefData);
+      console.log(this.pref);
       this.coronaPref = prefData[0];
       this.totalData(prefData[0]);
     },
 
     totalData(data) {
       data.forEach(num => {
-        this.cases += num.cases; //感染者
-        this.deaths += num.deaths; //死者
-        this.discharge += num.discharge; //退院
-        this.hospitalize += num.hospitalize; //入院
-        this.pcr += num.pcr; //PCR検査
-        this.population += num.population; //人口
-        this.severe += num.severe; //重症
+        this.total = {
+          cases: (this.cases += num.cases), //感染者
+          deaths: (this.deaths += num.deaths), //死者
+          discharge: (this.discharge += num.discharge), //退院
+          hospitalize: (this.hospitalize += num.hospitalize), //入院
+          pcr: (this.pcr += num.pcr), //PCR検査
+          population: (this.population += num.population), //人口
+          severe: (this.severe += num.severe) //重症
+        };
       });
-      console.log(this.cases);
-      console.log(this.deaths);
-      console.log(this.discharge);
-      console.log(this.hospitalize);
-      console.log(this.pcr);
-      console.log(this.population);
-      console.log(this.severe);
-    },
-    setTotalData(totalData) {
-      console.log(totalData);
-      this.coronaTotal = totalData;
+      console.log(this.total);
+      this.$store.commit("setTotalData", this.total);
     }
   }
 };
