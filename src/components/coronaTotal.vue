@@ -11,9 +11,9 @@
       <vxe-table-column field="pcr" title="PCR検査数" sortable></vxe-table-column>
       <vxe-table-column field="population" title="人口" sortable></vxe-table-column>
     </vxe-table>
-    
-    <select v-model="setPref" name="pref" id="pref">
-      <option v-for="(pref, index) in prefs" :key="index" :value="pref.name">{{ pref.name}}</option>
+
+    <select v-model="selected">
+      <option v-for="pref in prefs" :key="pref.code" :value="pref.name">{{ pref.name }}</option>
     </select>
   </div>
 </template>
@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       prefs: prefs,
-      setPref: "都道府県別詳細",
+      selected: "大阪府",
       coronaPref: [],
       cases: 0,
       deaths: 0,
@@ -47,12 +47,15 @@ export default {
     },
     coronaTotalData() {
       console.log(this.coronaTotalData);
+    },
+    selected() {
+      this.$store.dispatch("prefInfomation", this.selected);
     }
   },
   methods: {
     aggregate() {
       this.$store.dispatch("coronaPrefectures");
-      this.$store.dispatch("prefInfomation", "北海道");
+      this.$store.dispatch("prefInfomation", this.selected);
       this.$store.dispatch("prefectures");
     },
     setData(prefData) {
