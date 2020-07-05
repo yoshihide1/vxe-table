@@ -12,7 +12,7 @@ export default new Vuex.Store({
     coronaData: [],
     coronaTotalData: {},
     coronaPrefData: [],
-    prefs: []
+    prefInfo: []
   },
   mutations: {
     shopData(state, data) {
@@ -26,6 +26,12 @@ export default new Vuex.Store({
     setTotalData(state, total) {
       console.log(total)
       state.coronaTotalData = total
+    },
+    prefTotal(state, prefData) {//getters経由
+      console.log(prefData)
+      state.prefInfo = prefData[0]
+
+
     },
     prefInfo(state, data) {
       state.coronaPrefData.push(data)
@@ -65,6 +71,11 @@ export default new Vuex.Store({
       commit('prefInfo', total)
       console.log(total)
     },
+  },
+  getters: {
+    prefDataFilter:(state) => (id) => {
+      return state.coronaData[0].filter(pref => pref.id == id)
+    } 
   },
   modules: {
   }

@@ -1,5 +1,6 @@
 <template>
   <div id="total">
+    <p>累計</p>
     <p>
       PCR検査：{{ coronaTotalData.pcr }}
       <span class="total__font__span">人</span>
@@ -27,6 +28,7 @@ export default {
   display: flex;
   justify-content: space-around;
   font-size: 1.4rem;
+  background-color: floralwhite;
 }
 .total__font__span {
   font-size: 1rem;

@@ -35,7 +35,7 @@ export default {
   display: flex;
 }
 .chart__bar {
-  width: 60%;
+  width: 40%;
 }
 .chart__pie {
   width: 40%;

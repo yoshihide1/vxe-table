@@ -7,12 +7,6 @@ import VXETable from 'vxe-table'
 import 'vxe-table/lib/index.css'
 
 import 'chart.js'
-import 'hchs-vue-charts'
-import Chartkick from 'chartkick'
-import VueChartkick from 'vue-chartkick'
-
-Vue.use(window.VueCharts)
-Vue.use(VueChartkick, { Chartkick })
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'

@@ -13,14 +13,14 @@
     </vxe-table>
 
     <select v-model="selected">
-      <option v-for="pref in prefs" :key="pref.code" :value="pref.name">{{ pref.name }}</option>
+      <option v-for="pref in prefs" :key="pref.code" :value="pref.code">{{ pref.name }}</option>
     </select>
   </div>
 </template>
 
 <script>
 import prefs from "../assets/prefectures.json";
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -39,7 +39,9 @@ export default {
   },
 
   computed: {
-    ...mapState(["coronaData", "coronaTotalData", "coronaPrefData"])
+    ...mapState(["coronaData", "coronaTotalData", "coronaPrefData"]),
+    ...mapGetters(["prefDataFilter"])
+
   },
   watch: {
     coronaData() {
@@ -50,8 +52,10 @@ export default {
       console.log(this.coronaTotalData);
     },
     selected() {
+      this.$store.commit("prefTotal", this.prefDataFilter(this.selected))
+      console.log(this.selected)
       // this.$store.dispatch("prefInfomation", this.selected);
-    }
+    },
   },
   methods: {
     // test(sample) {
@@ -70,7 +74,7 @@ export default {
     setData(prefData) {
       this.coronaPref = prefData[0];
       this.totalData(prefData[0]);
-      this.test(this.coronaPrefData);
+      // this.test(this.coronaPrefData);
     },
 
     totalData(data) {

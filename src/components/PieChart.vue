@@ -14,7 +14,7 @@ export default {
   },
   watch: {
     coronaTotalData() {
-      this.totalChart()
+      this.totalChart();
     }
   },
   methods: {
@@ -25,11 +25,23 @@ export default {
         datasets: [
           {
             label: "Data One",
-            backgroundColor: ["#008DA9", "#5EAD7D", "#11843E", "#DE4027","#FFBCD7",],
+            backgroundColor: [
+              "#008DA9",
+              "#5EAD7D",
+              "#11843E",
+              "#DE4027",
+              "#FFBCD7"
+            ],
             pointBackgroundColor: "white",
             borderWidth: 1,
             pointBorderColor: "#249EBF",
-            data: [total.cases, total.hospitalize, total.discharge, total.severe, total.deaths]
+            data: [
+              total.cases,
+              total.hospitalize,
+              total.discharge,
+              total.severe,
+              total.deaths
+            ]
           }
         ]
       }),
@@ -44,11 +56,5 @@ export default {
       this.renderChart(this.datacollection, this.options);
     }
   }
-  // created() {
-  //   this.totalChart()
-  // },
-  // mounted () {
-  //   this.renderChart(this.datacollection, this.options)
-  // }
 };
 </script>
