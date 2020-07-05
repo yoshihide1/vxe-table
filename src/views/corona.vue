@@ -1,7 +1,7 @@
 <template>
   <div id="corona">
     <div class="corona__total__header">
-    <headerTotal></headerTotal>
+      <headerTotal></headerTotal>
     </div>
     <div class="chart">
       <barChart class="chart__bar"></barChart>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import headerTotal from "@/components/headerTotal"
+import headerTotal from "@/components/headerTotal";
 import coronaTotal from "@/components/coronaTotal";
 import barChart from "@/components/BarChart";
 import pieChart from "@/components/PieChart";

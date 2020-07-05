@@ -25,7 +25,7 @@ export default {
   data() {
     return {
       prefs: prefs,
-      selected: "大阪府",
+      selected: 13,
       coronaPref: [],
       cases: 0,
       deaths: 0,
@@ -41,7 +41,6 @@ export default {
   computed: {
     ...mapState(["coronaData", "coronaTotalData", "coronaPrefData"]),
     ...mapGetters(["prefDataFilter"])
-
   },
   watch: {
     coronaData() {
@@ -49,13 +48,12 @@ export default {
     },
     coronaTotalData() {
       //coronaDataの合計値
-      console.log(this.coronaTotalData);
+      this.$store.commit("prefTotal", this.prefDataFilter(this.selected));
     },
     selected() {
-      this.$store.commit("prefTotal", this.prefDataFilter(this.selected))
-      console.log(this.selected)
-      // this.$store.dispatch("prefInfomation", this.selected);
-    },
+      this.$store.commit("prefTotal", this.prefDataFilter(this.selected));
+      console.log(this.selected);
+    }
   },
   methods: {
     // test(sample) {
@@ -67,9 +65,9 @@ export default {
     //   }
     // },
     aggregate() {
-      this.$store.dispatch("coronaPrefectures");
-      this.$store.dispatch("prefInfomation");
-      // this.$store.dispatch("test");
+      if (this.coronaTotalData.length == 0) {
+        this.$store.dispatch("coronaPrefectures");
+      }
     },
     setData(prefData) {
       this.coronaPref = prefData[0];
@@ -97,5 +95,4 @@ export default {
 </script>
 
 <style>
-
 </style>

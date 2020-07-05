@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-import prefs from '../assets/prefectures.json';
+// import prefs from '../assets/prefectures.json';
 
 
 Vue.use(Vuex)
@@ -10,9 +10,9 @@ export default new Vuex.Store({
   state: {
     rankingData: [],
     coronaData: [],
-    coronaTotalData: {},
+    coronaTotalData: [],
     coronaPrefData: [],
-    prefInfo: []
+    // prefInfo: []
   },
   mutations: {
     shopData(state, data) {
@@ -29,13 +29,13 @@ export default new Vuex.Store({
     },
     prefTotal(state, prefData) {//getters経由
       console.log(prefData)
-      state.prefInfo = prefData[0]
+      state.coronaPrefData = prefData[0]
 
 
     },
-    prefInfo(state, data) {
-      state.coronaPrefData.push(data)
-    }
+    // prefInfo(state, data) {
+    //   state.coronaPrefData.push(data)
+    // }
 
   },
   actions: {
@@ -57,25 +57,25 @@ export default new Vuex.Store({
         })
     },
     //都道府県別の詳細
-    prefInfomation({ commit }) {
-      let total = []
-      prefs.forEach((pref) => {
-        let params = {
-          prefecture: pref.name
-        }
-        axios.get("https://covid19-japan-web-api.now.sh/api/v1/positives", { params })
-          .then((res) => {
-            total.push(res)
-          })
-      })
-      commit('prefInfo', total)
-      console.log(total)
-    },
+    // prefInfomation({ commit }) {
+    //   let total = []
+    //   prefs.forEach((pref) => {
+    //     let params = {
+    //       prefecture: pref.name
+    //     }
+    //     axios.get("https://covid19-japan-web-api.now.sh/api/v1/positives", { params })
+    //       .then((res) => {
+    //         total.push(res)
+    //       })
+    //   })
+    //   commit('prefInfo', total)
+    //   console.log(total)
+    // },
   },
   getters: {
-    prefDataFilter:(state) => (id) => {
+    prefDataFilter: (state) => (id) => {
       return state.coronaData[0].filter(pref => pref.id == id)
-    } 
+    }
   },
   modules: {
   }

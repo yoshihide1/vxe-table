@@ -4,7 +4,7 @@ import { mapState, mapGetters } from "vuex";
 export default {
   extends: Bar,
   computed: {
-    ...mapState(["coronaTotalData", "coronaData", "prefInfo"]),
+    ...mapState(["coronaTotalData", "coronaData", "coronaPrefData"]),
     ...mapGetters(["prefData"])
   },
   data() {
@@ -18,23 +18,21 @@ export default {
   watch: {
     coronaTotalData() {
       this.totalAndPref();
-      console.log(this.coronaData);
     },
-    prefInfo() {
+    coronaPrefData() {
       this.totalAndPref();
     }
   },
   methods: {
     totalAndPref() {
       this.total = this.coronaTotalData;
-      this.prefTotal = this.prefInfo;
+      this.prefTotal = this.coronaPrefData;
       (this.datacollection = {
         labels: ["感染者", "入院中", "退院", "重症", "死者"],
         datasets: [
           {
-            label: "全国",
-            backgroundColor: "#1C1E59",
-            pointBackgroundColor: "red",
+            label: "全国(累計)",
+            backgroundColor: "#1E0B14",
             borderWidth: 1,
             pointBorderColor: "glay",
             data: [
@@ -46,9 +44,8 @@ export default {
             ]
           },
           {
-            label: this.prefTotal.name_ja,
-            backgroundColor: "#DE4027",
-            pointBackgroundColor: "red",
+            label: `${this.prefTotal.name_ja}(累計)`,
+            backgroundColor: "#F26C18",
             borderWidth: 1,
             pointBorderColor: "glay",
             data: [

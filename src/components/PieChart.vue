@@ -4,7 +4,7 @@ import { mapState } from "vuex";
 export default {
   extends: Pie,
   computed: {
-    ...mapState(["coronaTotalData"])
+    ...mapState(["coronaPrefData"])
   },
   data() {
     return {
@@ -13,32 +13,30 @@ export default {
     };
   },
   watch: {
-    coronaTotalData() {
+    coronaPrefData() {
       this.totalChart();
     }
   },
   methods: {
     totalChart() {
-      let total = this.coronaTotalData;
+      let total = this.coronaPrefData;
       (this.datacollection = {
-        labels: ["感染者", "入院中", "退院", "重症", "死者"],
+        labels: ["入院中(現在)",  "重症(現在)", "死者(累計)"],
         datasets: [
           {
             label: "Data One",
             backgroundColor: [
-              "#008DA9",
-              "#5EAD7D",
-              "#11843E",
-              "#DE4027",
-              "#FFBCD7"
+              // "#0E376F",
+              "#3A6BA5",
+              "#5C5344",
+              "#F24C0C",
             ],
             pointBackgroundColor: "white",
             borderWidth: 1,
             pointBorderColor: "#249EBF",
             data: [
-              total.cases,
+              // total.cases - total.discharge - total.deaths,
               total.hospitalize,
-              total.discharge,
               total.severe,
               total.deaths
             ]
