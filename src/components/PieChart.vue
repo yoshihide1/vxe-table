@@ -24,7 +24,7 @@ export default {
         labels: ["入院中(現在)",  "重症(現在)", "死者(累計)"],
         datasets: [
           {
-            label: "Data One",
+            label: "Datrrrrrrrrrrrrrrrrrrrrrra One",
             backgroundColor: [
               // "#0E376F",
               "#3A6BA5",

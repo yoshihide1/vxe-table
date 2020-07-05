@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <button @click="aggregate">統計データ取得</button>
     <vxe-table border height="300" :data="coronaPref">
       <vxe-table-column field="name_ja" title="都道府県"></vxe-table-column>
@@ -11,20 +11,14 @@
       <vxe-table-column field="pcr" title="PCR検査数" sortable></vxe-table-column>
       <vxe-table-column field="population" title="人口" sortable></vxe-table-column>
     </vxe-table>
-
-    <select v-model="selected">
-      <option v-for="pref in prefs" :key="pref.code" :value="pref.code">{{ pref.name }}</option>
-    </select>
   </div>
 </template>
 
 <script>
-import prefs from "../assets/prefectures.json";
 import { mapState, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      prefs: prefs,
       selected: 13,
       coronaPref: [],
       cases: 0,
@@ -49,22 +43,11 @@ export default {
     coronaTotalData() {
       //coronaDataの合計値
       this.$store.commit("prefTotal", this.prefDataFilter(this.selected));
-    },
-    selected() {
-      this.$store.commit("prefTotal", this.prefDataFilter(this.selected));
-      console.log(this.selected);
     }
   },
   methods: {
-    // test(sample) {
-    //   //各都道府県の年代と性別分け
-    //   console.log(sample[0]);
-    //   console.log(sample[0].data);
-    //   for (let i = 0; i < 47; i++) {
-    //     console.log(sample[i].data);
-    //   }
-    // },
     aggregate() {
+      //最後にcreatedに変える
       if (this.coronaTotalData.length == 0) {
         this.$store.dispatch("coronaPrefectures");
       }
@@ -72,9 +55,7 @@ export default {
     setData(prefData) {
       this.coronaPref = prefData[0];
       this.totalData(prefData[0]);
-      // this.test(this.coronaPrefData);
     },
-
     totalData(data) {
       data.forEach(num => {
         this.total = {
@@ -84,7 +65,8 @@ export default {
           hospitalize: (this.hospitalize += num.hospitalize), //入院
           pcr: (this.pcr += num.pcr), //PCR検査
           population: (this.population += num.population), //人口
-          severe: (this.severe += num.severe) //重症
+          severe: (this.severe += num.severe), //重症
+          lastUpdated: num.last_updated.cases_date
         };
       });
       console.log(this.total);
@@ -95,4 +77,7 @@ export default {
 </script>
 
 <style>
+.container {
+  margin-bottom: 1rem;
+}
 </style>

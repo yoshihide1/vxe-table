@@ -30,13 +30,7 @@ export default new Vuex.Store({
     prefTotal(state, prefData) {//getters経由
       console.log(prefData)
       state.coronaPrefData = prefData[0]
-
-
     },
-    // prefInfo(state, data) {
-    //   state.coronaPrefData.push(data)
-    // }
-
   },
   actions: {
     rankingData({ commit }) {
