@@ -76,8 +76,7 @@ import prefs from "../assets/prefectures.json";
 export default {
   computed: {
     ...mapState(["coronaTotalData", "coronaPrefData"]),
-        ...mapGetters(["prefDataFilter"])
-
+    ...mapGetters(["prefDataFilter"])
   },
   data() {
     return {
@@ -139,7 +138,18 @@ export default {
       let percentage = (now / pref.population) * 100;
       this.prefNowCase = now;
       this.prefNowPercentage = Math.floor(percentage * 100000) / 100000;
-      this.prefName = pref.name_ja;
+      this.prefName = this.checkPref(pref.name_ja);
+    },
+    checkPref(prefName) {
+      if (prefName === "東京") {
+        return `${prefName}都`;
+      } else if (prefName === "大阪" || prefName === "京都") {
+        return `${prefName}府`;
+      } else if (prefName !== "北海道") {
+        return `${prefName}県`;
+      } else {
+        return prefName;
+      }
     }
   }
 };
