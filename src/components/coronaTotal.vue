@@ -1,6 +1,5 @@
 <template>
   <div class="container">
-    <button @click="aggregate">統計データ取得</button>
     <vxe-table border height="300" :data="coronaPref">
       <vxe-table-column field="name_ja" title="都道府県"></vxe-table-column>
       <vxe-table-column field="cases" title="感染者数" sortable></vxe-table-column>
@@ -45,13 +44,12 @@ export default {
       this.$store.commit("prefTotal", this.prefDataFilter(this.selected));
     }
   },
+  mounted() {
+    if (this.coronaTotalData.length == 0) {
+      this.$store.dispatch("coronaPrefectures");
+    }
+  },
   methods: {
-    aggregate() {
-      //最後にcreatedに変える
-      if (this.coronaTotalData.length == 0) {
-        this.$store.dispatch("coronaPrefectures");
-      }
-    },
     setData(prefData) {
       this.coronaPref = prefData[0];
       this.totalData(prefData[0]);

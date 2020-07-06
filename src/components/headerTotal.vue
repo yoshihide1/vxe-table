@@ -4,89 +4,100 @@
       <p>{{ updated }}</p>
     </div>
     <div id="total">
-      <div class="total__info">
-        <p class="total__title">累計</p>
-        <p>
-          <span class="total__font__span">PCR検査</span>
-          ：{{ numComma(coronaTotalData.pcr) }}
-          <span class="total__font__span">人</span>
-        </p>
-        <p>
-          <span class="total__font__span">感染者</span>
-          ：{{ numComma(coronaTotalData.cases) }}
-          <span class="total__font__span">人</span>
-        </p>
-        <p>
-          <span class="total__font__span">死者</span>
-          ：{{ numComma(coronaTotalData.deaths) }}
-          <span class="total__font__span">人</span>
-        </p>
+      <div class="card">
+        <div class="card__title">
+          <p>累計</p>
+        </div>
+        <div class="card__body">
+          <p>
+            <span class="card__font__span">PCR検査</span>
+            ：{{ numComma(coronaTotalData.pcr) }}
+            <span class="card__font__span">人</span>
+          </p>
+          <p>
+            <span class="card__font__span">感染者</span>
+            ：{{ numComma(coronaTotalData.cases) }}
+            <span class="card__font__span">人</span>
+          </p>
+          <p>
+            <span class="card__font__span">死者</span>
+            ：{{ numComma(coronaTotalData.deaths) }}
+            <span class="card__font__span">人</span>
+          </p>
+          <p class="death">
+            <span class="card__font__span">致死率</span>
+            {{ deathPercentage }}%
+          </p>
+        </div>
       </div>
-      <div class="total__info">
-        <p class="total__title">人口に対する割合</p>
-        <p>
-          <span class="total__font__span">PCR検査</span>
-          ：{{ pcrPercentage }}
-          <span class="total__font__span">％</span>
-        </p>
-        <p>
-          <span class="total__font__span">感染者</span>
-          ：{{ casesPercentage }}
-          <span class="total__font__span">％</span>
-        </p>
-        <p>
-          <span class="total__font__span">国内の人口:{{ numComma(coronaTotalData.population) }}人</span>
-        </p>
+      <div class="card">
+        <div class="card__title">
+          <p>人口に対する割合</p>
+        </div>
+        <div class="card__body">
+          <p>
+            <span class="card__font__span">PCR検査</span>
+            ：{{ pcrPercentage }}
+            <span class="card__font__span">％</span>
+          </p>
+          <p>
+            <span class="card__font__span">感染者</span>
+            ：{{ casesPercentage }}
+            <span class="card__font__span">％</span>
+          </p>
+          <p>
+            <span class="card__font__span">国内の人口:{{ numComma(coronaTotalData.population) }}人</span>
+          </p>
+        </div>
       </div>
-      <div class="total__info">
-        <p class="total__title">
-          日本国内
-          <span class="total__font__span">(現在)</span>
-        </p>
-        <p>
-          <span class="total__font__span">感染者</span>
-          ：{{ numComma(nowCase) }}
-          <span class="total__font__span">人</span>
-        </p>
-        <p>
-          <span class="total__font__span">国内人口の</span>
-          {{ nowPercentage }}%
-        </p>
-        <p>
-          <span class="total__font__span">国内の人口:{{ numComma(coronaTotalData.population) }}人</span>
-        </p>
+      <div class="card">
+        <div class="card__title">
+          <p>
+            日本国内
+            <span class="card__font__span">(現在)</span>
+          </p>
+        </div>
+        <div class="card__body">
+          <p>
+            <span class="card__font__span">感染者</span>
+            ：{{ numComma(nowCase) }}
+            <span class="card__font__span">人</span>
+          </p>
+          <p>
+            <span class="card__font__span">国内人口の</span>
+            {{ nowPercentage }}%
+          </p>
+          <p>
+            <span class="card__font__span">国内の人口:{{ numComma(coronaTotalData.population) }}人</span>
+          </p>
+        </div>
       </div>
-
-      <div class="total__info">
-        <p class="total__title">
-          {{ prefName }}
-          <select v-model="selected">
-            <option v-for="pref in prefs" :key="pref.code" :value="pref.code">{{ pref.name }}</option>
-          </select>
-          <span class="total__font__span">(現在)</span>
-        </p>
-        <p></p>
-        <p>
-          <span class="total__font__span">感染者</span>
-          ：{{ numComma(prefNowCase) }}
-          <span class="total__font__span">人</span>
-        </p>
-        <p>
-          <span class="total__font__span">{{ prefName }}人口の</span>
-          {{ prefNowPercentage }}%
-        </p>
-        <p>
-          <span
-            class="total__font__span"
-          >{{ prefName }}の人口:{{ numComma(coronaPrefData.population) }}人</span>
-        </p>
+      <div class="card">
+        <div class="card__title">
+          <p>
+            <select v-model="selected">
+              <option v-for="pref in prefs" :key="pref.code" :value="pref.code">{{ pref.name }}</option>
+            </select>
+            <span class="card__font__span">(現在)</span>
+          </p>
+        </div>
+        <div class="card__body">
+          <p>
+            <span class="card__font__span">感染者</span>
+            ：{{ numComma(prefNowCase) }}
+            <span class="card__font__span">人</span>
+          </p>
+          <p>
+            <span class="card__font__span">{{ prefName }}人口の</span>
+            {{ prefNowPercentage }}%
+          </p>
+          <p>
+            <span
+              class="card__font__span"
+            >{{ prefName }}の人口:{{ numComma(coronaPrefData.population) }}人</span>
+          </p>
+        </div>
       </div>
-    </div>
-    <div id="death">
-      <p>
-        <span class="total__font__span">致死率</span>
-        {{ deathPercentage }}%
-      </p>
     </div>
   </div>
 </template>
@@ -178,38 +189,57 @@ export default {
 #container {
   width: 100%;
 }
-#death {
-  margin: 1rem auto;
-  width: 20%;
-  background-color: red;
-  color: white;
-  border-radius: 5px;
-}
-#death p {
-  margin: 0;
-}
 #total {
   display: flex;
   justify-content: space-around;
   font-size: 1.4rem;
 }
-.total__title {
-  margin-top: 0;
-  border-bottom: 2px solid white;
+.card {
+  width: 20%;
 }
-.total__info {
-  background-color: #100038;
+.card__title {
+  position: relative;
+  background-color: gray;
+  bottom: -15px;
+  overflow: hidden;
   color: white;
-  padding: 1rem;
-  border-radius: 10px;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+.card__title p {
   margin: 1rem;
 }
-.total__font__span {
+.card__body {
+  background-color: white;
+  color: black;
+  padding: 0.4rem;
+  overflow: hidden;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+.card__title select {
+  font-size: 1.4rem;
+  padding: 0 1rem;
+  margin-right: 0.5rem;
+  border: 2px solid white;
+  border-radius: 10px;
+  text-indent: 10px;
+  background: none transparent;
+  color: white;
+  padding-bottom: 5px;
+}
+.card__title select option {
+  background-color: black;
+  color: white;
+}
+.card__font__span {
   font-size: 0.9rem;
 }
 .title__now p {
   margin: 0;
   color: white;
   background-color: #100038;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
 </style>

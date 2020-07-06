@@ -1,5 +1,5 @@
 <template>
-  <div id="corona">
+  <div class="container">
     <div class="corona__total__header">
       <headerTotal></headerTotal>
     </div>
@@ -29,6 +29,9 @@ export default {
 </script>
 
 <style>
+.container {
+  background-color: #FCFCFC;
+}
 .chart {
   display: flex;
   justify-content: center;
