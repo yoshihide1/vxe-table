@@ -29,10 +29,9 @@ export default {
 </script>
 
 <style>
-/* .corona__total__header {
-} */
 .chart {
   display: flex;
+  justify-content: center;
 }
 .chart__bar {
   width: 40%;

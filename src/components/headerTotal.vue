@@ -1,72 +1,92 @@
 <template>
   <div id="container">
-    <div id="death">
-      <p>致死率</p>
-      <p>{{ deathPercentage }}%</p>
-    </div>
-    <div id="total">
-      <p>累計</p>
-      <p>
-        PCR検査：{{ numComma(coronaTotalData.pcr) }}
-        <span class="total__font__span">人</span>
-      </p>
-      <p>
-        感染者：{{ numComma(coronaTotalData.cases) }}
-        <span class="total__font__span">人</span>
-      </p>
-      <p>
-        死者：{{ numComma(coronaTotalData.deaths) }}
-        <span class="total__font__span">人</span>
-      </p>
-    </div>
-    <div id="percentage">
-      <p>人口に対する割合</p>
-      <p>
-        PCR検査：{{ pcrPercentage }}
-        <span class="total__font__span">％</span>
-      </p>
-      <p>
-        感染者：{{ casesPercentage }}
-        <span class="total__font__span">％</span>
-      </p>
-    </div>
     <div class="title__now">
       <p>{{ updated }}</p>
     </div>
-    <div id="total__now">
-      <div>
-        <p class="total__now">日本国内</p>
-        <p class="total__now">
-          <span class="total__person">国内人口:{{ numComma(coronaTotalData.population) }}人</span>
-        </p>
+    <div id="total">
+      <div class="total__info">
+        <p class="total__title">累計</p>
         <p>
-          感染者：{{ numComma(nowCase) }}
+          <span class="total__font__span">PCR検査</span>
+          ：{{ numComma(coronaTotalData.pcr) }}
           <span class="total__font__span">人</span>
         </p>
         <p>
-          <span class="total__person">国内人口の</span>
+          <span class="total__font__span">感染者</span>
+          ：{{ numComma(coronaTotalData.cases) }}
+          <span class="total__font__span">人</span>
+        </p>
+        <p>
+          <span class="total__font__span">死者</span>
+          ：{{ numComma(coronaTotalData.deaths) }}
+          <span class="total__font__span">人</span>
+        </p>
+      </div>
+      <div class="total__info">
+        <p class="total__title">人口に対する割合</p>
+        <p>
+          <span class="total__font__span">PCR検査</span>
+          ：{{ pcrPercentage }}
+          <span class="total__font__span">％</span>
+        </p>
+        <p>
+          <span class="total__font__span">感染者</span>
+          ：{{ casesPercentage }}
+          <span class="total__font__span">％</span>
+        </p>
+        <p>
+          <span class="total__font__span">国内の人口:{{ numComma(coronaTotalData.population) }}人</span>
+        </p>
+      </div>
+      <div class="total__info">
+        <p class="total__title">
+          日本国内
+          <span class="total__font__span">(現在)</span>
+        </p>
+        <p>
+          <span class="total__font__span">感染者</span>
+          ：{{ numComma(nowCase) }}
+          <span class="total__font__span">人</span>
+        </p>
+        <p>
+          <span class="total__font__span">国内人口の</span>
           {{ nowPercentage }}%
         </p>
-      </div>
-      <div>
-        <select v-model="selected">
-          <option v-for="pref in prefs" :key="pref.code" :value="pref.code">{{ pref.name }}</option>
-        </select>
-      </div>
-      <div>
-        <p class="total__now">{{ prefName }}</p>
-        <p class="total__now">
-          <span class="total__person">{{ prefName }}の人口:{{ numComma(coronaPrefData.population) }}人</span>
-        </p>
         <p>
-          感染者：{{ numComma(prefNowCase) }}
+          <span class="total__font__span">国内の人口:{{ numComma(coronaTotalData.population) }}人</span>
+        </p>
+      </div>
+
+      <div class="total__info">
+        <p class="total__title">
+          {{ prefName }}
+          <select v-model="selected">
+            <option v-for="pref in prefs" :key="pref.code" :value="pref.code">{{ pref.name }}</option>
+          </select>
+          <span class="total__font__span">(現在)</span>
+        </p>
+        <p></p>
+        <p>
+          <span class="total__font__span">感染者</span>
+          ：{{ numComma(prefNowCase) }}
           <span class="total__font__span">人</span>
         </p>
         <p>
-          <span class="total__person">{{ prefName }}人口の</span>
+          <span class="total__font__span">{{ prefName }}人口の</span>
           {{ prefNowPercentage }}%
         </p>
+        <p>
+          <span
+            class="total__font__span"
+          >{{ prefName }}の人口:{{ numComma(coronaPrefData.population) }}人</span>
+        </p>
       </div>
+    </div>
+    <div id="death">
+      <p>
+        <span class="total__font__span">致死率</span>
+        {{ deathPercentage }}%
+      </p>
     </div>
   </div>
 </template>
@@ -159,12 +179,11 @@ export default {
   width: 100%;
 }
 #death {
-  margin: 0 auto;
+  margin: 1rem auto;
   width: 20%;
-  font-size: 2rem;
   background-color: red;
   color: white;
-  border-radius: 10px;
+  border-radius: 5px;
 }
 #death p {
   margin: 0;
@@ -173,29 +192,19 @@ export default {
   display: flex;
   justify-content: space-around;
   font-size: 1.4rem;
-  background-color: floralwhite;
 }
-#total__now {
-  display: flex;
-  color: white;
-  padding-left: 1rem;
-  justify-content: space-around;
-  font-size: 1.4rem;
+.total__title {
+  margin-top: 0;
+  border-bottom: 2px solid white;
+}
+.total__info {
   background-color: #100038;
-}
-.total__now {
-  margin: 0;
-}
-#percentage {
-  display: flex;
-  justify-content: space-around;
-  font-size: 1.4rem;
-  background-color: floralwhite;
+  color: white;
+  padding: 1rem;
+  border-radius: 10px;
+  margin: 1rem;
 }
 .total__font__span {
-  font-size: 1rem;
-}
-.total__person {
   font-size: 0.9rem;
 }
 .title__now p {
