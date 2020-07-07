@@ -35,9 +35,10 @@ export default {
 .chart {
   display: flex;
   justify-content: center;
+  margin-top: 1rem;
 }
 .chart__bar {
-  width: 40%;
+  width: 55%;
 }
 .chart__pie {
   width: 40%;

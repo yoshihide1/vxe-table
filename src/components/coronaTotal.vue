@@ -1,36 +1,39 @@
 <template>
   <div class="container">
-    <p>{{chartSet}}</p>
-    <table class="table">
-      <thead>
-        <tr>
-          <th class="table__title"></th>
-          <th class="table__title">都道府県</th>
-          <th class="table__title">感染者</th>
-          <th class="table__title">入院中</th>
-          <th class="table__title">退院</th>
-          <th class="table__title">死者</th>
-          <th class="table__title">重症</th>
-          <th class="table__title">PCR検査</th>
-          <th class="table__title">人口</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="data in coronaPref" :key="data.id">
-          <td class="table__body">
-            <input type="checkbox" :value="data.id" v-model="chartSet" />
-          </td>
-          <td class="table__body">{{ data.name_ja }}</td>
-          <td class="table__body">{{ data.cases }}</td>
-          <td class="table__body">{{ data.hospitalize }}</td>
-          <td class="table__body">{{ data.discharge }}</td>
-          <td class="table__body">{{ data.deaths }}</td>
-          <td class="table__body">{{ data.severe }}</td>
-          <td class="table__body">{{ data.pcr }}</td>
-          <td class="table__body">{{ data.population}}</td>
-        </tr>
-      </tbody>
-    </table>
+    <div class="table">
+      <table class="table__main">
+        <thead class="table__head">
+          <tr>
+            <th class="table__title"></th>
+            <th class="table__title">都道府県</th>
+            <th class="table__title">感染者</th>
+            <th class="table__title">入院中</th>
+            <th class="table__title">退院</th>
+            <th class="table__title">死者</th>
+            <th class="table__title">重症</th>
+            <th class="table__title">PCR検査</th>
+            <th class="table__title">人口</th>
+          </tr>
+        </thead>
+        <tbody class="table__body">
+          <tr v-for="data in coronaPref" :key="data.id">
+            <td class="table__body">
+              <input type="checkbox" :value="data.id" v-model="chartSet" />
+            </td>
+            <td class="table__body__sub">{{ data.name_ja }}</td>
+            <td class="table__body__sub">{{ data.cases }}</td>
+            <td class="table__body__sub">{{ data.hospitalize }}</td>
+            <td class="table__body__sub">{{ data.discharge }}</td>
+            <td class="table__body__sub">{{ data.deaths }}</td>
+            <td class="table__body__sub">{{ data.severe }}</td>
+            <td class="table__body__sub">{{ data.pcr }}</td>
+            <td class="table__body__sub">{{ data.population}}</td>
+          </tr>
+        </tbody>
+      </table>
+      <button @click="sortDesc(coronaPref)">ddddddddddd</button>
+    </div>
+
     <!-- <vxe-table border height="300" highlight-hover-row ref="xTable6" :data="coronaPref">
       <vxe-table-column field="name_ja" title="都道府県"></vxe-table-column>
       <vxe-table-column field="cases" title="感染者数" sortable></vxe-table-column>
@@ -40,7 +43,7 @@
       <vxe-table-column field="severe" title="重症" sortable></vxe-table-column>
       <vxe-table-column field="pcr" title="PCR検査数" sortable></vxe-table-column>
       <vxe-table-column field="population" title="人口" sortable></vxe-table-column>
-    </vxe-table> -->
+    </vxe-table>-->
   </div>
 </template>
 
@@ -83,15 +86,26 @@ export default {
   },
 
   methods: {
+    sortDesc(data) {
+      console.log(data);
+      let sample = [];
+      for (let i in data) {
+        sample.push(data[i].cases);
+      }
+      sample.sort((a, b) => {
+        return a < b ? 1 : -1;
+      });
+      console.log(sample);
+    },
     chartCheck(prefCode) {
-      let pref = []
-      prefCode.forEach((code) => {  
-        console.log(code)
-        console.log(this.prefDataFilter(code)[0])
-        pref.push(this.prefDataFilter(code)[0])
-      })
-      console.log(pref)
-      this.$store.commit("chart", pref)
+      let pref = [];
+      prefCode.forEach(code => {
+        console.log(code);
+        console.log(this.prefDataFilter(code)[0]);
+        pref.push(this.prefDataFilter(code)[0]);
+      });
+      console.log(pref);
+      this.$store.commit("chart", pref);
     },
     setData(prefData) {
       this.coronaPref = prefData;
@@ -122,14 +136,31 @@ export default {
   margin-bottom: 1rem;
 }
 .table {
-  border: 1px solid black;
+  color: #5e5e5e;
+  max-height: 300px;
+  overflow: auto;
+  overflow-x: hidden;
+}
+.table thead th {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+}
+.table__main {
+  border: 2px solid gray;
   width: 100%;
+  margin-top: 1.5rem;
 }
 .table__title {
-  border: 1px solid black;
+  border-left: 2px solid gray;
+  border-bottom: 2px solid gray;
+  padding: 1rem;
+  font-weight: bolder;
+  background-color: gray;
 }
-.table__body {
-  border-top: 1px solid gray;
+.table__body__sub {
+  border-bottom: 1px solid gray;
   border-left: 1px solid gray;
+  padding: 0.8rem;
 }
 </style>

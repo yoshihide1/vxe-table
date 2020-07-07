@@ -25,7 +25,7 @@ export default {
       this.totalAndPref();
     },
     coronaPrefData() {
-      this.totalAndPref();
+      this.totalAndPref(this.chartPlus[0]);
     },
     chartPlus() {
       this.totalAndPref(this.chartPlus[0]);
@@ -37,7 +37,7 @@ export default {
       data.forEach(pref => {
         this.datacollection.datasets.push({
           label: `${pref.name_ja}(累計)`,
-          backgroundColor: "#F26C18",
+          backgroundColor: "#FFB43B",
           borderWidth: 1,
           pointBorderColor: "glay",
           data: [
@@ -73,7 +73,7 @@ export default {
           },
           {
             label: `${this.prefTotal.name_ja}(累計)`,
-            backgroundColor: "#F26C18",
+            backgroundColor: "#FF395A",
             borderWidth: 1,
             pointBorderColor: "glay",
             data: [
