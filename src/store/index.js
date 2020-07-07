@@ -1,27 +1,22 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import axios from 'axios'
-// import prefs from '../assets/prefectures.json';
 
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    rankingData: [],
     coronaData: [],
     coronaTotalData: [],
     coronaPrefData: [],
-    // prefInfo: []
+    chartPlus: [],
+    updateChart: []
   },
   mutations: {
-    shopData(state, data) {
-      state.rankingData = []
-      state.rankingData.push(data)
-    },
     prefectures(state, data) {
-      state.coronaData = []
-      state.coronaData.push(data)
+      state.coronaData = data
+      console.log(state.coronaData)
     },
     setTotalData(state, total) {
       console.log(total)
@@ -31,18 +26,17 @@ export default new Vuex.Store({
       console.log(prefData)
       state.coronaPrefData = prefData[0]
     },
+    chart(state, prefData) {
+      console.log(prefData)
+      state.chartPlus = []
+      state.chartPlus.push(prefData)
+    },
+    deleteChart(state, prefData) {
+      console.log(prefData)
+      state.updateChart = prefData
+    }
   },
   actions: {
-    rankingData({ commit }) {
-      const params = {
-        applicationId:
-          process.env.VUE_APP_applicationId
-      }
-      axios.get("https://app.rakuten.co.jp/services/api/IchibaItem/Ranking/20170628", { params })
-        .then((res) => {
-          commit('shopData', res.data.Items)
-        })
-    },
     //都道府県別
     coronaPrefectures({ commit }) {
       axios.get("https://covid19-japan-web-api.now.sh/api/v1/prefectures")
@@ -68,8 +62,8 @@ export default new Vuex.Store({
   },
   getters: {
     prefDataFilter: (state) => (id) => {
-      return state.coronaData[0].filter(pref => pref.id == id)
-    }
+      return state.coronaData.filter(pref => pref.id == id)
+    },
   },
   modules: {
   }

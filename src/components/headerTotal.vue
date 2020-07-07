@@ -32,7 +32,10 @@
       </div>
       <div class="card">
         <div class="card__title">
-          <p>人口に対する割合</p>
+          <p>
+            人口に対する割合
+            <span class="card__font__span">(累計)</span>
+          </p>
         </div>
         <div class="card__body">
           <p>

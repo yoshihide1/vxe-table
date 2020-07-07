@@ -4,8 +4,13 @@ import { mapState, mapGetters } from "vuex";
 export default {
   extends: Bar,
   computed: {
-    ...mapState(["coronaTotalData", "coronaData", "coronaPrefData"]),
-    ...mapGetters(["prefData"])
+    ...mapState([
+      "coronaTotalData",
+      "coronaData",
+      "coronaPrefData",
+      "chartPlus",
+    ]),
+    ...mapGetters(["prefDataFilter"])
   },
   data() {
     return {
@@ -21,13 +26,36 @@ export default {
     },
     coronaPrefData() {
       this.totalAndPref();
+    },
+    chartPlus() {
+      this.totalAndPref(this.chartPlus[0]);
     }
   },
   methods: {
-    totalAndPref() {
+    plus(data) {
+      console.log(data);
+      data.forEach(pref => {
+        this.datacollection.datasets.push({
+          label: `${pref.name_ja}(累計)`,
+          backgroundColor: "#F26C18",
+          borderWidth: 1,
+          pointBorderColor: "glay",
+          data: [
+            pref.cases,
+            pref.hospitalize,
+            pref.discharge,
+            pref.severe,
+            pref.deaths
+          ]
+        });
+      });
+      this.renderChart(this.datacollection, this.options);
+    },
+    totalAndPref(pref) {
+      this.datacollection.datasets = [];
       this.total = this.coronaTotalData;
       this.prefTotal = this.coronaPrefData;
-      (this.datacollection = {
+      this.datacollection = {
         labels: ["感染者", "入院中", "退院", "重症", "死者"],
         datasets: [
           {
@@ -57,34 +85,39 @@ export default {
             ]
           }
         ]
-      }),
-        (this.options = {
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: true
-                },
-                gridLines: {
-                  display: true
-                }
+      };
+      this.options = {
+        scales: {
+          yAxes: [
+            {
+              ticks: {
+                beginAtZero: true
+              },
+              gridLines: {
+                display: true
               }
-            ],
-            xAxes: [
-              {
-                gridLines: {
-                  display: false
-                }
+            }
+          ],
+          xAxes: [
+            {
+              gridLines: {
+                display: false
               }
-            ]
-          },
-          legend: {
-            display: true
-          },
-          responsive: true,
-          maintainAspectRatio: false
-        });
-      this.renderChart(this.datacollection, this.options);
+            }
+          ]
+        },
+        legend: {
+          display: true
+        },
+        responsive: true,
+        maintainAspectRatio: false
+      };
+
+      if (pref) {
+        this.plus(pref);
+      } else {
+        this.renderChart(this.datacollection, this.options);
+      }
     }
   }
 };

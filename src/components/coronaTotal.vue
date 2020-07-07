@@ -1,6 +1,37 @@
 <template>
   <div class="container">
-    <vxe-table border height="300" :data="coronaPref">
+    <p>{{chartSet}}</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th class="table__title"></th>
+          <th class="table__title">都道府県</th>
+          <th class="table__title">感染者</th>
+          <th class="table__title">入院中</th>
+          <th class="table__title">退院</th>
+          <th class="table__title">死者</th>
+          <th class="table__title">重症</th>
+          <th class="table__title">PCR検査</th>
+          <th class="table__title">人口</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr v-for="data in coronaPref" :key="data.id">
+          <td class="table__body">
+            <input type="checkbox" :value="data.id" v-model="chartSet" />
+          </td>
+          <td class="table__body">{{ data.name_ja }}</td>
+          <td class="table__body">{{ data.cases }}</td>
+          <td class="table__body">{{ data.hospitalize }}</td>
+          <td class="table__body">{{ data.discharge }}</td>
+          <td class="table__body">{{ data.deaths }}</td>
+          <td class="table__body">{{ data.severe }}</td>
+          <td class="table__body">{{ data.pcr }}</td>
+          <td class="table__body">{{ data.population}}</td>
+        </tr>
+      </tbody>
+    </table>
+    <!-- <vxe-table border height="300" highlight-hover-row ref="xTable6" :data="coronaPref">
       <vxe-table-column field="name_ja" title="都道府県"></vxe-table-column>
       <vxe-table-column field="cases" title="感染者数" sortable></vxe-table-column>
       <vxe-table-column field="hospitalize" title="入院中" sortable></vxe-table-column>
@@ -9,7 +40,7 @@
       <vxe-table-column field="severe" title="重症" sortable></vxe-table-column>
       <vxe-table-column field="pcr" title="PCR検査数" sortable></vxe-table-column>
       <vxe-table-column field="population" title="人口" sortable></vxe-table-column>
-    </vxe-table>
+    </vxe-table> -->
   </div>
 </template>
 
@@ -27,32 +58,44 @@ export default {
       pcr: 0,
       population: 0,
       severe: 0,
-      total: {}
+      total: {},
+      chartSet: []
     };
   },
 
   computed: {
     ...mapState(["coronaData", "coronaTotalData", "coronaPrefData"]),
-    ...mapGetters(["prefDataFilter"])
+    ...mapGetters(["prefDataFilter", "chartDeleteFilter"])
   },
   watch: {
     coronaData() {
       this.setData(this.coronaData);
     },
     coronaTotalData() {
-      //coronaDataの合計値
       this.$store.commit("prefTotal", this.prefDataFilter(this.selected));
+    },
+    chartSet() {
+      this.chartCheck(this.chartSet);
     }
   },
   mounted() {
-    if (this.coronaTotalData.length == 0) {
-      this.$store.dispatch("coronaPrefectures");
-    }
+    this.$store.dispatch("coronaPrefectures");
   },
+
   methods: {
+    chartCheck(prefCode) {
+      let pref = []
+      prefCode.forEach((code) => {  
+        console.log(code)
+        console.log(this.prefDataFilter(code)[0])
+        pref.push(this.prefDataFilter(code)[0])
+      })
+      console.log(pref)
+      this.$store.commit("chart", pref)
+    },
     setData(prefData) {
-      this.coronaPref = prefData[0];
-      this.totalData(prefData[0]);
+      this.coronaPref = prefData;
+      this.totalData(prefData);
     },
     totalData(data) {
       data.forEach(num => {
@@ -77,5 +120,16 @@ export default {
 <style>
 .container {
   margin-bottom: 1rem;
+}
+.table {
+  border: 1px solid black;
+  width: 100%;
+}
+.table__title {
+  border: 1px solid black;
+}
+.table__body {
+  border-top: 1px solid gray;
+  border-left: 1px solid gray;
 }
 </style>
