@@ -202,12 +202,14 @@ export default {
 }
 .card__title {
   position: relative;
-  background-color: gray;
+  /* background-color: gray; */
   bottom: -15px;
   overflow: hidden;
   color: white;
-  border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  padding: .2rem;
+  font-weight: bolder;
+  background: linear-gradient(#829ebc, #354453fd);
 }
 .card__title p {
   margin: 1rem;
@@ -217,23 +219,21 @@ export default {
   color: black;
   padding: 0.4rem;
   overflow: hidden;
-  border-radius: 8px;
+  border-radius: 5px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
 }
 .card__title select {
   font-size: 1.4rem;
-  padding: 0 1rem;
+  padding: 0 1rem 5px;
   margin-right: 0.5rem;
   border: 2px solid white;
-  border-radius: 10px;
+  border-radius: 5px;
   text-indent: 10px;
   background: none transparent;
   color: white;
-  padding-bottom: 5px;
 }
 .card__title select option {
-  background-color: black;
-  color: white;
+  color: black;
 }
 .card__font__span {
   font-size: 0.9rem;

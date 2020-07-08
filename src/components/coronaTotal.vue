@@ -160,7 +160,6 @@ th.sorted.asc::after {
   top: 0;
 }
 .table__main {
-  border: 2px solid gray;
   width: 100%;
   margin-top: 1.5rem;
   border-collapse: separate;
