@@ -1,23 +1,23 @@
 <template>
   <div class="container">
     <div class="table">
-      <table class="table__main">
+      <table id="table" class="table__main">
         <thead class="table__head">
           <tr>
             <th class="table__title"></th>
             <th class="table__title">都道府県</th>
-            <th class="table__title">感染者</th>
-            <th class="table__title">入院中</th>
-            <th class="table__title">退院</th>
-            <th class="table__title">死者</th>
-            <th class="table__title">重症</th>
-            <th class="table__title">PCR検査</th>
-            <th class="table__title">人口</th>
+            <th @click="sortBy('cases')" :class="sortedClass('cases')" class="table__title">感染者</th>
+            <th @click="sortBy('hospitalize')" :class="sortedClass('hospitalize')" class="table__title">入院中</th>
+            <th @click="sortBy('discharge')" :class="sortedClass('discharge')" class="table__title">退院</th>
+            <th @click="sortBy('deaths')" :class="sortedClass('deaths')" class="table__title">死者</th>
+            <th @click="sortBy('severe')" :class="sortedClass('severe')" class="table__title">重症</th>
+            <th @click="sortBy('pcr')" :class="sortedClass('pcr')" class="table__title">PCR検査</th>
+            <th @click="sortBy('population')" :class="sortedClass('population')" class="table__title">人口</th>
           </tr>
         </thead>
         <tbody class="table__body">
-          <tr v-for="data in coronaPref" :key="data.id">
-            <td class="table__body">
+          <tr v-for="data in eventedAction" :key="data.id">
+            <td class="table__body__sub">
               <input type="checkbox" :value="data.id" v-model="chartSet" />
             </td>
             <td class="table__body__sub">{{ data.name_ja }}</td>
@@ -33,17 +33,6 @@
       </table>
       <button @click="sortDesc(coronaPref)">ddddddddddd</button>
     </div>
-
-    <!-- <vxe-table border height="300" highlight-hover-row ref="xTable6" :data="coronaPref">
-      <vxe-table-column field="name_ja" title="都道府県"></vxe-table-column>
-      <vxe-table-column field="cases" title="感染者数" sortable></vxe-table-column>
-      <vxe-table-column field="hospitalize" title="入院中" sortable></vxe-table-column>
-      <vxe-table-column field="discharge" title="退院" sortable></vxe-table-column>
-      <vxe-table-column field="deaths" title="死者" sortable></vxe-table-column>
-      <vxe-table-column field="severe" title="重症" sortable></vxe-table-column>
-      <vxe-table-column field="pcr" title="PCR検査数" sortable></vxe-table-column>
-      <vxe-table-column field="population" title="人口" sortable></vxe-table-column>
-    </vxe-table>-->
   </div>
 </template>
 
@@ -52,8 +41,12 @@ import { mapState, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      selected: 13,
       coronaPref: [],
+      sort: {
+        key: "",
+        isAsc: false // 昇順ならtrue,降順ならfalse
+      },
+      selected: 13,
       cases: 0,
       deaths: 0,
       discharge: 0,
@@ -68,7 +61,20 @@ export default {
 
   computed: {
     ...mapState(["coronaData", "coronaTotalData", "coronaPrefData"]),
-    ...mapGetters(["prefDataFilter", "chartDeleteFilter"])
+    ...mapGetters(["prefDataFilter"]),
+
+    eventedAction() {
+      let list = this.coronaPref.slice();
+
+      if (this.sort.key) {
+        list.sort((a, b) => {
+          a = a[this.sort.key];
+          b = b[this.sort.key];
+          return (a === b ? 0 : a > b ? 1 : -1) * (this.sort.isAsc ? 1 : -1);
+        });
+      }
+      return list;
+    }
   },
   watch: {
     coronaData() {
@@ -81,22 +87,16 @@ export default {
       this.chartCheck(this.chartSet);
     }
   },
-  mounted() {
-    this.$store.dispatch("coronaPrefectures");
-  },
 
   methods: {
-    sortDesc(data) {
-      console.log(data);
-      let sample = [];
-      for (let i in data) {
-        sample.push(data[i].cases);
-      }
-      sample.sort((a, b) => {
-        return a < b ? 1 : -1;
-      });
-      console.log(sample);
+    sortBy(key) {
+      this.sort.isAsc = this.sort.key === key ? !this.sort.isAsc : false;
+      this.sort.key = key;
     },
+    sortedClass(key) {
+      return this.sort.key === key ? `sorted ${this.sort.isAsc ? "asc" : "desc"}` : "";
+    },
+
     chartCheck(prefCode) {
       let pref = [];
       prefCode.forEach(code => {
@@ -108,6 +108,7 @@ export default {
       this.$store.commit("chart", pref);
     },
     setData(prefData) {
+      console.log(prefData);
       this.coronaPref = prefData;
       this.totalData(prefData);
     },
@@ -127,11 +128,22 @@ export default {
       console.log(this.total);
       this.$store.commit("setTotalData", this.total);
     }
+  },
+  mounted() {
+    this.$store.dispatch("coronaPrefectures");
   }
 };
 </script>
 
 <style>
+th.sorted.desc::after {
+  display: inline-block;
+  content: "▼";
+}
+th.sorted.asc::after {
+  display: inline-block;
+  content: "▲";
+}
 .container {
   margin-bottom: 1rem;
 }
