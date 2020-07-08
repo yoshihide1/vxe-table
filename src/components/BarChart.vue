@@ -32,12 +32,23 @@ export default {
     }
   },
   methods: {
+    randomColor() {
+      let max = 240
+      let min = 0
+      let color = []
+      let i = 0
+      while (i < 3) {
+        let colorCode = Math.floor(Math.random() * (max + 1 - min)) + min
+        color.push(colorCode)
+        i++
+      }
+      return `rgb(${color})`
+    },
     plus(data) {
-      console.log(data);
       data.forEach(pref => {
         this.datacollection.datasets.push({
           label: `${pref.name_ja}(累計)`,
-          backgroundColor: "#FFB43B",
+          backgroundColor: this.randomColor(),
           borderWidth: 1,
           pointBorderColor: "glay",
           data: [
@@ -60,7 +71,7 @@ export default {
         datasets: [
           {
             label: "全国(累計)",
-            backgroundColor: "#1E0B14",
+            backgroundColor: "#0B0000",
             borderWidth: 1,
             pointBorderColor: "glay",
             data: [
@@ -73,7 +84,7 @@ export default {
           },
           {
             label: `${this.prefTotal.name_ja}(累計)`,
-            backgroundColor: "#FF395A",
+            backgroundColor: this.randomColor(),
             borderWidth: 1,
             pointBorderColor: "glay",
             data: [
