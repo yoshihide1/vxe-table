@@ -1,7 +1,7 @@
 <template>
   <div class="container">
     <div class="table">
-      <table id="table" class="table__main">
+      <table class="table__main">
         <thead class="table__head">
           <tr>
             <th class="table__title"></th>
@@ -16,7 +16,7 @@
           </tr>
         </thead>
         <tbody class="table__body">
-          <tr v-for="data in eventedAction" :key="data.id">
+          <tr v-for="data in coronaDataSort" :key="data.id">
             <td class="table__body__sub">
               <input type="checkbox" :value="data.id" v-model="chartSet" />
             </td>
@@ -31,7 +31,6 @@
           </tr>
         </tbody>
       </table>
-      <button @click="sortDesc(coronaPref)">ddddddddddd</button>
     </div>
   </div>
 </template>
@@ -63,7 +62,7 @@ export default {
     ...mapState(["coronaData", "coronaTotalData", "coronaPrefData"]),
     ...mapGetters(["prefDataFilter"]),
 
-    eventedAction() {
+    coronaDataSort() {
       let list = this.coronaPref.slice();
 
       if (this.sort.key) {
@@ -94,7 +93,9 @@ export default {
       this.sort.key = key;
     },
     sortedClass(key) {
-      return this.sort.key === key ? `sorted ${this.sort.isAsc ? "asc" : "desc"}` : "";
+      return this.sort.key === key
+        ? `sorted ${this.sort.isAsc ? "asc" : "desc"}`
+        : "";
     },
 
     chartCheck(prefCode) {
@@ -162,17 +163,34 @@ th.sorted.asc::after {
   border: 2px solid gray;
   width: 100%;
   margin-top: 1.5rem;
+  border-collapse: separate;
+  border-spacing: 0;
+}
+.table__main th:first-child {
+  border-radius: 5px 0 0 0;
+}
+
+.table__main th:last-child {
+  border-radius: 0 5px 0 0;
+  border-right: 1px solid #3c6690;
 }
 .table__title {
-  border-left: 2px solid gray;
-  border-bottom: 2px solid gray;
+  border-left: 1px solid #242b33;
+  border-top: 1px solid #242b33;
+  border-bottom: 1px solid #242b33;
+  box-shadow: 0px 1px 1px rgba(255, 255, 255, 0.3) inset;
   padding: 1rem;
   font-weight: bolder;
-  background-color: gray;
+  background: linear-gradient(#829ebc, #354453fd);
+  color: white;
+  padding: 1rem 0;
 }
+
 .table__body__sub {
-  border-bottom: 1px solid gray;
-  border-left: 1px solid gray;
+  border-left: 1px solid #242b33;
+  border-bottom: 1px solid #242b33;
+  border-top: none;
+  box-shadow: 0px -3px 5px 1px #eee inset;
   padding: 0.8rem;
 }
 </style>
