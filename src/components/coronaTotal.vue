@@ -192,4 +192,10 @@ th.sorted.asc::after {
   box-shadow: 0px -3px 5px 1px #eee inset;
   padding: 0.8rem;
 }
+
+@media screen and (max-width: 768px) {
+  .table {
+    overflow-x: auto;
+  }
+}
 </style>
