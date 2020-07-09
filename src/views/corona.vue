@@ -43,4 +43,18 @@ export default {
 .chart__pie {
   width: 40%;
 }
+
+@media screen and (max-width:768px ) {
+  .chart {
+    display: block;
+  }
+  .chart__bar {
+    width: 95%;
+    margin: 0 auto;
+  }
+  .chart__pie {
+    width: 95%;
+    margin: 0 auto;
+  }
+}
 </style>

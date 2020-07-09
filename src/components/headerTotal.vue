@@ -245,4 +245,15 @@ export default {
   overflow: hidden;
   box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
 }
+
+@media screen and (max-width: 768px) {
+  #total {
+    display: block;
+  
+  }
+  .card {
+    width: 90%;
+    margin: 0 auto;
+  }
+}
 </style>
