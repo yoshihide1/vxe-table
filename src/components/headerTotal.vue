@@ -171,7 +171,7 @@ export default {
       let percentage = (now / pref.population) * 100;
       this.prefNowCase = now;
       this.prefNowPercentage = Math.floor(percentage * 100000) / 100000;
-      this.prefName = this.checkPref(pref.name_ja);
+      this.prefName = this.checkPref(pref.prefecture);
     },
     checkPref(prefName) {
       if (prefName === "東京") {
@@ -206,7 +206,7 @@ export default {
   overflow: hidden;
   color: white;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  padding: .2rem;
+  padding: 0.2rem;
   font-weight: bolder;
   background: linear-gradient(#829ebc, #354453fd);
 }
@@ -248,7 +248,6 @@ export default {
 @media screen and (max-width: 768px) {
   #total {
     display: block;
-  
   }
   .card {
     width: 90%;
