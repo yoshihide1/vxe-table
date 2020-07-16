@@ -38,31 +38,24 @@ export default new Vuex.Store({
   },
   actions: {
     //都道府県別
-    coronaPrefectures({ commit }) {
-      axios.get("https://covid19-japan-web-api.now.sh/api/v1/prefectures")
+    // coronaPrefectures({ commit }) {
+    //   axios.get("https://covid19-japan-web-api.now.sh/api/v1/prefectures")
+    //     .then((res) => {
+    //       console.log(res)
+    //       commit('prefectures', res.data)
+    //     })
+    // },
+    coronaToday({ commit }) {
+      axios.get("https://node-api-corona.herokuapp.com/api/v1/today/")
         .then((res) => {
+          console.log(res)
           commit('prefectures', res.data)
         })
     },
-    //都道府県別の詳細
-    // prefInfomation({ commit }) {
-    //   let total = []
-    //   prefs.forEach((pref) => {
-    //     let params = {
-    //       prefecture: pref.name
-    //     }
-    //     axios.get("https://covid19-japan-web-api.now.sh/api/v1/positives", { params })
-    //       .then((res) => {
-    //         total.push(res)
-    //       })
-    //   })
-    //   commit('prefInfo', total)
-    //   console.log(total)
-    // },
   },
   getters: {
     prefDataFilter: (state) => (id) => {
-      return state.coronaData.filter(pref => pref.id == id)
+      return state.coronaData.filter(pref => pref.pref_id == id)
     },
   },
   modules: {

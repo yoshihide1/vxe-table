@@ -21,7 +21,7 @@ export default {
     totalChart() {
       let total = this.coronaPrefData;
       (this.datacollection = {
-        labels: ["入院中(現在)", "重症(現在)", "死者(累計)"],
+        labels: [`${total.prefecture}：入院中(現在)`, "重症(現在)", "死者(累計)"],
         datasets: [
           {
             label: ["Datrrrrrrrrrrrrrrrrrrrrrra One"],

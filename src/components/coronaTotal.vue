@@ -7,20 +7,32 @@
             <th class="table__title"></th>
             <th class="table__title">都道府県</th>
             <th @click="sortBy('cases')" :class="sortedClass('cases')" class="table__title">感染者</th>
-            <th @click="sortBy('hospitalize')" :class="sortedClass('hospitalize')" class="table__title">入院中</th>
-            <th @click="sortBy('discharge')" :class="sortedClass('discharge')" class="table__title">退院</th>
+            <th
+              @click="sortBy('hospitalize')"
+              :class="sortedClass('hospitalize')"
+              class="table__title"
+            >入院中</th>
+            <th
+              @click="sortBy('discharge')"
+              :class="sortedClass('discharge')"
+              class="table__title"
+            >退院</th>
             <th @click="sortBy('deaths')" :class="sortedClass('deaths')" class="table__title">死者</th>
             <th @click="sortBy('severe')" :class="sortedClass('severe')" class="table__title">重症</th>
             <th @click="sortBy('pcr')" :class="sortedClass('pcr')" class="table__title">PCR検査</th>
-            <th @click="sortBy('population')" :class="sortedClass('population')" class="table__title">人口</th>
+            <th
+              @click="sortBy('population')"
+              :class="sortedClass('population')"
+              class="table__title"
+            >人口</th>
           </tr>
         </thead>
         <tbody class="table__body">
-          <tr v-for="data in coronaDataSort" :key="data.id">
+          <tr v-for="data in coronaDataSort" :key="data.pref_id">
             <td class="table__body__sub">
-              <input type="checkbox" :value="data.id" v-model="chartSet" />
+              <input type="checkbox" :value="data.pref_id" v-model="chartSet" />
             </td>
-            <td class="table__body__sub">{{ data.name_ja }}</td>
+            <td class="table__body__sub">{{ data.prefecture }}</td>
             <td class="table__body__sub">{{ data.cases }}</td>
             <td class="table__body__sub">{{ data.hospitalize }}</td>
             <td class="table__body__sub">{{ data.discharge }}</td>
@@ -116,14 +128,14 @@ export default {
     totalData(data) {
       data.forEach(num => {
         this.total = {
-          cases: (this.cases += num.cases), //感染者
-          deaths: (this.deaths += num.deaths), //死者
-          discharge: (this.discharge += num.discharge), //退院
-          hospitalize: (this.hospitalize += num.hospitalize), //入院
-          pcr: (this.pcr += num.pcr), //PCR検査
-          population: (this.population += num.population), //人口
-          severe: (this.severe += num.severe), //重症
-          lastUpdated: num.last_updated.cases_date
+          cases: (this.cases += Number(num.cases)), //感染者
+          deaths: (this.deaths += Number(num.deaths)), //死者
+          discharge: (this.discharge += Number(num.discharge)), //退院
+          hospitalize: (this.hospitalize += Number(num.hospitalize)), //入院
+          pcr: (this.pcr += Number(num.pcr)), //PCR検査
+          population: (this.population += Number(num.population)), //人口
+          severe: (this.severe += Number(num.severe)), //重症
+          lastUpdated: num.created_at
         };
       });
       console.log(this.total);
@@ -131,7 +143,8 @@ export default {
     }
   },
   mounted() {
-    this.$store.dispatch("coronaPrefectures");
+    // this.$store.dispatch("coronaPrefectures");
+    this.$store.dispatch("coronaToday");
   }
 };
 </script>

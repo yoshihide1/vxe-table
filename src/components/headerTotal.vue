@@ -148,7 +148,6 @@ export default {
       const c = a.slice(4, 6); //月
       const d = a.slice(6, 8); //日
       this.updated = `最終更新日${b}年${c}月${d}日`;
-      console.log(a);
     },
     numComma(num) {
       return String(num).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");

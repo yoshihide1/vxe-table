@@ -47,7 +47,7 @@ export default {
     plus(data) {
       data.forEach(pref => {
         this.datacollection.datasets.push({
-          label: `${pref.name_ja}(累計)`,
+          label: `${pref.prefecture}(累計)`,
           backgroundColor: this.randomColor(),
           borderWidth: 1,
           pointBorderColor: "glay",
@@ -83,7 +83,7 @@ export default {
             ]
           },
           {
-            label: `${this.prefTotal.name_ja}(累計)`,
+            label: `${this.prefTotal.prefecture}(累計)`,
             backgroundColor: this.randomColor(),
             borderWidth: 1,
             pointBorderColor: "glay",
