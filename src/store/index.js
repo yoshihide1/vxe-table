@@ -11,9 +11,13 @@ export default new Vuex.Store({
     coronaTotalData: [],
     coronaPrefData: [],
     chartPlus: [],
-    updateChart: []
+    updateChart: [],
+    ratio: []
   },
   mutations: {
+    ratio(state, data) {
+      state.ratio = data
+    },
     prefectures(state, data) {
       state.coronaData = data
       console.log(state.coronaData)
@@ -50,6 +54,13 @@ export default new Vuex.Store({
         .then((res) => {
           console.log(res)
           commit('prefectures', res.data)
+        })
+    },
+    coronaTotal({ commit }) {
+      axios.get("https://node-api-corona.herokuapp.com/api/v1/total/")
+        .then((res) => {
+          console.log(res)
+          commit('ratio', res.data)
         })
     },
   },

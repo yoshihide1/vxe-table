@@ -145,6 +145,7 @@ export default {
   mounted() {
     // this.$store.dispatch("coronaPrefectures");
     this.$store.dispatch("coronaToday");
+    this.$store.dispatch("coronaTotal");
   }
 };
 </script>

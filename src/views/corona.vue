@@ -3,6 +3,9 @@
     <div class="corona__total__header">
       <headerTotal></headerTotal>
     </div>
+    <div>
+<lineChart></lineChart>
+    </div>
     <div class="chart">
       <barChart class="chart__bar"></barChart>
       <pieChart class="chart__pie"></pieChart>
@@ -17,13 +20,15 @@ import headerTotal from "@/components/headerTotal";
 import coronaTotal from "@/components/coronaTotal";
 import barChart from "@/components/BarChart";
 import pieChart from "@/components/PieChart";
+import lineChart from "@/components/LineChart";
 
 export default {
   components: {
     headerTotal,
     coronaTotal,
     barChart,
-    pieChart
+    pieChart,
+    lineChart
   }
 };
 </script>
