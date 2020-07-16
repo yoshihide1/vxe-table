@@ -14,7 +14,6 @@ export default {
       date: [],
       cases: [],
       pcr: [],
-      deaths: []
     };
   },
   watch: {
@@ -30,7 +29,6 @@ export default {
         this.date.unshift(data1[i].date.slice(5).replace("-", "月") + "日");
         this.cases.unshift(data1[i].cases - data2[i].cases);
         this.pcr.unshift(data1[i].pcr - data2[i].pcr);
-        this.deaths.unshift(data1[i].deaths - data2[i].deaths);
       }
       this.totalChart();
     },
@@ -52,13 +50,6 @@ export default {
             borderColor: "green",
             data: this.pcr
           },
-          {
-            label: ["死者"],
-            pointBackgroundColor: "red",
-            borderWidth: 3,
-            borderColor: "red",
-            data: this.deaths
-          }
         ]
       }),
         (this.options = {
