@@ -27,7 +27,7 @@ export default {
       let data1 = this.ratio.slice(0, this.ratio.length - 1);
       let data2 = this.ratio.slice(1, this.ratio.length);
       for (let i in data1) {
-        this.date.unshift(data1[i].date);
+        this.date.unshift(data1[i].date.slice(5).replace("-", "月") + "日");
         this.cases.unshift(data1[i].cases - data2[i].cases);
         this.pcr.unshift(data1[i].pcr - data2[i].pcr);
         this.deaths.unshift(data1[i].deaths - data2[i].deaths);
@@ -40,26 +40,23 @@ export default {
         datasets: [
           {
             label: ["感染者"],
-            // backgroundColor: "pink",
-            pointBackgroundColor: "black",
-            borderWidth: 1,
-            pointBorderColor: "#249EBF",
+            pointBackgroundColor: "blue",
+            borderWidth: 3,
+            borderColor: "orange",
             data: this.cases
           },
           {
             label: ["PCR検査"],
-            // backgroundColor: "#F24C0C",
-            pointBackgroundColor: "pink",
-            borderWidth: 1,
-            pointBorderColor: "#249EBF",
+            pointBackgroundColor: "black",
+            borderWidth: 3,
+            borderColor: "green",
             data: this.pcr
           },
           {
             label: ["死者"],
-            // backgroundColor: "black",
             pointBackgroundColor: "red",
-            borderWidth: 1,
-            pointBorderColor: "black",
+            borderWidth: 3,
+            borderColor: "red",
             data: this.deaths
           }
         ]
