@@ -3,14 +3,13 @@
     <div class="corona__total__header">
       <headerTotal></headerTotal>
     </div>
-    <div>
-<lineChart></lineChart>
-    </div>
     <div class="chart">
       <barChart class="chart__bar"></barChart>
       <pieChart class="chart__pie"></pieChart>
     </div>
-
+    <div>
+      <lineChart></lineChart>
+    </div>
     <coronaTotal />
   </div>
 </template>
@@ -35,7 +34,7 @@ export default {
 
 <style>
 .container {
-  background-color: #FCFCFC;
+  background-color: #fcfcfc;
 }
 .chart {
   display: flex;
@@ -49,7 +48,7 @@ export default {
   width: 40%;
 }
 
-@media screen and (max-width:768px ) {
+@media screen and (max-width: 768px) {
   .chart {
     display: block;
   }

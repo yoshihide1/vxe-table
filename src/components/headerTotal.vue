@@ -11,17 +11,17 @@
         <div class="card__body">
           <p>
             <span class="card__font__span">PCR検査</span>
-            ：{{ numComma(coronaTotalData.pcr) }}
+            ：{{ numComma(ratio[0].pcr) }}
             <span class="card__font__span">人</span>
           </p>
           <p>
             <span class="card__font__span">感染者</span>
-            ：{{ numComma(coronaTotalData.cases) }}
+            ：{{ numComma(ratio[0].cases) }}
             <span class="card__font__span">人</span>
           </p>
           <p>
             <span class="card__font__span">死者</span>
-            ：{{ numComma(coronaTotalData.deaths) }}
+            ：{{ numComma(ratio[0].deaths) }}
             <span class="card__font__span">人</span>
           </p>
           <p class="death">
@@ -49,7 +49,7 @@
             <span class="card__font__span">％</span>
           </p>
           <p>
-            <span class="card__font__span">国内の人口:{{ numComma(coronaTotalData.population) }}人</span>
+            <span class="card__font__span">国内の人口:{{ numComma(ratio[0].population) }}人</span>
           </p>
         </div>
       </div>
@@ -71,7 +71,7 @@
             {{ nowPercentage }}%
           </p>
           <p>
-            <span class="card__font__span">国内の人口:{{ numComma(coronaTotalData.population) }}人</span>
+            <span class="card__font__span">国内の人口:{{ numComma(ratio[0].population) }}人</span>
           </p>
         </div>
       </div>
@@ -109,7 +109,7 @@ import { mapState, mapGetters } from "vuex";
 import prefs from "../assets/prefectures.json";
 export default {
   computed: {
-    ...mapState(["coronaTotalData", "coronaPrefData"]),
+    ...mapState(["coronaData", "coronaPrefData", "ratio"]),
     ...mapGetters(["prefDataFilter"])
   },
   data() {
@@ -130,14 +130,18 @@ export default {
   watch: {
     selected() {
       this.$store.commit("prefTotal", this.prefDataFilter(this.selected));
-      console.log(this.selected);
     },
-    coronaTotalData() {
-      this.numPercentage(this.coronaTotalData);
-      this.nowCases(this.coronaTotalData);
-      this.lastUpdate(this.coronaTotalData.lastUpdated);
+    coronaData() {
+      this.$store.commit("prefTotal", this.prefDataFilter(this.selected));
+    },
+    ratio() {
+      this.numPercentage(this.ratio[0]);
+      this.nowCases(this.ratio[0]);
+      this.lastUpdate(this.ratio[0].date);
     },
     coronaPrefData() {
+      console.log(222);
+      console.log(this.coronaPrefData);
       this.prefFilter(this.coronaPrefData);
     }
   },
@@ -145,14 +149,15 @@ export default {
     lastUpdate(date) {
       const a = String(date);
       const b = a.slice(0, 4); //年
-      const c = a.slice(4, 6); //月
-      const d = a.slice(6, 8); //日
+      const c = a.slice(5, 7); //月
+      const d = a.slice(8, 10); //日
       this.updated = `最終更新日${b}年${c}月${d}日`;
     },
     numComma(num) {
       return String(num).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
     },
     numPercentage(total) {
+      console.log(total);
       let death = (total.deaths / total.cases) * 100;
       let pcr = (total.pcr / total.population) * 100;
       let cases = (total.cases / total.population) * 100;
@@ -167,6 +172,7 @@ export default {
       this.nowPercentage = Math.floor(percentage * 100000) / 100000;
     },
     prefFilter(pref) {
+      console.log(pref);
       let now = pref.cases - pref.discharge - pref.deaths;
       let percentage = (now / pref.population) * 100;
       this.prefNowCase = now;

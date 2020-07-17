@@ -4,12 +4,7 @@ import { mapState, mapGetters } from "vuex";
 export default {
   extends: Bar,
   computed: {
-    ...mapState([
-      "coronaTotalData",
-      "coronaData",
-      "coronaPrefData",
-      "chartPlus",
-    ]),
+    ...mapState(["ratio", "coronaPrefData", "chartPlus"]),
     ...mapGetters(["prefDataFilter"])
   },
   data() {
@@ -21,7 +16,7 @@ export default {
     };
   },
   watch: {
-    coronaTotalData() {
+    ratio() {
       this.totalAndPref();
     },
     coronaPrefData() {
@@ -33,16 +28,16 @@ export default {
   },
   methods: {
     randomColor() {
-      let max = 240
-      let min = 0
-      let color = []
-      let i = 0
+      let max = 240;
+      let min = 0;
+      let color = [];
+      let i = 0;
       while (i < 3) {
-        let colorCode = Math.floor(Math.random() * (max + 1 - min)) + min
-        color.push(colorCode)
-        i++
+        let colorCode = Math.floor(Math.random() * (max + 1 - min)) + min;
+        color.push(colorCode);
+        i++;
       }
-      return `rgb(${color})`
+      return `rgb(${color})`;
     },
     plus(data) {
       data.forEach(pref => {
@@ -64,7 +59,7 @@ export default {
     },
     totalAndPref(pref) {
       this.datacollection.datasets = [];
-      this.total = this.coronaTotalData;
+      this.total = this.ratio[0];
       this.prefTotal = this.coronaPrefData;
       this.datacollection = {
         labels: ["感染者", "入院中", "退院", "重症", "死者"],

@@ -71,11 +71,11 @@ export default {
   },
 
   computed: {
-    ...mapState(["coronaData", "coronaTotalData", "coronaPrefData"]),
+    ...mapState(["coronaData", "coronaPrefData"]),
     ...mapGetters(["prefDataFilter"]),
 
     coronaDataSort() {
-      let list = this.coronaPref.slice();
+      let list = this.coronaData.slice();
 
       if (this.sort.key) {
         list.sort((a, b) => {
@@ -88,12 +88,6 @@ export default {
     }
   },
   watch: {
-    coronaData() {
-      this.setData(this.coronaData);
-    },
-    coronaTotalData() {
-      this.$store.commit("prefTotal", this.prefDataFilter(this.selected));
-    },
     chartSet() {
       this.chartCheck(this.chartSet);
     }
@@ -119,33 +113,12 @@ export default {
       });
       console.log(pref);
       this.$store.commit("chart", pref);
-    },
-    setData(prefData) {
-      console.log(prefData);
-      this.coronaPref = prefData;
-      this.totalData(prefData);
-    },
-    totalData(data) {
-      data.forEach(num => {
-        this.total = {
-          cases: (this.cases += Number(num.cases)), //感染者
-          deaths: (this.deaths += Number(num.deaths)), //死者
-          discharge: (this.discharge += Number(num.discharge)), //退院
-          hospitalize: (this.hospitalize += Number(num.hospitalize)), //入院
-          pcr: (this.pcr += Number(num.pcr)), //PCR検査
-          population: (this.population += Number(num.population)), //人口
-          severe: (this.severe += Number(num.severe)), //重症
-          lastUpdated: num.created_at
-        };
-      });
-      console.log(this.total);
-      this.$store.commit("setTotalData", this.total);
     }
   },
   mounted() {
     // this.$store.dispatch("coronaPrefectures");
-    this.$store.dispatch("coronaToday");
     this.$store.dispatch("coronaTotal");
+    this.$store.dispatch("coronaToday");
   }
 };
 </script>

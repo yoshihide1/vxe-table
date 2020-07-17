@@ -12,43 +12,27 @@ export default new Vuex.Store({
     coronaPrefData: [],
     chartPlus: [],
     updateChart: [],
-    ratio: []
+    ratio: [0]
   },
   mutations: {
-    ratio(state, data) {
+    ratio(state, data) {//割合
       state.ratio = data
     },
     prefectures(state, data) {
       state.coronaData = data
-      console.log(state.coronaData)
-    },
-    setTotalData(state, total) {
-      console.log(total)
-      state.coronaTotalData = total
     },
     prefTotal(state, prefData) {//getters経由
-      console.log(prefData)
       state.coronaPrefData = prefData[0]
     },
     chart(state, prefData) {
-      console.log(prefData)
       state.chartPlus = []
       state.chartPlus.push(prefData)
     },
     deleteChart(state, prefData) {
-      console.log(prefData)
       state.updateChart = prefData
     }
   },
   actions: {
-    //都道府県別
-    // coronaPrefectures({ commit }) {
-    //   axios.get("https://covid19-japan-web-api.now.sh/api/v1/prefectures")
-    //     .then((res) => {
-    //       console.log(res)
-    //       commit('prefectures', res.data)
-    //     })
-    // },
     coronaToday({ commit }) {
       axios.get("https://node-api-corona.herokuapp.com/api/v1/today/")
         .then((res) => {
