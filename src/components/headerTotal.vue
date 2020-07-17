@@ -140,8 +140,6 @@ export default {
       this.lastUpdate(this.ratio[0].date);
     },
     coronaPrefData() {
-      console.log(222);
-      console.log(this.coronaPrefData);
       this.prefFilter(this.coronaPrefData);
     }
   },
@@ -157,7 +155,6 @@ export default {
       return String(num).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
     },
     numPercentage(total) {
-      console.log(total);
       let death = (total.deaths / total.cases) * 100;
       let pcr = (total.pcr / total.population) * 100;
       let cases = (total.cases / total.population) * 100;
@@ -172,7 +169,6 @@ export default {
       this.nowPercentage = Math.floor(percentage * 100000) / 100000;
     },
     prefFilter(pref) {
-      console.log(pref);
       let now = pref.cases - pref.discharge - pref.deaths;
       let percentage = (now / pref.population) * 100;
       this.prefNowCase = now;

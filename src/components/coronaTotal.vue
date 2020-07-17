@@ -76,11 +76,12 @@ export default {
 
     coronaDataSort() {
       let list = this.coronaData.slice();
-
+      console.log(list);
+      console.log(this.sort.key);
       if (this.sort.key) {
         list.sort((a, b) => {
-          a = a[this.sort.key];
-          b = b[this.sort.key];
+          a = Number(a[this.sort.key]);
+          b = Number(b[this.sort.key]);
           return (a === b ? 0 : a > b ? 1 : -1) * (this.sort.isAsc ? 1 : -1);
         });
       }
