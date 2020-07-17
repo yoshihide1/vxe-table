@@ -52,6 +52,9 @@ export default new Vuex.Store({
     prefDataFilter: (state) => (id) => {
       return state.coronaData.filter(pref => pref.pref_id == id)
     },
+    // numComma: (num) => {
+    //   return String(num).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
+    // }
   },
   modules: {
   }

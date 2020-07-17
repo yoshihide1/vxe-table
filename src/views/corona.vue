@@ -1,5 +1,11 @@
 <template>
   <div class="container">
+    <div>
+      <cumulative />
+      <domestic />
+      <domesticPrefecture />
+      <populationRatio />
+    </div>
     <div class="corona__total__header">
       <headerTotal></headerTotal>
     </div>
@@ -17,6 +23,10 @@
 <script>
 import headerTotal from "@/components/headerTotal";
 import coronaTotal from "@/components/coronaTotal";
+import cumulative from "@/components/Cumulative"
+import domestic from "@/components/Domestic"
+import domesticPrefecture from "@/components/DomesticPrefecture"
+import populationRatio from "@/components/PopulationRatio"
 import barChart from "@/components/BarChart";
 import pieChart from "@/components/PieChart";
 import lineChart from "@/components/LineChart";
@@ -25,6 +35,10 @@ export default {
   components: {
     headerTotal,
     coronaTotal,
+    cumulative,
+    domestic,
+    domesticPrefecture,
+    populationRatio,
     barChart,
     pieChart,
     lineChart
