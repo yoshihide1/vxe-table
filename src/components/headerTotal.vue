@@ -210,6 +210,7 @@ export default {
 }
 .card {
   width: 20%;
+  font-size: 1.4rem;
 }
 .card__title {
   position: relative;
