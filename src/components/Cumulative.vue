@@ -39,7 +39,9 @@ export default {
       cases: 0,
       deaths: 0,
       deathPercentage: 0,
-      comparisonPcr: 0
+      comparisonPcr: 0,
+      comparisonCases: 0,
+      comparisonDeaths: 0
     };
   },
   computed: {

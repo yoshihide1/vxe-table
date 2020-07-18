@@ -45,6 +45,10 @@ export default new Vuex.Store({
         .then((res) => {
           console.log(res)
           commit('ratio', res.data)
+          axios.get("https://node-api-corona.herokuapp.com/api/v1/2day/")
+            .then((res) => {
+              console.log(res)
+            })
         })
     },
   },

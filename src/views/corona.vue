@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div id="pc">
+    <div v-if="pc" id="pc">
       <div class="container">
         <updated class="date" />
         <div class="wrap__1">
@@ -22,7 +22,7 @@
       </div>
     </div>
 
-    <div id="sp">
+    <div v-if="sp" id="sp">
       <div container>
         <updated class="date" />
         <lineChart class="chart__line"></lineChart>
@@ -78,17 +78,42 @@ export default {
     pieChart,
     lineChart,
     updated
+  },
+  data() {
+    return {
+      pc: false,
+      sp: false,
+      repkaceWidth: 768,
+      windowSize: 0
+    }
+  },
+  watch: {
+    },
+  created() {
+    this.windowSwitch()
+  },
+  methods: {
+    windowSwitch() {
+    let size = parseInt(window.innerWidth)
+      if (size > 768) {
+        this.pc = !this.pc
+        console.log(1)
+      } else {
+        this.sp = !this.sp
+        console.log(2)
+      }
+    }
   }
 };
 </script>
 
 <style>
-#pc {
+/* #pc {
   display: block;
 }
 #sp {
   display: none;
-}
+} */
 .container {
   width: 100%;
   background-color: #fcfcfc;
@@ -176,12 +201,12 @@ export default {
 }
 
 @media screen and (max-width: 768px) {
-  #pc {
+  /* #pc {
     display: none;
   }
   #sp {
     display: block;
-  }
+  } */
   .chart__line {
     width: 100%;
     margin: 0 auto;
