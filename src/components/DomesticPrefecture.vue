@@ -1,28 +1,28 @@
 <template>
-    <div class="card">
-      <div class="card__title">
-        <p>
-          <select v-model="selected">
-            <option v-for="pref in prefs" :key="pref.code" :value="pref.code">{{ pref.name }}</option>
-          </select>
-          <span class="card__font__span">(現在)</span>
-        </p>
-      </div>
-      <div class="card__body">
-        <p>
-          <span class="card__font__span">感染者</span>
-          ：{{ numComma(prefNowCase) }}
-          <span class="card__font__span">人</span>
-        </p>
-        <p>
-          <span class="card__font__span">{{ prefName }}人口の</span>
-          {{ prefNowPercentage }}%
-        </p>
-        <p>
-          <span class="card__font__span">{{ prefName }}の人口:{{ prefPopulation }}人</span>
-        </p>
-      </div>
+  <div class="card">
+    <div class="card__title">
+      <p>
+        <select v-model="selected">
+          <option v-for="pref in prefs" :key="pref.code" :value="pref.code">{{ pref.name }}</option>
+        </select>
+        <span class="card__font__span">(現在)</span>
+      </p>
     </div>
+    <div class="card__body">
+      <p>
+        <span class="card__font__span">感染者</span>
+        ：{{ numComma(prefNowCase) }}
+        <span class="card__font__span">人</span>
+      </p>
+      <p>
+        <span class="card__font__span">{{ prefName }}人口の</span>
+        {{ prefNowPercentage }}%
+      </p>
+      <p>
+        <span class="card__font__span">{{ prefName }}の人口:{{ prefPopulation }}人</span>
+      </p>
+    </div>
+  </div>
 </template>
 
 <script>
@@ -41,19 +41,23 @@ export default {
     };
   },
   computed: {
-    ...mapState(["newCoronaData", "oldCoronaData", "coronaPrefData"]),
-    ...mapGetters(["newPrefFilter", "numComma"])
+    ...mapState(["newCoronaData", "oldCoronaData", "newPrefData"]),
+    ...mapGetters(["newPrefFilter", "oldPrefFilter", "numComma"])
   },
   watch: {
     selected() {
-      this.$store.commit("prefTotal", this.newPrefFilter(this.selected));
+      this.$store.commit("newPrefTotal", this.newPrefFilter(this.selected));
+      this.$store.commit("oldPrefTotal", this.oldPrefFilter(this.selected));
     },
     newCoronaData() {
-      this.$store.commit("prefTotal", this.newPrefFilter(this.selected));
+      this.$store.commit("newPrefTotal", this.newPrefFilter(this.selected));
     },
-    coronaPrefData() {
-      this.prefFilter(this.coronaPrefData);
+    oldCoronaData() {
+      this.$store.commit("oldPrefTotal", this.oldPrefFilter(this.selected));
     },
+    newPrefData() {
+      this.prefFilter(this.newPrefData);
+    }
   },
   methods: {
     prefFilter(pref) {

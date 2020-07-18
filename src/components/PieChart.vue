@@ -4,7 +4,7 @@ import { mapState } from "vuex";
 export default {
   extends: Pie,
   computed: {
-    ...mapState(["coronaPrefData"])
+    ...mapState(["newPrefData"])
   },
   data() {
     return {
@@ -13,13 +13,13 @@ export default {
     };
   },
   watch: {
-    coronaPrefData() {
+    newPrefData() {
       this.totalChart();
     }
   },
   methods: {
     totalChart() {
-      let total = this.coronaPrefData;
+      let total = this.newPrefData;
       (this.datacollection = {
         labels: [
           `${total.prefecture}：入院中(現在)`,

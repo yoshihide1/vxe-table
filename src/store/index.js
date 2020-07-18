@@ -9,7 +9,8 @@ export default new Vuex.Store({
   state: {
     newCoronaData: [],
     oldCoronaData: [],
-    coronaPrefData: [],
+    newPrefData: [],
+    oldPrefData: [],
     chartPlus: [],
     updateChart: [],
     ratio: [0],
@@ -27,9 +28,13 @@ export default new Vuex.Store({
       console.log(data)
       state.oldCoronaData = data
     },
-    prefTotal(state, prefData) {//getters経由
-      console.log(prefData)//今日[1]昨日[0]
-      state.coronaPrefData = prefData[0]
+    newPrefTotal(state, newPref) {//getters経由
+      console.log(newPref)
+      state.newPrefData = newPref[0]
+    },
+    oldPrefTotal(state, oldPref) {//getters経由
+      console.log(oldPref)
+      state.oldPrefData = oldPref[0]
     },
     chart(state, prefData) {
       state.chartPlus = []
@@ -76,6 +81,9 @@ export default new Vuex.Store({
   getters: {
     newPrefFilter: (state) => (id) => {
       return state.newCoronaData.filter(pref => pref.pref_id == id)
+    },
+    oldPrefFilter: (state) => (id) => {
+      return state.oldCoronaData.filter(pref => pref.pref_id == id)
     },
     numComma: () => (num) => {
       return String(num).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")

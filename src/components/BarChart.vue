@@ -4,7 +4,7 @@ import { mapState, mapGetters } from "vuex";
 export default {
   extends: Bar,
   computed: {
-    ...mapState(["ratio", "coronaPrefData", "chartPlus"]),
+    ...mapState(["ratio", "newPrefData", "chartPlus"]),
     ...mapGetters(["prefDataFilter"])
   },
   data() {
@@ -19,7 +19,7 @@ export default {
     ratio() {
       this.totalAndPref();
     },
-    coronaPrefData() {
+    newPrefData() {
       this.totalAndPref(this.chartPlus[0]);
     },
     chartPlus() {
@@ -60,7 +60,7 @@ export default {
     totalAndPref(pref) {
       this.datacollection.datasets = [];
       this.total = this.ratio[0];
-      this.prefTotal = this.coronaPrefData;
+      this.prefTotal = this.newPrefData;
       this.datacollection = {
         labels: ["感染者", "入院中", "退院", "重症", "死者"],
         datasets: [
