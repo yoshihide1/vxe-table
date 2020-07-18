@@ -53,7 +53,7 @@ export default {
     },
     coronaPrefData() {
       this.prefFilter(this.coronaPrefData);
-    }
+    },
   },
   methods: {
     prefFilter(pref) {

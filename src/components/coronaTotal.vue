@@ -120,6 +120,7 @@ export default {
     // this.$store.dispatch("coronaPrefectures");
     this.$store.dispatch("coronaTotal");
     this.$store.dispatch("coronaToday");
+    // this.$store.dispatch("coronaTwoDay");
   }
 };
 </script>

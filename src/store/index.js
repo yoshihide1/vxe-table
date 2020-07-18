@@ -12,16 +12,23 @@ export default new Vuex.Store({
     coronaPrefData: [],
     chartPlus: [],
     updateChart: [],
-    ratio: [0]
+    ratio: [0],
+    prefTwoDay: []
+
   },
   mutations: {
     ratio(state, data) {//割合
       state.ratio = data
     },
     prefectures(state, data) {
+      console.log(data)
       state.coronaData = data
     },
+    prefecturesTwoDay(state, data) {
+      state.prefTwoDay = data
+    },
     prefTotal(state, prefData) {//getters経由
+      console.log(prefData)//今日[1]昨日[0]
       state.coronaPrefData = prefData[0]
     },
     chart(state, prefData) {
@@ -45,12 +52,17 @@ export default new Vuex.Store({
         .then((res) => {
           console.log(res)
           commit('ratio', res.data)
-          axios.get("https://node-api-corona.herokuapp.com/api/v1/2day/")
-            .then((res) => {
-              console.log(res)
-            })
+
+
         })
     },
+    // coronaTwoDay({ commit }) {
+    //   axios.get("https://node-api-corona.herokuapp.com/api/v1/2day/")
+    //     .then((res) => {
+    //       console.log(res)
+    //       commit('prefectures', res.data)
+    //     })
+    // }
   },
   getters: {
     prefDataFilter: (state) => (id) => {
