@@ -13,6 +13,7 @@
         <span class="card__font__span">感染者</span>
         ：{{ numComma(prefNowCase) }}
         <span class="card__font__span">人</span>
+        <span class="card__font__comparison">(前日比:+{{ comparisonCases }})</span>
       </p>
       <p>
         <span class="card__font__span">{{ prefName }}人口の</span>
@@ -37,11 +38,17 @@ export default {
       prefNowCase: 0,
       prefNowPercentage: 0,
       prefPopulation: 0,
-      prefName: ""
+      prefName: "",
+      comparisonCases: 0
     };
   },
   computed: {
-    ...mapState(["newCoronaData", "oldCoronaData", "newPrefData"]),
+    ...mapState([
+      "newCoronaData",
+      "oldCoronaData",
+      "newPrefData",
+      "oldPrefData"
+    ]),
     ...mapGetters(["newPrefFilter", "oldPrefFilter", "numComma"])
   },
   watch: {
@@ -57,6 +64,9 @@ export default {
     },
     newPrefData() {
       this.prefFilter(this.newPrefData);
+    },
+    oldPrefData() {
+      this.comparison(this.newPrefData, this.oldPrefData);
     }
   },
   methods: {
@@ -67,6 +77,9 @@ export default {
       this.prefNowPercentage = Math.floor(percentage * 100000) / 100000;
       this.prefName = pref.prefecture;
       this.prefPopulation = this.numComma(pref.population);
+    },
+    comparison(newPref, oldPref) {
+      this.comparisonCases = newPref.cases - oldPref.cases;
     }
   }
 };
