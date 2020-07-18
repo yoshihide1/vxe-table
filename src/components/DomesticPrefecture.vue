@@ -41,15 +41,15 @@ export default {
     };
   },
   computed: {
-    ...mapState(["newCoronaData", "coronaPrefData"]),
-    ...mapGetters(["prefDataFilter", "numComma"])
+    ...mapState(["newCoronaData", "oldCoronaData", "coronaPrefData"]),
+    ...mapGetters(["newPrefFilter", "numComma"])
   },
   watch: {
     selected() {
-      this.$store.commit("prefTotal", this.prefDataFilter(this.selected));
+      this.$store.commit("prefTotal", this.newPrefFilter(this.selected));
     },
     newCoronaData() {
-      this.$store.commit("prefTotal", this.prefDataFilter(this.selected));
+      this.$store.commit("prefTotal", this.newPrefFilter(this.selected));
     },
     coronaPrefData() {
       this.prefFilter(this.coronaPrefData);

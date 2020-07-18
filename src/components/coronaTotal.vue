@@ -72,7 +72,7 @@ export default {
 
   computed: {
     ...mapState(["newCoronaData", "coronaPrefData"]),
-    ...mapGetters(["prefDataFilter"]),
+    ...mapGetters(["newPrefFilter"]),
 
     coronaDataSort() {
       let list = this.newCoronaData.slice();
@@ -109,8 +109,8 @@ export default {
       let pref = [];
       prefCode.forEach(code => {
         console.log(code);
-        console.log(this.prefDataFilter(code)[0]);
-        pref.push(this.prefDataFilter(code)[0]);
+        console.log(this.newPrefFilter(code)[0]);
+        pref.push(this.newPrefFilter(code)[0]);
       });
       console.log(pref);
       this.$store.commit("chart", pref);
