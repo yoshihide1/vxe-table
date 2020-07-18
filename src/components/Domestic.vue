@@ -11,7 +11,7 @@
         <span class="card__font__span">感染者</span>
         ：{{ nowCase }}
         <span class="card__font__span">人</span>
-        <span class="card__font__comparison">(前日比:{{ comparisonCases }})</span>
+        <span class="card__font__comparison">(前日比:{{ comparisonCases }}※感染者ー退院者)</span>
       </p>
       <p>
         <span class="card__font__span">国内人口の</span>

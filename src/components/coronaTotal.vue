@@ -76,8 +76,6 @@ export default {
 
     coronaDataSort() {
       let list = this.newCoronaData.slice();
-      console.log(list);
-      console.log(this.sort.key);
       if (this.sort.key) {
         list.sort((a, b) => {
           a = Number(a[this.sort.key]);
@@ -108,11 +106,8 @@ export default {
     chartCheck(prefCode) {
       let pref = [];
       prefCode.forEach(code => {
-        console.log(code);
-        console.log(this.newPrefFilter(code)[0]);
         pref.push(this.newPrefFilter(code)[0]);
       });
-      console.log(pref);
       this.$store.commit("chart", pref);
     }
   },
