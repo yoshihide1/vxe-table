@@ -208,10 +208,6 @@ export default {
   justify-content: space-around;
   font-size: 1.4rem;
 }
-.card {
-  width: 20%;
-  font-size: 1.4rem;
-}
 .card__title {
   position: relative;
   /* background-color: gray; */

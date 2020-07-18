@@ -1,10 +1,10 @@
 <template>
   <div class="container">
-    <div>
+    <div class="aaa">
       <cumulative />
+      <populationRatio />
       <domestic />
       <domesticPrefecture />
-      <populationRatio />
     </div>
     <div class="corona__total__header">
       <headerTotal></headerTotal>
@@ -48,7 +48,18 @@ export default {
 
 <style>
 .container {
+  width: 100%;
+}
+.container {
   background-color: #fcfcfc;
+}
+.aaa {
+  display: flex;
+  justify-content: space-around;
+}
+.card {
+  width: 20%;
+  font-size: 1.4rem;
 }
 .chart {
   display: flex;

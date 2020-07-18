@@ -1,5 +1,4 @@
 <template>
-  <div>
     <div class="card">
       <div class="card__title">
         <p>
@@ -24,7 +23,6 @@
         </p>
       </div>
     </div>
-  </div>
 </template>
 
 <script>
