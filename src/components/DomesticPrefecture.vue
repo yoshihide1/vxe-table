@@ -41,14 +41,14 @@ export default {
     };
   },
   computed: {
-    ...mapState(["coronaData", "coronaPrefData"]),
+    ...mapState(["newCoronaData", "coronaPrefData"]),
     ...mapGetters(["prefDataFilter", "numComma"])
   },
   watch: {
     selected() {
       this.$store.commit("prefTotal", this.prefDataFilter(this.selected));
     },
-    coronaData() {
+    newCoronaData() {
       this.$store.commit("prefTotal", this.prefDataFilter(this.selected));
     },
     coronaPrefData() {

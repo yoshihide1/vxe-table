@@ -71,11 +71,11 @@ export default {
   },
 
   computed: {
-    ...mapState(["coronaData", "coronaPrefData"]),
+    ...mapState(["newCoronaData", "coronaPrefData"]),
     ...mapGetters(["prefDataFilter"]),
 
     coronaDataSort() {
-      let list = this.coronaData.slice();
+      let list = this.newCoronaData.slice();
       console.log(list);
       console.log(this.sort.key);
       if (this.sort.key) {
@@ -120,7 +120,7 @@ export default {
     // this.$store.dispatch("coronaPrefectures");
     this.$store.dispatch("coronaTotal");
     this.$store.dispatch("coronaToday");
-    // this.$store.dispatch("coronaTwoDay");
+    this.$store.dispatch("coronaTwoDay");
   }
 };
 </script>
