@@ -13,7 +13,7 @@ export default {
       coronaTransition: [],
       date: [],
       cases: [],
-      pcr: [],
+      pcr: []
     };
   },
   watch: {
@@ -23,6 +23,9 @@ export default {
   },
   methods: {
     setRatio() {
+      this.cases = [];
+      this.pcr = [];
+      this.date = [];
       let data1 = this.ratio.slice(0, this.ratio.length - 1);
       let data2 = this.ratio.slice(1, this.ratio.length);
       for (let i in data1) {
@@ -49,7 +52,7 @@ export default {
             borderWidth: 3,
             borderColor: "green",
             data: this.pcr
-          },
+          }
         ]
       }),
         (this.options = {
