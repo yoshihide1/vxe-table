@@ -157,6 +157,10 @@ export default {
 .card__font__span {
   font-size: 0.9rem;
 }
+.card__font__comparison {
+  font-size: 0.7rem;
+  color: red;
+}
 .chart__bar {
   width: 70%;
 }
