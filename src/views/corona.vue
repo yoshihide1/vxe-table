@@ -1,13 +1,11 @@
 <template>
   <div class="container">
+    <updated />
     <div class="aaa">
       <cumulative />
       <populationRatio />
       <domestic />
       <domesticPrefecture />
-    </div>
-    <div class="corona__total__header">
-      <headerTotal></headerTotal>
     </div>
     <div class="chart">
       <barChart class="chart__bar"></barChart>
@@ -21,19 +19,18 @@
 </template>
 
 <script>
-import headerTotal from "@/components/headerTotal";
 import coronaTotal from "@/components/coronaTotal";
-import cumulative from "@/components/Cumulative"
-import domestic from "@/components/Domestic"
-import domesticPrefecture from "@/components/DomesticPrefecture"
-import populationRatio from "@/components/PopulationRatio"
+import cumulative from "@/components/Cumulative";
+import domestic from "@/components/Domestic";
+import domesticPrefecture from "@/components/DomesticPrefecture";
+import populationRatio from "@/components/PopulationRatio";
 import barChart from "@/components/BarChart";
 import pieChart from "@/components/PieChart";
 import lineChart from "@/components/LineChart";
+import updated from "@/components/updated";
 
 export default {
   components: {
-    headerTotal,
     coronaTotal,
     cumulative,
     domestic,
@@ -41,7 +38,8 @@ export default {
     populationRatio,
     barChart,
     pieChart,
-    lineChart
+    lineChart,
+    updated
   }
 };
 </script>
@@ -60,6 +58,44 @@ export default {
 .card {
   width: 20%;
   font-size: 1.4rem;
+}
+.card__title {
+  position: relative;
+  /* background-color: gray; */
+  bottom: -15px;
+  overflow: hidden;
+  color: white;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+  padding: 0.2rem;
+  font-weight: bolder;
+  background: linear-gradient(#829ebc, #354453fd);
+}
+.card__title p {
+  margin: 1rem;
+}
+.card__body {
+  background-color: white;
+  color: black;
+  padding: 0.4rem;
+  overflow: hidden;
+  border-radius: 5px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+}
+.card__title select {
+  font-size: 1.4rem;
+  padding: 0 1rem 5px;
+  margin-right: 0.5rem;
+  border: 2px solid white;
+  border-radius: 5px;
+  text-indent: 10px;
+  background: none transparent;
+  color: white;
+}
+.card__title select option {
+  color: black;
+}
+.card__font__span {
+  font-size: 0.9rem;
 }
 .chart {
   display: flex;
