@@ -28,19 +28,22 @@
           </tr>
         </thead>
         <tbody class="table__body">
+              
           <tr v-for="data in coronaDataSort" :key="data.pref_id">
+              
             <td class="table__body__sub">
               <input type="checkbox" :value="data.pref_id" v-model="chartSet" />
             </td>
-            <td class="table__body__sub">{{ data.prefecture }}</td>
-            <td class="table__body__sub">{{ data.cases }}</td>
-            <td class="table__body__sub">{{ data.hospitalize }}</td>
-            <td class="table__body__sub">{{ data.discharge }}</td>
-            <td class="table__body__sub">{{ data.deaths }}</td>
-            <td class="table__body__sub">{{ data.severe }}</td>
-            <td class="table__body__sub">{{ data.pcr }}</td>
-            <td class="table__body__sub">{{ data.population}}</td>
-          </tr>
+     
+            <td class="table__body__sub">{{ data['prefecture'] }}</td>
+            <td class="table__body__sub">{{ data['cases'].today }}</td>
+            <td class="table__body__sub">{{ data['hospitalize'].today }}</td>
+            <td class="table__body__sub">{{ data['discharge'].today }}</td>
+            <td class="table__body__sub">{{ data['deaths'].today }}</td>
+            <td class="table__body__sub">{{ data['severe'].today }}</td>
+            <td class="table__body__sub">{{ data['pcr'].today }}</td>
+            <td class="table__body__sub">{{ data['population'].today }}</td>
+            </tr>
         </tbody>
       </table>
     </div>
@@ -71,11 +74,12 @@ export default {
   },
 
   computed: {
-    ...mapState(["newCoronaData", "oldCoronaData", "coronaPrefData"]),
-    ...mapGetters(["newPrefFilter"]),
+    ...mapState(["allCoronaData"]),
+    ...mapGetters(["newPrefFilter", "oldPrefFilter"]),
 
     coronaDataSort() {
-      let list = this.newCoronaData.slice();
+      let list = this.allCoronaData.slice();
+
       if (this.sort.key) {
         list.sort((a, b) => {
           a = Number(a[this.sort.key]);
@@ -83,16 +87,24 @@ export default {
           return (a === b ? 0 : a > b ? 1 : -1) * (this.sort.isAsc ? 1 : -1);
         });
       }
+      console.log(list)
       return list;
     }
   },
   watch: {
     chartSet() {
       this.chartCheck(this.chartSet);
-    }
+    },
   },
 
   methods: {
+    sample (prefId) {
+      let newPref = this.newPrefFilter(prefId)
+      let oldPref = this.oldPrefFilter(prefId)
+      console.log(newPref)
+      console.log(oldPref)
+      return newPref[0].cases - oldPref[0].cases
+    },
     sortBy(key) {
       this.sort.isAsc = this.sort.key === key ? !this.sort.isAsc : false;
       this.sort.key = key;

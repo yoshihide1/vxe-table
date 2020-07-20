@@ -4,7 +4,7 @@ import { mapState } from "vuex";
 export default {
   extends: Pie,
   computed: {
-    ...mapState(["newPrefData"])
+    ...mapState(["prefData"])
   },
   data() {
     return {
@@ -13,13 +13,13 @@ export default {
     };
   },
   watch: {
-    newPrefData() {
+    prefData() {
       this.totalChart();
     }
   },
   methods: {
     totalChart() {
-      let total = this.newPrefData;
+      let total = this.prefData;
       (this.datacollection = {
         labels: [
           `${total.prefecture}：入院中(現在)`,
@@ -30,7 +30,6 @@ export default {
           {
             label: [""],
             backgroundColor: [
-              // "#0E376F",
               "#3A6BA5",
               "#5C5344",
               "#F24C0C"
@@ -39,10 +38,9 @@ export default {
             borderWidth: 1,
             pointBorderColor: "#249EBF",
             data: [
-              // total.cases - total.discharge - total.deaths,
-              total.hospitalize,
-              total.severe,
-              total.deaths
+              total["hospitalize"].today,
+              total["severe"].today,
+              total["deaths"].today
             ]
           }
         ]

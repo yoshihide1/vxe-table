@@ -1,11 +1,10 @@
 <script>
 import { Bar } from "vue-chartjs";
-import { mapState, mapGetters } from "vuex";
+import { mapState } from "vuex";
 export default {
   extends: Bar,
   computed: {
-    ...mapState(["ratio", "newPrefData", "chartPlus"]),
-    ...mapGetters(["prefDataFilter"])
+    ...mapState(["ratio", "prefData", "chartPlus"])
   },
   data() {
     return {
@@ -16,10 +15,10 @@ export default {
     };
   },
   watch: {
-    ratio() {
-      this.totalAndPref();
-    },
-    newPrefData() {
+    // ratio() {
+    //   this.totalAndPref();
+    // },
+    prefData() {
       this.totalAndPref(this.chartPlus[0]);
     },
     chartPlus() {
@@ -47,11 +46,11 @@ export default {
           borderWidth: 1,
           pointBorderColor: "glay",
           data: [
-            pref.cases,
-            pref.hospitalize,
-            pref.discharge,
-            pref.severe,
-            pref.deaths
+            pref["cases"].today,
+            pref["hospitalize"].today,
+            pref["discharge"].today,
+            pref["severe"].today,
+            pref["deaths"].today
           ]
         });
       });
@@ -59,8 +58,8 @@ export default {
     },
     totalAndPref(pref) {
       this.datacollection.datasets = [];
-      this.total = this.ratio[0];
-      this.prefTotal = this.newPrefData;
+      let total = this.ratio[0];
+      let prefData = this.prefData;
       this.datacollection = {
         labels: ["感染者", "入院中", "退院", "重症", "死者"],
         datasets: [
@@ -70,24 +69,24 @@ export default {
             borderWidth: 1,
             pointBorderColor: "glay",
             data: [
-              this.total.cases,
-              this.total.hospitalize,
-              this.total.discharge,
-              this.total.severe,
-              this.total.deaths
+              total.cases,
+              total.hospitalize,
+              total.discharge,
+              total.severe,
+              total.deaths
             ]
           },
           {
-            label: `${this.prefTotal.prefecture}(累計)`,
+            label: `${prefData.prefecture}(累計)`,
             backgroundColor: this.randomColor(),
             borderWidth: 1,
             pointBorderColor: "glay",
             data: [
-              this.prefTotal.cases,
-              this.prefTotal.hospitalize,
-              this.prefTotal.discharge,
-              this.prefTotal.severe,
-              this.prefTotal.deaths
+              prefData["cases"].today,
+              prefData["hospitalize"].today,
+              prefData["discharge"].today,
+              prefData["severe"].today,
+              prefData["deaths"].today
             ]
           }
         ]

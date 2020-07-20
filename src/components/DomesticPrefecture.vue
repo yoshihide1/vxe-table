@@ -44,42 +44,46 @@ export default {
   },
   computed: {
     ...mapState([
-      "newCoronaData",
-      "oldCoronaData",
-      "newPrefData",
-      "oldPrefData"
+      // "newCoronaData",
+      // "oldCoronaData",
+      "allCoronaData",
+      "prefData",
     ]),
     ...mapGetters(["newPrefFilter", "oldPrefFilter", "numComma"])
   },
   watch: {
     selected() {
       this.$store.commit("newPrefTotal", this.newPrefFilter(this.selected));
-      this.$store.commit("oldPrefTotal", this.oldPrefFilter(this.selected));
+      // this.$store.commit("oldPrefTotal", this.oldPrefFilter(this.selected));
     },
-    newCoronaData() {
-      this.$store.commit("newPrefTotal", this.newPrefFilter(this.selected));
+    // newCoronaData() {
+    //   this.$store.commit("newPrefTotal", this.newPrefFilter(this.selected));
+    // },
+    // oldCoronaData() {
+    //   this.$store.commit("oldPrefTotal", this.oldPrefFilter(this.selected));
+    // },
+    allCoronaData() {
+      this.$store.commit("newPrefTotal", this.newPrefFilter(this.selected))
+      // this.$store.commit("newPrefTotal", this.oldPrefFilter(this.selected))
+      
     },
-    oldCoronaData() {
-      this.$store.commit("oldPrefTotal", this.oldPrefFilter(this.selected));
+    prefData() {
+      this.prefFilter(this.prefData);
+      this.comparison(this.prefData);
     },
-    newPrefData() {
-      this.prefFilter(this.newPrefData);
-    },
-    oldPrefData() {
-      this.comparison(this.newPrefData, this.oldPrefData);
-    }
   },
   methods: {
     prefFilter(pref) {
-      let now = pref.cases - pref.discharge - pref.deaths;
-      let percentage = (now / pref.population) * 100;
+      console.log(pref)
+      let now = pref['cases'].today - pref['discharge'].today - pref['deaths'].today;
+      let percentage = (now / pref['population'].today) * 100;
       this.prefNowCase = now;
       this.prefNowPercentage = Math.floor(percentage * 100000) / 100000;
-      this.prefName = pref.prefecture;
-      this.prefPopulation = this.numComma(pref.population);
+      this.prefName = pref['prefecture'].today;
+      this.prefPopulation = this.numComma(pref['population'].today);
     },
-    comparison(newPref, oldPref) {
-      this.comparisonCases = newPref.cases - oldPref.cases;
+    comparison(pref) {
+      this.comparisonCases = pref['cases'].today - pref['cases'].yesterday;
     }
   }
 };
