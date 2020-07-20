@@ -49,7 +49,7 @@
             <td class="table__body__sub">
               {{ data['discharge'].today }}
               <span
-                class="card__font__comparison"
+                class="card__font__comparison discharge"
               >(+{{ data['discharge'].today - data['discharge'].yesterday }})</span>
             </td>
             <td class="table__body__sub">
@@ -88,13 +88,7 @@ export default {
         key: "",
         isAsc: false // 昇順ならtrue,降順ならfalse
       },
-      selected: 13,
-      cases: 0,
-      deaths: 0,
-      discharge: 0,
-      hospitalize: 0,
-      pcr: 0,
-      severe: 0
+      selected: 13
     };
   },
 
@@ -117,9 +111,6 @@ export default {
   watch: {
     chartSet() {
       this.chartCheck(this.chartSet);
-    },
-    allCoronaData() {
-      this.comparison(this.allCoronaData);
     }
   },
 
@@ -133,13 +124,11 @@ export default {
         ? `sorted ${this.sort.isAsc ? "asc" : "desc"}`
         : "";
     },
-    comparison(data) {
-      console.log(data);
-    },
-
     chartCheck(prefCode) {
+      console.log(prefCode);
       let pref = [];
       prefCode.forEach(code => {
+        console.log(this.prefDataFilter(code));
         pref.push(this.prefDataFilter(code)[0]);
       });
       this.$store.commit("chart", pref);
@@ -203,6 +192,9 @@ th.sorted.asc::after {
   border-top: none;
   box-shadow: 0px -3px 5px 1px #eee inset;
   padding: 0.8rem;
+}
+.card__font__comparison.discharge {
+  color: blue;
 }
 
 @media screen and (max-width: 768px) {

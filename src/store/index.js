@@ -53,7 +53,6 @@ export default new Vuex.Store({
             today.push(data[j])
           }
           let allData = []
-          console.log(today)
           for (let x = 0; x < today.length; x++) {
            let todayData = today[x]
             let yesterdayData = yesterday[x]
@@ -69,9 +68,7 @@ export default new Vuex.Store({
               population: {today: todayData['population'], yesterday: yesterdayData['population']},
               created_at: {today: todayData['created_at'], yesterday: yesterdayData['created_at']}
             })
-
           }
-          console.log(allData)
           commit("allPrefectures", allData)
         })
     }
