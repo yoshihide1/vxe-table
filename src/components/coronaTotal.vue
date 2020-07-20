@@ -38,37 +38,37 @@
               {{ data['cases'].today }}
               <span
                 class="card__font__comparison"
-              >(+{{ data['cases'].today - data['cases'].yesterday }})</span>
+              >(+{{ comparison(data, "cases") }})</span>
             </td>
             <td class="table__body__sub">
               {{ data['hospitalize'].today }}
               <span
                 class="card__font__comparison"
-              >(+{{ data['hospitalize'].today - data['hospitalize'].yesterday }})</span>
+              >(+{{ comparison(data, "hospitalize") }})</span>
             </td>
             <td class="table__body__sub">
               {{ data['discharge'].today }}
               <span
                 class="card__font__comparison discharge"
-              >(+{{ data['discharge'].today - data['discharge'].yesterday }})</span>
+              >(+{{ comparison(data, "discharge") }})</span>
             </td>
             <td class="table__body__sub">
               {{ data['deaths'].today }}
               <span
                 class="card__font__comparison"
-              >(+{{ data['deaths'].today - data['deaths'].yesterday }})</span>
+              >(+{{ comparison(data, "deaths") }})</span>
             </td>
             <td class="table__body__sub">
               {{ data['severe'].today }}
               <span
                 class="card__font__comparison"
-              >(+{{ data['severe'].today - data['severe'].yesterday }})</span>
+              >(+{{ comparison(data, "severe") }})</span>
             </td>
             <td class="table__body__sub">
               {{ data['pcr'].today }}
               <span
                 class="card__font__comparison"
-              >(+{{ data['pcr'].today - data['pcr'].yesterday }})</span>
+              >(+{{ comparison(data, "pcr") }})</span>
             </td>
             <td class="table__body__sub">{{ data['population'].today }}</td>
           </tr>
@@ -115,6 +115,10 @@ export default {
   },
 
   methods: {
+    comparison(data, value) {
+      let name = value;
+      return data[name].today - data[name].yesterday;
+    },
     sortBy(key) {
       this.sort.isAsc = this.sort.key === key ? !this.sort.isAsc : false;
       this.sort.key = key;
