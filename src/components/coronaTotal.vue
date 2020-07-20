@@ -28,22 +28,50 @@
           </tr>
         </thead>
         <tbody class="table__body">
-              
           <tr v-for="data in coronaDataSort" :key="data.pref_id">
-              
             <td class="table__body__sub">
               <input type="checkbox" :value="data.pref_id" v-model="chartSet" />
             </td>
-     
+
             <td class="table__body__sub">{{ data['prefecture'] }}</td>
-            <td class="table__body__sub">{{ data['cases'].today }}</td>
-            <td class="table__body__sub">{{ data['hospitalize'].today }}</td>
-            <td class="table__body__sub">{{ data['discharge'].today }}</td>
-            <td class="table__body__sub">{{ data['deaths'].today }}</td>
-            <td class="table__body__sub">{{ data['severe'].today }}</td>
-            <td class="table__body__sub">{{ data['pcr'].today }}</td>
+            <td class="table__body__sub">
+              {{ data['cases'].today }}
+              <span
+                class="card__font__comparison"
+              >(+{{ data['cases'].today - data['cases'].yesterday }})</span>
+            </td>
+            <td class="table__body__sub">
+              {{ data['hospitalize'].today }}
+              <span
+                class="card__font__comparison"
+              >(+{{ data['hospitalize'].today - data['hospitalize'].yesterday }})</span>
+            </td>
+            <td class="table__body__sub">
+              {{ data['discharge'].today }}
+              <span
+                class="card__font__comparison"
+              >(+{{ data['discharge'].today - data['discharge'].yesterday }})</span>
+            </td>
+            <td class="table__body__sub">
+              {{ data['deaths'].today }}
+              <span
+                class="card__font__comparison"
+              >(+{{ data['deaths'].today - data['deaths'].yesterday }})</span>
+            </td>
+            <td class="table__body__sub">
+              {{ data['severe'].today }}
+              <span
+                class="card__font__comparison"
+              >(+{{ data['severe'].today - data['severe'].yesterday }})</span>
+            </td>
+            <td class="table__body__sub">
+              {{ data['pcr'].today }}
+              <span
+                class="card__font__comparison"
+              >(+{{ data['pcr'].today - data['pcr'].yesterday }})</span>
+            </td>
             <td class="table__body__sub">{{ data['population'].today }}</td>
-            </tr>
+          </tr>
         </tbody>
       </table>
     </div>
@@ -55,7 +83,7 @@ import { mapState, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      coronaPref: [],
+      chartSet: [],
       sort: {
         key: "",
         isAsc: false // 昇順ならtrue,降順ならfalse
@@ -66,28 +94,23 @@ export default {
       discharge: 0,
       hospitalize: 0,
       pcr: 0,
-      population: 0,
-      severe: 0,
-      total: {},
-      chartSet: []
+      severe: 0
     };
   },
 
   computed: {
     ...mapState(["allCoronaData"]),
-    ...mapGetters(["newPrefFilter", "oldPrefFilter"]),
+    ...mapGetters(["prefDataFilter"]),
 
     coronaDataSort() {
       let list = this.allCoronaData.slice();
-
       if (this.sort.key) {
         list.sort((a, b) => {
-          a = Number(a[this.sort.key]);
-          b = Number(b[this.sort.key]);
+          a = Number(a[this.sort.key].today);
+          b = Number(b[this.sort.key].today);
           return (a === b ? 0 : a > b ? 1 : -1) * (this.sort.isAsc ? 1 : -1);
         });
       }
-      console.log(list)
       return list;
     }
   },
@@ -95,16 +118,12 @@ export default {
     chartSet() {
       this.chartCheck(this.chartSet);
     },
+    allCoronaData() {
+      this.comparison(this.allCoronaData);
+    }
   },
 
   methods: {
-    sample (prefId) {
-      let newPref = this.newPrefFilter(prefId)
-      let oldPref = this.oldPrefFilter(prefId)
-      console.log(newPref)
-      console.log(oldPref)
-      return newPref[0].cases - oldPref[0].cases
-    },
     sortBy(key) {
       this.sort.isAsc = this.sort.key === key ? !this.sort.isAsc : false;
       this.sort.key = key;
@@ -114,11 +133,14 @@ export default {
         ? `sorted ${this.sort.isAsc ? "asc" : "desc"}`
         : "";
     },
+    comparison(data) {
+      console.log(data);
+    },
 
     chartCheck(prefCode) {
       let pref = [];
       prefCode.forEach(code => {
-        pref.push(this.newPrefFilter(code)[0]);
+        pref.push(this.prefDataFilter(code)[0]);
       });
       this.$store.commit("chart", pref);
     }

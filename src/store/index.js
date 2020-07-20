@@ -77,7 +77,7 @@ export default new Vuex.Store({
     }
   },
   getters: {
-    newPrefFilter: (state) => (id) => {
+    prefDataFilter: (state) => (id) => {
       return state.allCoronaData.filter(pref => pref.pref_id == id)
     },
     numComma: () => (num) => {

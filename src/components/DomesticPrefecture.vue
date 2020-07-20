@@ -43,47 +43,34 @@ export default {
     };
   },
   computed: {
-    ...mapState([
-      // "newCoronaData",
-      // "oldCoronaData",
-      "allCoronaData",
-      "prefData",
-    ]),
-    ...mapGetters(["newPrefFilter", "oldPrefFilter", "numComma"])
+    ...mapState(["allCoronaData", "prefData"]),
+    ...mapGetters(["prefDataFilter", "numComma"])
   },
   watch: {
     selected() {
-      this.$store.commit("newPrefTotal", this.newPrefFilter(this.selected));
-      // this.$store.commit("oldPrefTotal", this.oldPrefFilter(this.selected));
+      this.$store.commit("newPrefTotal", this.prefDataFilter(this.selected));
     },
-    // newCoronaData() {
-    //   this.$store.commit("newPrefTotal", this.newPrefFilter(this.selected));
-    // },
-    // oldCoronaData() {
-    //   this.$store.commit("oldPrefTotal", this.oldPrefFilter(this.selected));
-    // },
     allCoronaData() {
-      this.$store.commit("newPrefTotal", this.newPrefFilter(this.selected))
-      // this.$store.commit("newPrefTotal", this.oldPrefFilter(this.selected))
-      
+      this.$store.commit("newPrefTotal", this.prefDataFilter(this.selected));
     },
     prefData() {
       this.prefFilter(this.prefData);
       this.comparison(this.prefData);
-    },
+    }
   },
   methods: {
     prefFilter(pref) {
-      console.log(pref)
-      let now = pref['cases'].today - pref['discharge'].today - pref['deaths'].today;
-      let percentage = (now / pref['population'].today) * 100;
+      console.log(pref);
+      let now =
+        pref["cases"].today - pref["discharge"].today - pref["deaths"].today;
+      let percentage = (now / pref["population"].today) * 100;
       this.prefNowCase = now;
       this.prefNowPercentage = Math.floor(percentage * 100000) / 100000;
-      this.prefName = pref['prefecture'].today;
-      this.prefPopulation = this.numComma(pref['population'].today);
+      this.prefName = pref["prefecture"].today;
+      this.prefPopulation = this.numComma(pref["population"].today);
     },
     comparison(pref) {
-      this.comparisonCases = pref['cases'].today - pref['cases'].yesterday;
+      this.comparisonCases = pref["cases"].today - pref["cases"].yesterday;
     }
   }
 };
