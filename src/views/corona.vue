@@ -85,22 +85,23 @@ export default {
       sp: false,
       repkaceWidth: 768,
       windowSize: 0
-    }
+    };
   },
-  watch: {
-    },
+  watch: {},
   created() {
-    this.windowSwitch()
+    this.windowSwitch();
+    this.$store.dispatch("coronaTotal");
+    this.$store.dispatch("coronaTwoDay");
   },
   methods: {
     windowSwitch() {
-    let size = parseInt(window.innerWidth)
+      let size = parseInt(window.innerWidth);
       if (size > 768) {
-        this.pc = !this.pc
-        console.log(1)
+        this.pc = !this.pc;
+        console.log(1);
       } else {
-        this.sp = !this.sp
-        console.log(2)
+        this.sp = !this.sp;
+        console.log(2);
       }
     }
   }

@@ -71,7 +71,7 @@ export default {
   },
 
   computed: {
-    ...mapState(["newCoronaData", "coronaPrefData"]),
+    ...mapState(["newCoronaData", "oldCoronaData", "coronaPrefData"]),
     ...mapGetters(["newPrefFilter"]),
 
     coronaDataSort() {
@@ -110,12 +110,6 @@ export default {
       });
       this.$store.commit("chart", pref);
     }
-  },
-  mounted() {
-    // this.$store.dispatch("coronaPrefectures");
-    this.$store.dispatch("coronaTotal");
-    // this.$store.dispatch("coronaToday");
-    this.$store.dispatch("coronaTwoDay");
   }
 };
 </script>
