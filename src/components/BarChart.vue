@@ -15,9 +15,6 @@ export default {
     };
   },
   watch: {
-    // ratio() {
-    //   this.totalAndPref();
-    // },
     prefData() {
       this.totalAndPref(this.chartPlus[0]);
     },
@@ -46,11 +43,11 @@ export default {
           borderWidth: 1,
           pointBorderColor: "glay",
           data: [
-            pref['cases'].today,
-            pref['hospitalize'].today,
-            pref['discharge'].today,
-            pref['severe'].today,
-            pref['deaths'].today
+            pref["cases"].today,
+            pref["hospitalize"].today,
+            pref["discharge"].today,
+            pref["severe"].today,
+            pref["deaths"].today
           ]
         });
       });
@@ -82,11 +79,11 @@ export default {
             borderWidth: 1,
             pointBorderColor: "glay",
             data: [
-              prefData['cases'].today,
-              prefData['hospitalize'].today,
-              prefData['discharge'].today,
-              prefData['severe'].today,
-              prefData['deaths'].today
+              prefData["cases"].today,
+              prefData["hospitalize"].today,
+              prefData["discharge"].today,
+              prefData["severe"].today,
+              prefData["deaths"].today
             ]
           }
         ]
