@@ -1,33 +1,51 @@
 <template>
-  <div class="card">
-    <div class="card__title">
-      <p>累計</p>
-    </div>
-    <div class="card__body">
-      <p>
-        <span class="card__font__span">PCR検査</span>
-        ：{{ pcr }}
-        <span class="card__font__span">人</span>
-        <span class="card__font__comparison">(前日比:+{{ comparisonPcr }})</span>
-      </p>
-      <p>
-        <span class="card__font__span">感染者</span>
-        ：{{ cases }}
-        <span class="card__font__span">人</span>
-        <span class="card__font__comparison">(前日比:+{{ comparisonCases }})</span>
-      </p>
-      <p>
-        <span class="card__font__span">死者</span>
-        ：{{ deaths }}
-        <span class="card__font__span">人</span>
-        <span class="card__font__comparison">(前日比:+{{ comparisonDeaths }})</span>
-      </p>
-      <p class="death">
-        <span class="card__font__span">致死率</span>
-        {{ deathPercentage }}%
-      </p>
-    </div>
-  </div>
+  <CRow>
+    <CCol col="12" sm="4">
+      <CWidgetBrand
+        color="dark"
+        :rightHeader="cases"
+        rightFooter="感染者"
+        :leftHeader="comparisonCases"
+        leftFooter="前日比"
+        class="w-100"
+      >
+        <span class="py-4 header__title">
+          感染者
+          <span class="header__title__sub">(累計)</span>
+        </span>
+      </CWidgetBrand>
+    </CCol>
+    <CCol col="12" sm="4">
+      <CWidgetBrand
+        color="primary"
+        :rightHeader="pcr"
+        rightFooter="PCR検査"
+        :leftHeader="comparisonPcr"
+        leftFooter="前日比"
+        class="w-100"
+      >
+        <span class="py-4 header__title">
+          PCR検査
+          <span class="header__title__sub">(累計)</span>
+        </span>
+      </CWidgetBrand>
+    </CCol>
+    <CCol col="12" sm="4">
+      <CWidgetBrand
+        color="danger"
+        :rightHeader="deaths"
+        rightFooter="死者"
+        :leftHeader="comparisonDeaths"
+        leftFooter="前日比"
+        class="w-100"
+      >
+        <span class="py-4 header__title">
+          死者
+          <span class="header__title__sub">(累計)</span>
+        </span>
+      </CWidgetBrand>
+    </CCol>
+  </CRow>
 </template>
 
 <script>
@@ -66,13 +84,19 @@ export default {
       this.deathPercentage = Math.floor(death * 100) / 100;
     },
     comparison(today, yesterday) {
-      this.comparisonPcr = today.pcr - yesterday.pcr;
-      this.comparisonCases = today.cases - yesterday.cases;
-      this.comparisonDeaths = today.deaths - yesterday.deaths;
+      this.comparisonPcr = `+${today.pcr - yesterday.pcr}`;
+      this.comparisonCases = `+${today.cases - yesterday.cases}`;
+      this.comparisonDeaths = `+${today.deaths - yesterday.deaths}`;
     }
   }
 };
 </script>
 
 <style>
+.header__title {
+  font-size: 1.3rem;
+}
+.header__title__sub {
+  font-size: 0.8rem;
+}
 </style>

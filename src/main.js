@@ -4,8 +4,8 @@ import router from './router'
 import store from './store'
 import 'chart.js'
 
-
-
+import CoreuiVue from '@coreui/vue';
+Vue.use(CoreuiVue);
 new Vue({
   router,
   store,

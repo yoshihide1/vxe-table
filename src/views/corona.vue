@@ -57,6 +57,7 @@
 </template>
 
 <script>
+
 import coronaTotal from "@/components/coronaTotal";
 import cumulative from "@/components/Cumulative";
 import domestic from "@/components/Domestic";
@@ -108,7 +109,9 @@ export default {
 };
 </script>
 
-<style>
+<style lang="scss">
+  
+@import "~@coreui/coreui/scss/coreui";
 /* #pc {
   display: block;
 }
@@ -123,140 +126,136 @@ export default {
   font-size: 20px;
 }
 
-.wrap__1 {
-  display: flex;
-  justify-content: space-around;
-  height: 350px;
-}
-.wrap__2 {
-  display: flex;
-  justify-content: space-around;
-  height: 350px;
-}
-.wrap__3 {
-  display: flex;
-  justify-content: center;
-  height: 350px;
-  margin-top: 1rem;
-}
+// .wrap__1 {
+//   display: flex;
+//   justify-content: space-around;
+//   height: 350px;
+// }
+// .wrap__2 {
+//   display: flex;
+//   justify-content: space-around;
+//   height: 350px;
+// }
+// .wrap__3 {
+//   display: flex;
+//   justify-content: center;
+//   height: 350px;
+//   margin-top: 1rem;
+// }
 
-.card {
-  font-size: 1.4rem;
-  width: 25%;
-  margin: auto 0;
-}
-.card__title {
-  position: relative;
-  /* background-color: gray; */
-  bottom: -15px;
-  overflow: hidden;
-  color: white;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-  padding: 0.2rem;
-  font-weight: bolder;
-  background: linear-gradient(#829ebc, #354453fd);
-}
-.card__title p {
-  margin: 1rem;
-}
-.card__body {
-  background-color: white;
-  color: black;
-  padding: 0.4rem;
-  overflow: hidden;
-  border-radius: 5px;
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
-}
-.card__title select {
-  font-size: 1.4rem;
-  padding: 0 1rem 5px;
-  margin-right: 0.5rem;
-  border: 2px solid white;
-  border-radius: 5px;
-  text-indent: 10px;
-  background: none transparent;
-  color: white;
-}
-.card__title select option {
-  color: black;
-}
-.card__font__span {
-  font-size: 0.9rem;
-}
-.card__font__comparison {
-  font-size: 0.7rem;
-  color: red;
-}
-.chart__bar {
-  width: 70%;
-}
-.chart__pie {
-  width: 30%;
-  margin: 0 1rem;
-}
-.chart__line {
-  width: 70%;
-}
-.card__domestic {
-  margin-right: 1rem;
-}
+// // .card {
+// //   font-size: 1.4rem;
+// //   width: 25%;
+// //   margin: auto 0;
+// // }
+// // .card__title {
+// //   position: relative;
+// //   /* background-color: gray; */
+// //   bottom: -15px;
+// //   overflow: hidden;
+// //   color: white;
+// //   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+// //   padding: 0.2rem;
+// //   font-weight: bolder;
+// //   background: linear-gradient(#829ebc, #354453fd);
+// // }
+// .card__title p {
+//   margin: 1rem;
+// }
+// .card__body {
+//   background-color: white;
+//   color: black;
+//   padding: 0.4rem;
+//   overflow: hidden;
+//   border-radius: 5px;
+//   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.4);
+// }
+// .card__title select {
+//   font-size: 1.4rem;
+//   padding: 0 1rem 5px;
+//   margin-right: 0.5rem;
+//   border: 2px solid white;
+//   border-radius: 5px;
+//   text-indent: 10px;
+//   background: none transparent;
+//   color: white;
+// }
+// .card__title select option {
+//   color: black;
+// }
+// .card__font__span {
+//   font-size: 0.9rem;
+// }
+// .chart__bar {
+//   width: 70%;
+// }
+// .chart__pie {
+//   width: 30%;
+//   margin: 0 1rem;
+// }
+// .chart__line {
+//   width: 70%;
+// }
+// .card__domestic {
+//   margin-right: 1rem;
+// }
 
-@media screen and (max-width: 768px) {
-  /* #pc {
-    display: none;
-  }
-  #sp {
-    display: block;
-  } */
-  .chart__line {
-    width: 100%;
-    margin: 0 auto;
-  }
-  .chart__bar {
-    width: 95%;
-    margin: 0 auto;
-  }
-  .chart__pie {
-    width: 95%;
-    margin: 0 auto;
-  }
-  .card {
-    width: 95%;
-    margin: 0 auto;
-  }
-  .tab__group {
-    width: 95%;
-    margin: auto;
-    margin-top: 1rem;
-    flex-wrap: wrap;
-    display: flex;
-  }
-  .tab__class {
-    width: calc(100% / 2);
-    height: 50px;
-    line-height: 50px;
-    text-align: center;
-    display: block;
-    float: left;
-    order: -1;
-  }
-  input[name="tab__name"] {
-    display: none;
-  }
+// @media screen and (max-width: 768px) {
+//   /* #pc {
+//     display: none;
+//   }
+//   #sp {
+//     display: block;
+//   } */
+//   .chart__line {
+//     width: 100%;
+//     margin: 0 auto;
+//   }
+//   .chart__bar {
+//     width: 95%;
+//     margin: 0 auto;
+//   }
+//   .chart__pie {
+//     width: 95%;
+//     margin: 0 auto;
+//   }
+//   .card {
+//     width: 95%;
+//     margin: 0 auto;
+//   }
+//   .tab__group {
+//     width: 95%;
+//     margin: auto;
+//     margin-top: 1rem;
+//     flex-wrap: wrap;
+//     display: flex;
+//   }
+//   .tab__class {
+//     width: calc(100% / 2);
+//     height: 50px;
+//     line-height: 50px;
+//     text-align: center;
+//     display: block;
+//     float: left;
+//     order: -1;
+//   }
+//   input[name="tab__name"] {
+//     display: none;
+//   }
 
-  input:checked + .tab__class {
-    background: linear-gradient(#000, gray);
+//   input:checked + .tab__class {
+//     background: linear-gradient(#000, gray);
 
-    color: aliceblue;
-  }
+//     color: aliceblue;
+//   }
 
-  .card__content {
-    display: none;
-    width: 100%;
-  }
+//   .card__content {
+//     display: none;
+//     width: 100%;
+//   }
 
-  input:checked + .tab__class + .card__content {
-    display: block;
-  }
-}
+//   input:checked + .tab__class + .card__content {
+//     display: block;
+//   }
+// }
 </style>

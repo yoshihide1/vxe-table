@@ -200,6 +200,11 @@ th.sorted.asc::after {
 .card__font__comparison.discharge {
   color: blue;
 }
+.card__font__comparison {
+  font-size: 0.7rem;
+  color: red;
+}
+
 
 @media screen and (max-width: 768px) {
   .table {
