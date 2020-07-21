@@ -9,13 +9,13 @@
         </div>
 
         <div class="wrap__2">
+          <domestic class="card__domestic" />
           <domesticPrefecture class="card__domestic__prefecture" />
           <pieChart class="chart__pie"></pieChart>
           <populationRatio class="card__population__ratio" />
         </div>
 
         <div class="wrap__3">
-          <domestic class="card__domestic" />
           <barChart class="chart__bar"></barChart>
         </div>
         <coronaTotal />

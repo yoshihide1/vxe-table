@@ -1,27 +1,21 @@
 <template>
-  <div class="card">
-    <div class="card__title">
-      <p>
-        日本国内
-        <span class="card__font__span">(現在)</span>
-      </p>
-    </div>
-    <div class="card__body">
-      <p>
-        <span class="card__font__span">感染者</span>
-        ：{{ nowCase }}
-        <span class="card__font__span">人</span>
-        <span class="card__font__comparison">(前日比:{{ comparisonCases }}※感染者ー退院者)</span>
-      </p>
-      <p>
-        <span class="card__font__span">国内人口の</span>
-        {{ nowPercentage }}%
-      </p>
-      <p>
-        <span class="card__font__span">国内の人口:{{ population }}人</span>
-      </p>
-    </div>
-  </div>
+  <CRow>
+    <CCol col="12" sm="6">
+      <CWidgetBrand
+        color="facebook"
+        :rightHeader="nowCase"
+        :rightFooter="'前日比：' + comparisonCases + '※感染者ー退院者'"
+        :leftHeader="nowPercentage + '%'"
+        :leftFooter="'国内の人口:' + population + '人'"
+        class="w-100"
+      >
+        <span class="py-4 header__title">
+          感染者
+          <span class="header__title__sub">(現在)</span>
+        </span>
+      </CWidgetBrand>
+    </CCol>
+  </CRow>
 </template>
 
 <script>
