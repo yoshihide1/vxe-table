@@ -2,7 +2,7 @@
   <CRow>
     <CCol col="12" sm="3">
       <CWidgetBrand
-        color="dark"
+        color="success"
         :rightHeader="cases"
         rightFooter="感染者"
         :leftHeader="comparisonCases"
@@ -18,7 +18,7 @@
     </CCol>
     <CCol col="12" sm="3">
       <CWidgetBrand
-        color="primary"
+        color="success"
         :rightHeader="pcr"
         rightFooter="PCR検査"
         :leftHeader="comparisonPcr"
@@ -33,7 +33,7 @@
     </CCol>
     <CCol col="12" sm="3">
       <CWidgetBrand
-        color="danger"
+        color="success"
         :rightHeader="deaths"
         rightFooter="死者"
         :leftHeader="comparisonDeaths"

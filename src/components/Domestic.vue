@@ -1,8 +1,8 @@
 <template>
   <CRow>
-    <CCol col="12" sm="6">
+    <CCol col="12" sm="12">
       <CWidgetBrand
-        color="facebook"
+        color="danger"
         :rightHeader="nowCase"
         :rightFooter="'前日比：' + comparisonCases + '※感染者ー退院者'"
         :leftHeader="nowPercentage"

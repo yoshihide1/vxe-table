@@ -1,27 +1,31 @@
 <template>
-  <div>
-    <div v-if="pc" id="pc">
-      <div class="container">
+  <div class="container">
         <updated class="date" />
-        <div class="wrap__1">
-          <lineChart class="chart__line"></lineChart>
-          <cumulative class="card__cumulative" />
-        </div>
+          <cumulative />
+          <lineChart />
+<CRow>
+   <CCol col="12" sm="6">
+          <domestic  />
+   </CCol>
+      <CCol col="12" sm="6">
 
-        <div class="wrap__2">
-          <domestic class="card__domestic" />
-          <domesticPrefecture class="card__domestic__prefecture" />
-          <pieChart class="chart__pie"></pieChart>
-        </div>
+          <domesticPrefecture />
+      </CCol>
+</CRow>
+<CRow>
+  
+   <CCol col="12" sm="8">
 
-        <div class="wrap__3">
-          <barChart class="chart__bar"></barChart>
-        </div>
+          <barChart />
+   </CCol>
+    <CCol col="12" sm="4">
+
+          <pieChart />
+   </CCol>
+</CRow>
         <coronaTotal />
-      </div>
-    </div>
 
-    <div v-if="sp" id="sp">
+    <!-- <div v-if="sp" id="sp">
       <div container>
         <updated class="date" />
         <lineChart class="chart__line"></lineChart>
@@ -50,8 +54,7 @@
         </div>
         <barChart class="chart__bar"></barChart>
         <coronaTotal />
-      </div>
-    </div>
+  </div> -->
   </div>
 </template>
 
