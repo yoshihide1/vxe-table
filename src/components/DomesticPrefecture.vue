@@ -1,29 +1,23 @@
 <template>
-  <div class="card">
-    <div class="card__title">
-      <p>
-        <select v-model="selected">
-          <option v-for="pref in prefs" :key="pref.code" :value="pref.code">{{ pref.name }}</option>
-        </select>
-        <span class="card__font__span">(現在)</span>
-      </p>
-    </div>
-    <div class="card__body">
-      <p>
-        <span class="card__font__span">感染者</span>
-        ：{{ numComma(prefNowCase) }}
-        <span class="card__font__span">人</span>
-        <span class="card__font__comparison">(前日比:+{{ comparisonCases }})</span>
-      </p>
-      <p>
-        <span class="card__font__span">{{ prefName }}人口の</span>
-        {{ prefNowPercentage }}%
-      </p>
-      <p>
-        <span class="card__font__span">{{ prefName }}の人口:{{ prefPopulation }}人</span>
-      </p>
-    </div>
-  </div>
+  <CRow>
+    <CCol col="12" sm="6">
+      <CWidgetBrand
+        color="facebook"
+        :rightHeader="prefNowCase"
+        :rightFooter="'前日比： +' + comparisonCases"
+        :leftHeader="' 人口の ' + prefNowPercentage"
+        :leftFooter="prefName + 'の人口' + prefPopulation"
+        class="w-100"
+      >
+        <span class="py-4 header__title">
+          <select v-model="selected">
+            <option v-for="pref in prefs" :key="pref.code" :value="pref.code">{{ pref.name }}</option>
+          </select>
+        </span>
+        <span class="header__title__sub">(現在)</span>
+      </CWidgetBrand>
+    </CCol>
+  </CRow>
 </template>
 
 <script>
@@ -35,7 +29,7 @@ export default {
       prefs: prefs,
       selected: 13,
       cases: 0,
-      prefNowCase: 0,
+      prefNowCase: "",
       prefNowPercentage: 0,
       prefPopulation: 0,
       prefName: "",
@@ -64,9 +58,9 @@ export default {
       let now =
         pref["cases"].today - pref["discharge"].today - pref["deaths"].today;
       let percentage = (now / pref["population"].today) * 100;
-      this.prefNowCase = now;
-      this.prefNowPercentage = Math.floor(percentage * 100000) / 100000;
-      this.prefName = pref["prefecture"].today;
+      this.prefNowCase = this.numComma(now);
+      this.prefNowPercentage = Math.floor(percentage * 100000) / 100000 + "%";
+      this.prefName = pref["prefecture"];
       this.prefPopulation = this.numComma(pref["population"].today);
     },
     comparison(pref) {

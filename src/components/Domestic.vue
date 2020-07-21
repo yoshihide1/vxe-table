@@ -5,7 +5,7 @@
         color="facebook"
         :rightHeader="nowCase"
         :rightFooter="'前日比：' + comparisonCases + '※感染者ー退院者'"
-        :leftHeader="nowPercentage + '%'"
+        :leftHeader="nowPercentage"
         :leftFooter="'国内の人口:' + population + '人'"
         class="w-100"
       >
@@ -23,8 +23,8 @@ import { mapState, mapGetters } from "vuex";
 export default {
   data() {
     return {
-      nowCase: 0,
-      nowPercentage: 0,
+      nowCase: "",
+      nowPercentage: "",
       population: 0,
       comparisonCases: 0
     };
@@ -45,7 +45,7 @@ export default {
       let b = yesterday.cases - yesterday.discharge - yesterday.deaths;
       let percentage = (a / today.population) * 100;
       this.nowCase = this.numComma(a);
-      this.nowPercentage = Math.floor(percentage * 100000) / 100000;
+      this.nowPercentage = Math.floor(percentage * 100000) / 100000 + "%";
       if (a - b >= 0) {
         this.comparisonCases = `+${a - b}`;
       } else {
