@@ -4,9 +4,11 @@ import router from './router'
 import store from './store'
 import 'chart.js'
 
+import { freeSet } from '@coreui/icons'
 import CoreuiVue from '@coreui/vue';
 Vue.use(CoreuiVue);
 new Vue({
+  icons: { freeSet },
   router,
   store,
   render: h => h(App)

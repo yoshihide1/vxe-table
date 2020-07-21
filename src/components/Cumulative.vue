@@ -1,6 +1,6 @@
 <template>
   <CRow>
-    <CCol col="12" sm="4">
+    <CCol col="12" sm="3">
       <CWidgetBrand
         color="dark"
         :rightHeader="cases"
@@ -9,13 +9,14 @@
         leftFooter="前日比"
         class="w-100"
       >
+        <CIcon name="cilSettings" />
         <span class="py-4 header__title">
           感染者
           <span class="header__title__sub">(累計)</span>
         </span>
       </CWidgetBrand>
     </CCol>
-    <CCol col="12" sm="4">
+    <CCol col="12" sm="3">
       <CWidgetBrand
         color="primary"
         :rightHeader="pcr"
@@ -30,7 +31,7 @@
         </span>
       </CWidgetBrand>
     </CCol>
-    <CCol col="12" sm="4">
+    <CCol col="12" sm="3">
       <CWidgetBrand
         color="danger"
         :rightHeader="deaths"
@@ -45,21 +46,40 @@
         </span>
       </CWidgetBrand>
     </CCol>
+    <CCol col="12" sm="3">
+      <CWidgetBrand
+        color="success"
+        :right-header="casesPercentage"
+        right-footer="感染者"
+        :left-header="pcrPercentage"
+        left-footer="PCR検査"
+        class="w-100"
+      >
+        <span class="py-4 header__title">
+          人口に対する割合
+          <span class="header__title__sub">(累計)</span>
+        </span>
+      </CWidgetBrand>
+    </CCol>
   </CRow>
 </template>
 
 <script>
 import { mapState, mapGetters } from "vuex";
+
 export default {
   data() {
     return {
-      pcr: 0,
-      cases: 0,
-      deaths: 0,
-      deathPercentage: 0,
-      comparisonPcr: 0,
-      comparisonCases: 0,
-      comparisonDeaths: 0
+      pcr: "",
+      cases: "",
+      deaths: "",
+      deathPercentage: "",
+      pcrPercentage: "",
+      casesPercentage: "",
+      population: "",
+      comparisonPcr: "",
+      comparisonCases: "",
+      comparisonDeaths: ""
     };
   },
   computed: {
@@ -81,7 +101,11 @@ export default {
     },
     percentage(ratio) {
       let death = (ratio.deaths / ratio.cases) * 100;
-      this.deathPercentage = Math.floor(death * 100) / 100;
+      let pcr = (ratio.pcr / ratio.population) * 100;
+      let cases = (ratio.cases / ratio.population) * 100;
+      this.pcrPercentage = Math.floor(pcr * 10000) / 10000 + "%";
+      this.casesPercentage = Math.floor(cases * 10000) / 10000 + "%";
+      this.deathPercentage = Math.floor(death * 100) / 100 + "%";
     },
     comparison(today, yesterday) {
       this.comparisonPcr = `+${today.pcr - yesterday.pcr}`;

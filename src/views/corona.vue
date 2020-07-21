@@ -12,7 +12,6 @@
           <domestic class="card__domestic" />
           <domesticPrefecture class="card__domestic__prefecture" />
           <pieChart class="chart__pie"></pieChart>
-          <populationRatio class="card__population__ratio" />
         </div>
 
         <div class="wrap__3">
@@ -62,7 +61,6 @@ import coronaTotal from "@/components/coronaTotal";
 import cumulative from "@/components/Cumulative";
 import domestic from "@/components/Domestic";
 import domesticPrefecture from "@/components/DomesticPrefecture";
-import populationRatio from "@/components/PopulationRatio";
 import barChart from "@/components/BarChart";
 import pieChart from "@/components/PieChart";
 import lineChart from "@/components/LineChart";
@@ -74,7 +72,6 @@ export default {
     cumulative,
     domestic,
     domesticPrefecture,
-    populationRatio,
     barChart,
     pieChart,
     lineChart,
