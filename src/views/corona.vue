@@ -31,9 +31,7 @@
       </CCol>
     </CRow>
     <CCol col="13" sm="13">
-      <CCard bodyWrapper>
         <coronaTotal />
-      </CCard>
     </CCol>
   </div>
 </template>
