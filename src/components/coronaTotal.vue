@@ -84,9 +84,7 @@ export default {
             data[i],
             "pcr"
           )}`,
-          population: `${Number(
-            data[i]["population"].today
-          )} +${this.comparison(data[i], "population")}`
+          population: Number(data[i]["population"].today)
         });
       }
     },
