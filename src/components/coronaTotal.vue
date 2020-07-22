@@ -9,13 +9,52 @@
         hover
         border
         striped
-        sorter
+        :sorter="{resetable: true}"
         pagination
       >
-        <template #show_details="{item}">
-          <td class="py-2">
+        <template #checkbox="{item}">
+          <td>
             <input type="checkbox" :value="item.pref_id" v-model="chartSet" />
           </td>
+        </template>
+        <template #cases="{item}">
+          <td>
+            {{item.cases}}
+            <span class="table__plus">{{ item.casesRatio}}</span>
+          </td>
+        </template>
+        <template #hospitalize="{item}">
+          <td>
+            {{item.hospitalize}}
+            <span class="table__plus">{{ item.hospitalizeRatio}}</span>
+          </td>
+        </template>
+        <template #discharge="{item}">
+          <td>
+            {{ item.discharge }}
+            <span class="table__good">{{ item.dischargeRatio }}</span>
+          </td>
+        </template>
+        <template #severe="{item}">
+          <td>
+            {{ item.severe }}
+            <span class="table__plus">{{ item.severeRatio }}</span>
+          </td>
+        </template>
+        <template #deaths="{item}">
+          <td>
+            {{ item.deaths }}
+            <span class="table__plus">{{ item.deathsRatio }}</span>
+          </td>
+        </template>
+        <template #pcr="{item}">
+          <td>
+            {{ item.pcr }}
+            <span class="table__plus">{{ item.pcrRatio }}</span>
+          </td>
+        </template>
+        <template #population="{item}">
+          <td>{{ item.population }}</td>
         </template>
       </CDataTable>
     </CCardBody>
@@ -30,7 +69,7 @@ export default {
       chartSet: [],
       tableData: [],
       fields: [
-        { key: "show_details", label: "", sorter: false },
+        { key: "checkbox", label: "", sorter: false },
         { key: "prefecture", label: "都道府県", sorter: false },
         { key: "cases", label: "感染者", _style: "min-width:70px" },
         { key: "hospitalize", label: "入院中", _style: "min-width:70px" },
@@ -61,39 +100,27 @@ export default {
         this.tableData.push({
           pref_id: Number(data[i].pref_id),
           prefecture: data[i].prefecture,
-          cases: `${Number(data[i]["cases"].today)} +${this.comparison(
-            data[i],
-            "cases"
-          )}`,
-          hospitalize: `${Number(
-            data[i]["hospitalize"].today
-          )} +${this.comparison(data[i], "hospitalize")}`,
-          discharge: `${Number(data[i]["discharge"].today)} +${this.comparison(
-            data[i],
-            "discharge"
-          )}`,
-          severe: `${Number(data[i]["severe"].today)} +${this.comparison(
-            data[i],
-            "severe"
-          )}`,
-          deaths: `${Number(data[i]["deaths"].today)} +${this.comparison(
-            data[i],
-            "deaths"
-          )}`,
-          pcr: `${Number(data[i]["pcr"].today)} +${this.comparison(
-            data[i],
-            "pcr"
-          )}`,
+          cases: Number(data[i]["cases"].today),
+          casesRatio: this.comparison(data[i], "cases"),
+          hospitalize: Number(data[i]["hospitalize"].today),
+          hospitalizeRatio: this.comparison(data[i], "hospitalize"),
+          discharge: Number(data[i]["discharge"].today),
+          dischargeRatio: this.comparison(data[i], "discharge"),
+          severe: Number(data[i]["severe"].today),
+          severeRatio: this.comparison(data[i], "severe"),
+          deaths: Number(data[i]["deaths"].today),
+          deathsRatio: this.comparison(data[i], "deaths"),
+          pcr: Number(data[i]["pcr"].today),
+          pcrRatio: this.comparison(data[i], "pcr"),
           population: Number(data[i]["population"].today)
         });
       }
     },
     comparison(data, value) {
       let name = value;
-      return data[name].today - data[name].yesterday;
+      return `+${data[name].today - data[name].yesterday}`;
     },
     chartCheck(prefCode) {
-      console.log(prefCode);
       let pref = [];
       prefCode.forEach(code => {
         console.log(this.prefDataFilter(code));
@@ -106,8 +133,19 @@ export default {
 </script>
 
 <style>
+.test {
+  font-size: 2rem;
+}
 .position-relative th {
   color: white;
   background-color: #2eb85c;
+}
+.table__plus {
+  font-size: 0.7rem;
+  color: red;
+}
+.table__good {
+  font-size: 0.7rem;
+  color: blue;
 }
 </style>
