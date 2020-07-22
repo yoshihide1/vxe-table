@@ -75,7 +75,11 @@ export default new Vuex.Store({
     },
     numComma: () => (num) => {
       return String(num).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
-    }
+    },
+    comparison: () => (data, value) => {
+      let name = value;
+      return `+${data[name].today - data[name].yesterday}`
+    } 
   },
   modules: {
   }

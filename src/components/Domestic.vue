@@ -2,12 +2,12 @@
   <CRow>
     <CCol col="12" sm="12">
       <CWidgetBrand
-        color="danger"
+        color="info"
         :rightHeader="nowCase"
         :rightFooter="'前日比：' + comparisonCases + '※感染者ー退院者'"
         :leftHeader="nowPercentage"
         :leftFooter="'国内の人口:' + population + '人'"
-        class="w-100"
+        class="w-100 case__small"
       >
         <span class="py-4 header__title">
           感染者
@@ -57,4 +57,7 @@ export default {
 </script>
 
 <style>
+.case__small .col:nth-child(1) .text-uppercase{
+  color: red !important;
+}
 </style>

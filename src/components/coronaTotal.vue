@@ -50,7 +50,7 @@
         <template #pcr="{item}">
           <td>
             {{ item.pcr }}
-            <span class="table__plus">{{ item.pcrRatio }}</span>
+            <span class="table__good">{{ item.pcrRatio }}</span>
           </td>
         </template>
         <template #population="{item}">
@@ -84,7 +84,7 @@ export default {
 
   computed: {
     ...mapState(["allCoronaData"]),
-    ...mapGetters(["prefDataFilter"])
+    ...mapGetters(["prefDataFilter", "comparison"])
   },
   watch: {
     chartSet() {
@@ -116,10 +116,6 @@ export default {
         });
       }
     },
-    comparison(data, value) {
-      let name = value;
-      return `+${data[name].today - data[name].yesterday}`;
-    },
     chartCheck(prefCode) {
       let pref = [];
       prefCode.forEach(code => {
@@ -138,7 +134,7 @@ export default {
 }
 .position-relative th {
   color: white;
-  background-color: #2eb85c;
+  background-color: #0F6347;
 }
 .table__plus {
   font-size: 0.7rem;

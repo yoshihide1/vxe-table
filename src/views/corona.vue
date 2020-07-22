@@ -87,6 +87,8 @@ export default {
 </script>
 
 <style lang="scss">
+$info: #0F6347;
+
 @import "~@coreui/coreui/scss/coreui";
 .container-fluid {
   width: 95%;

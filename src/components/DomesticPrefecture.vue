@@ -2,12 +2,12 @@
   <CRow>
     <CCol col="12" sm="12">
       <CWidgetBrand
-        color="danger"
+        color="info"
         :rightHeader="prefNowCase"
         :rightFooter="'前日比： +' + comparisonCases"
         :leftHeader="' 人口の ' + prefNowPercentage"
         :leftFooter="prefName + 'の人口' + prefPopulation"
-        class="w-100"
+        class="w-100 case__small"
       >
         <span class="py-4 header__title">
           <select v-model="selected">

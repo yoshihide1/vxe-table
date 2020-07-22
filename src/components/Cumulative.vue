@@ -2,14 +2,13 @@
   <CRow>
     <CCol col="12" sm="3">
       <CWidgetBrand
-        color="success"
+        color="info"
         :rightHeader="cases"
         rightFooter="感染者"
         :leftHeader="comparisonCases"
         leftFooter="前日比"
-        class="w-100"
+        class="w-100 case"
       >
-        <CIcon name="cilSettings" />
         <span class="py-4 header__title">
           感染者
           <span class="header__title__sub">(累計)</span>
@@ -18,12 +17,12 @@
     </CCol>
     <CCol col="12" sm="3">
       <CWidgetBrand
-        color="success"
+        color="info"
         :rightHeader="pcr"
         rightFooter="PCR検査"
         :leftHeader="comparisonPcr"
         leftFooter="前日比"
-        class="w-100"
+        class="w-100 pcr"
       >
         <span class="py-4 header__title">
           PCR検査
@@ -33,12 +32,12 @@
     </CCol>
     <CCol col="12" sm="3">
       <CWidgetBrand
-        color="success"
+        color="info"
         :rightHeader="deaths"
         rightFooter="死者"
         :leftHeader="comparisonDeaths"
         leftFooter="前日比"
-        class="w-100"
+        class="w-100 case"
       >
         <span class="py-4 header__title">
           死者
@@ -48,7 +47,7 @@
     </CCol>
     <CCol col="12" sm="3">
       <CWidgetBrand
-        color="success"
+        color="info"
         :right-header="casesPercentage"
         right-footer="感染者"
         :left-header="pcrPercentage"
@@ -123,4 +122,11 @@ export default {
 .header__title__sub {
   font-size: 0.8rem;
 }
+.case .col:nth-child(3) .text-value-lg {
+  color: red;
+}
+.pcr .col:nth-child(3) .text-value-lg {
+  color: blue;
+}
+
 </style>
