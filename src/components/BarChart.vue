@@ -4,23 +4,24 @@ import { mapState } from "vuex";
 export default {
   extends: Bar,
   computed: {
-    ...mapState(["ratio", "prefData", "chartPlus"])
+    ...mapState(["ratio", "prefData", "chartPlus"]),
   },
   data() {
     return {
       datacollection: {},
       options: {},
       total: null,
-      prefTotal: null
+      prefTotal: null,
     };
   },
   watch: {
     prefData() {
-      this.totalAndPref(this.chartPlus[0]);
+      console.log(this.ratio[0])
+      this.totalAndPref();
     },
     chartPlus() {
       this.totalAndPref(this.chartPlus[0]);
-    }
+    },
   },
   methods: {
     randomColor() {
@@ -36,7 +37,7 @@ export default {
       return `rgb(${color})`;
     },
     plus(data) {
-      data.forEach(pref => {
+      data.forEach((pref) => {
         this.datacollection.datasets.push({
           label: `${pref.prefecture}(累計)`,
           backgroundColor: this.randomColor(),
@@ -47,8 +48,8 @@ export default {
             pref["hospitalize"].today,
             pref["discharge"].today,
             pref["severe"].today,
-            pref["deaths"].today
-          ]
+            pref["deaths"].today,
+          ],
         });
       });
       this.renderChart(this.datacollection, this.options);
@@ -64,14 +65,13 @@ export default {
             label: "全国(累計)",
             backgroundColor: "#0B0000",
             borderWidth: 1,
-            pointBorderColor: "glay",
             data: [
               total.cases,
               total.hospitalize,
               total.discharge,
               total.severe,
-              total.deaths
-            ]
+              total.deaths,
+            ],
           },
           {
             label: `${prefData.prefecture}(累計)`,
@@ -83,36 +83,36 @@ export default {
               prefData["hospitalize"].today,
               prefData["discharge"].today,
               prefData["severe"].today,
-              prefData["deaths"].today
-            ]
-          }
-        ]
+              prefData["deaths"].today,
+            ],
+          },
+        ],
       };
       this.options = {
         scales: {
           yAxes: [
             {
               ticks: {
-                beginAtZero: true
+                beginAtZero: true,
               },
               gridLines: {
-                display: true
-              }
-            }
+                display: true,
+              },
+            },
           ],
           xAxes: [
             {
               gridLines: {
-                display: false
-              }
-            }
-          ]
+                display: false,
+              },
+            },
+          ],
         },
         legend: {
-          display: true
+          display: true,
         },
         responsive: true,
-        maintainAspectRatio: false
+        maintainAspectRatio: false,
       };
 
       if (pref) {
@@ -120,7 +120,7 @@ export default {
       } else {
         this.renderChart(this.datacollection, this.options);
       }
-    }
-  }
+    },
+  },
 };
 </script>

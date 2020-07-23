@@ -17,9 +17,6 @@
             <span class="header__title__sub">(累計)</span>
           </p>
         </div>
-        <!-- <div class="col">
-          <CChartPie style="height:60px" :datasets="datasetsPie" :options="options" />
-        </div> -->
         <div class="col">
           <p>
             <span class="header__title">PCR検査</span>
@@ -30,21 +27,6 @@
         </div>
       </CWidgetBrand>
     </CCol>
-    <!-- <CCol col="12" sm="3">
-      <CWidgetBrand
-        color="info"
-        :rightHeader="pcr"
-        rightFooter="PCR検査"
-        :leftHeader="comparisonPcr"
-        leftFooter="前日比"
-        class="w-100 pcr"
-      >
-        <span class="py-4 header__title">
-          PCR検査
-          <span class="header__title__sub">(累計)</span>
-        </span>
-      </CWidgetBrand>
-    </CCol>-->
     <CCol col="12" sm="4">
       <CWidgetBrand
         color="info"
@@ -148,8 +130,8 @@ export default {
       this.deathPercentage = Math.floor(death * 100) / 100 + "%";
     },
     comparison(today, yesterday) {
-      this.comparisonPcr = `+${today.pcr - yesterday.pcr}`;
-      this.comparisonCases = `+${today.cases - yesterday.cases}`;
+      this.comparisonPcr = `+${this.numComma(today.pcr - yesterday.pcr)}`;
+      this.comparisonCases = `+${this.numComma(today.cases - yesterday.cases)}`;
       this.comparisonDeaths = `+${today.deaths - yesterday.deaths}`;
     },
   },

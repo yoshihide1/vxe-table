@@ -33,10 +33,10 @@ export default new Vuex.Store({
     }
   },
   actions: {
-    async coronaTotal({ commit }) {
+    async coronaTotal({ dispatch, commit }) {
       let res = await axios.get("https://node-api-corona.herokuapp.com/api/v1/total/")
       commit('ratio', res.data)
-
+      dispatch('coronaTwoDay')
     },
     async coronaTwoDay({ commit }) {
       let res = await axios.get("https://node-api-corona.herokuapp.com/api/v1/2day/")

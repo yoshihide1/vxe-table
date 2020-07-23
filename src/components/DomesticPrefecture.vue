@@ -4,7 +4,7 @@
       <CWidgetBrand
         color="info"
         :rightHeader="prefNowCase"
-        :rightFooter="'前日比： +' + comparisonCases"
+        :rightFooter="'前日比：' + comparisonCases"
         :leftHeader="' 人口の ' + prefNowPercentage"
         :leftFooter="prefName + 'の人口' + prefPopulation"
         class="w-100 case__small"
@@ -28,17 +28,16 @@ export default {
     return {
       prefs: prefs,
       selected: 13,
-      cases: 0,
       prefNowCase: "",
       prefNowPercentage: 0,
       prefPopulation: 0,
       prefName: "",
-      comparisonCases: 0
+      comparisonCases: 0,
     };
   },
   computed: {
     ...mapState(["allCoronaData", "prefData"]),
-    ...mapGetters(["prefDataFilter", "numComma"])
+    ...mapGetters(["prefDataFilter", "numComma", "comparison"]),
   },
   watch: {
     selected() {
@@ -49,8 +48,8 @@ export default {
     },
     prefData() {
       this.prefFilter(this.prefData);
-      this.comparison(this.prefData);
-    }
+      this.comparisonCases = this.comparison(this.prefData, "cases");
+    },
   },
   methods: {
     prefFilter(pref) {
@@ -63,10 +62,7 @@ export default {
       this.prefName = pref["prefecture"];
       this.prefPopulation = this.numComma(pref["population"].today);
     },
-    comparison(pref) {
-      this.comparisonCases = pref["cases"].today - pref["cases"].yesterday;
-    }
-  }
+  },
 };
 </script>
 
