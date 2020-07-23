@@ -55,7 +55,9 @@ export default {
     prefFilter(pref) {
       console.log(pref);
       let now =
-        pref["cases"].today - pref["discharge"].today - pref["deaths"].today;
+        pref["cases"].today -
+        pref["discharge"].today -
+        (pref["deaths"].today - pref["deaths"].yesterday);
       let percentage = (now / pref["population"].today) * 100;
       this.prefNowCase = this.numComma(now);
       this.prefNowPercentage = Math.floor(percentage * 100000) / 100000 + "%";

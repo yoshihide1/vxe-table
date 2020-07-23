@@ -22,7 +22,7 @@ export default {
       let total = this.prefData;
       (this.datacollection = {
         labels: [
-          `${total.prefecture}：入院中(現在)`,
+          "入院中(現在)",
           "重症(現在)",
           "死者(累計)",
         ],
@@ -30,8 +30,7 @@ export default {
           {
             label: [""],
             backgroundColor: ["#3A6BA5", "#F1CD42", "#F24C0C"],
-            pointBackgroundColor: "black",
-            borderWidth: 1,
+            borderWidth: 0,
             pointBorderColor: "#249EBF",
             data: [
               total["hospitalize"].today,
@@ -43,6 +42,10 @@ export default {
       }),
         (this.options = {
           scales: {},
+          title: {
+            display: true,
+            text: total.prefecture,
+          },
           legend: {
             display: true,
           },

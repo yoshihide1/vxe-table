@@ -40,6 +40,7 @@ export default {
           {
             label: ["PCR検査の推移"],
             pointBackgroundColor: "#fff",
+            backgroundColor: "rgba(0,0,255,0.1)",
             borderWidth: 3,
             borderColor: "#673FC4",
             data: this.pcr,
@@ -47,7 +48,16 @@ export default {
         ],
       }),
         (this.options = {
-          scales: {},
+          scales: {
+            yAxes: [
+              {
+                ticks: {
+                  suggestedMin: 0,
+                  stepSize: 5000,
+                },
+              },
+            ],
+          },
           legend: {
             display: true,
           },

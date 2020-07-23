@@ -16,7 +16,6 @@ export default {
   },
   watch: {
     prefData() {
-      console.log(this.ratio[0])
       this.totalAndPref();
     },
     chartPlus() {
@@ -25,7 +24,7 @@ export default {
   },
   methods: {
     randomColor() {
-      let max = 240;
+      let max = 255;
       let min = 0;
       let color = [];
       let i = 0;
@@ -42,6 +41,7 @@ export default {
           label: `${pref.prefecture}(累計)`,
           backgroundColor: this.randomColor(),
           borderWidth: 1,
+          borderColor: "black",
           pointBorderColor: "glay",
           data: [
             pref["cases"].today,
@@ -63,8 +63,9 @@ export default {
         datasets: [
           {
             label: "全国(累計)",
-            backgroundColor: "#0B0000",
+            backgroundColor: this.randomColor(),
             borderWidth: 1,
+            borderColor: "black",
             data: [
               total.cases,
               total.hospitalize,
@@ -77,7 +78,7 @@ export default {
             label: `${prefData.prefecture}(累計)`,
             backgroundColor: this.randomColor(),
             borderWidth: 1,
-            pointBorderColor: "glay",
+            borderColor: "black",
             data: [
               prefData["cases"].today,
               prefData["hospitalize"].today,
