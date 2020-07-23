@@ -6,6 +6,11 @@
 
     <CCol col="13" sm="13">
       <CCard bodyWrapper>
+        <lineChartPcr class="chart__pcr" />
+      </CCard>
+    </CCol>
+    <CCol col="13" sm="13">
+      <CCard bodyWrapper>
         <lineChart />
       </CCard>
     </CCol>
@@ -31,7 +36,7 @@
       </CCol>
     </CRow>
     <CCol col="13" sm="13">
-        <coronaTotal />
+      <coronaTotal />
     </CCol>
   </div>
 </template>
@@ -44,6 +49,8 @@ import domesticPrefecture from "@/components/DomesticPrefecture";
 import barChart from "@/components/BarChart";
 import pieChart from "@/components/PieChart";
 import lineChart from "@/components/LineChart";
+import lineChartPcr from "@/components/LineChartPcr";
+
 import updated from "@/components/updated";
 
 export default {
@@ -55,14 +62,15 @@ export default {
     barChart,
     pieChart,
     lineChart,
-    updated
+    lineChartPcr,
+    updated,
   },
   data() {
     return {
       pc: false,
       sp: false,
       repkaceWidth: 768,
-      windowSize: 0
+      windowSize: 0,
     };
   },
   watch: {},
@@ -81,20 +89,27 @@ export default {
         this.sp = !this.sp;
         console.log(2);
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style lang="scss">
-$info: #0F6347;
+$info: #3e3d37;
 
 @import "~@coreui/coreui/scss/coreui";
+p {
+  padding: 0;
+  margin: 0;
+}
 .container-fluid {
   width: 95%;
   background-color: #fcfcfc;
 }
 .date {
   font-size: 20px;
+}
+.chart__pcr {
+  height: 150px;
 }
 </style>

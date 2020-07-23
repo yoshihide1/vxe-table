@@ -26,18 +26,18 @@ export default {
       nowCase: "",
       nowPercentage: "",
       population: 0,
-      comparisonCases: 0
+      comparisonCases: 0,
     };
   },
   computed: {
     ...mapState(["ratio"]),
-    ...mapGetters(["numComma"])
+    ...mapGetters(["numComma"]),
   },
   watch: {
     ratio() {
       this.now(this.ratio[0], this.ratio[1]);
       this.population = this.numComma(this.ratio[0].population);
-    }
+    },
   },
   methods: {
     now(today, yesterday) {
@@ -51,13 +51,13 @@ export default {
       } else {
         this.comparisonCases = `-${a - b}`;
       }
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style>
-.case__small .col:nth-child(1) .text-uppercase{
+.case__small .col:nth-child(1) .text-uppercase {
   color: red !important;
 }
 </style>

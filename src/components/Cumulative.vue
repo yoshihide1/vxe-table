@@ -1,21 +1,36 @@
 <template>
   <CRow>
-    <CCol col="12" sm="3">
+    <CCol col="12" sm="4">
       <CWidgetBrand
         color="info"
-        :rightHeader="cases"
-        rightFooter="感染者"
-        :leftHeader="comparisonCases"
-        leftFooter="前日比"
+        :rightHeader="comparisonCases"
+        :rightFooter="cases"
+        :leftHeader="comparisonPcr"
+        :leftFooter="pcr"
         class="w-100 case"
       >
-        <span class="py-4 header__title">
-          感染者
-          <span class="header__title__sub">(累計)</span>
-        </span>
+        <div class="col py-3">
+          <p>
+            <span class="header__title">感染者</span>
+          </p>
+          <p>
+            <span class="header__title__sub">(累計)</span>
+          </p>
+        </div>
+        <!-- <div class="col">
+          <CChartPie style="height:60px" :datasets="datasetsPie" :options="options" />
+        </div> -->
+        <div class="col">
+          <p>
+            <span class="header__title">PCR検査</span>
+          </p>
+          <p>
+            <span class="header__title__sub">(累計)</span>
+          </p>
+        </div>
       </CWidgetBrand>
     </CCol>
-    <CCol col="12" sm="3">
+    <!-- <CCol col="12" sm="3">
       <CWidgetBrand
         color="info"
         :rightHeader="pcr"
@@ -29,23 +44,27 @@
           <span class="header__title__sub">(累計)</span>
         </span>
       </CWidgetBrand>
-    </CCol>
-    <CCol col="12" sm="3">
+    </CCol>-->
+    <CCol col="12" sm="4">
       <CWidgetBrand
         color="info"
         :rightHeader="deaths"
         rightFooter="死者"
         :leftHeader="comparisonDeaths"
         leftFooter="前日比"
-        class="w-100 case"
+        class="w-100 death"
       >
-        <span class="py-4 header__title">
-          死者
-          <span class="header__title__sub">(累計)</span>
-        </span>
+        <div class="col py-3">
+          <p>
+            <span class="header__title">死者</span>
+          </p>
+          <p>
+            <span class="header__title__sub">(累計)</span>
+          </p>
+        </div>
       </CWidgetBrand>
     </CCol>
-    <CCol col="12" sm="3">
+    <CCol col="12" sm="4">
       <CWidgetBrand
         color="info"
         :right-header="casesPercentage"
@@ -54,10 +73,14 @@
         left-footer="PCR検査"
         class="w-100"
       >
-        <span class="py-4 header__title">
-          人口に対する割合
-          <span class="header__title__sub">(累計)</span>
-        </span>
+        <div class="col py-3">
+          <p>
+            <span class="header__title">人口に対する割合</span>
+          </p>
+          <p>
+            <span class="header__title__sub">(累計)</span>
+          </p>
+        </div>
       </CWidgetBrand>
     </CCol>
   </CRow>
@@ -78,24 +101,42 @@ export default {
       population: "",
       comparisonPcr: "",
       comparisonCases: "",
-      comparisonDeaths: ""
+      comparisonDeaths: "",
     };
   },
   computed: {
     ...mapState(["ratio"]),
-    ...mapGetters(["numComma"])
+    ...mapGetters(["numComma"]),
+    datasetsPie() {
+      return [
+        {
+          data: [this.comparisonCases, this.comparisonPcr],
+          borderWidth: 1,
+          backgroundColor: ["#ff1e1e", "blue"],
+          label: "感染者",
+        },
+      ];
+    },
+    options() {
+      return {
+        maintainAspectRatio: false,
+        legend: {
+          display: false,
+        },
+      };
+    },
   },
   watch: {
     ratio() {
       this.cumulative(this.ratio[0]);
       this.percentage(this.ratio[0]);
       this.comparison(this.ratio[0], this.ratio[1]);
-    }
+    },
   },
   methods: {
     cumulative(ratio) {
-      this.pcr = this.numComma(ratio.pcr);
-      this.cases = this.numComma(ratio.cases);
+      this.pcr = `(${this.numComma(ratio.pcr)})`;
+      this.cases = `(${this.numComma(ratio.cases)})`;
       this.deaths = this.numComma(ratio.deaths);
     },
     percentage(ratio) {
@@ -110,23 +151,25 @@ export default {
       this.comparisonPcr = `+${today.pcr - yesterday.pcr}`;
       this.comparisonCases = `+${today.cases - yesterday.cases}`;
       this.comparisonDeaths = `+${today.deaths - yesterday.deaths}`;
-    }
-  }
+    },
+  },
 };
 </script>
 
 <style>
 .header__title {
-  font-size: 1.3rem;
+  font-size: 1.1rem;
 }
 .header__title__sub {
   font-size: 0.8rem;
 }
-.case .col:nth-child(3) .text-value-lg {
-  color: red;
+.case .col:nth-child(1) .text-value-lg {
+  color: #ff1e1e;
 }
-.pcr .col:nth-child(3) .text-value-lg {
+.case .col:nth-child(3) .text-value-lg {
   color: blue;
 }
-
+.death .col:nth-child(3) .text-value-lg {
+  color: #ff1e1e;
+}
 </style>

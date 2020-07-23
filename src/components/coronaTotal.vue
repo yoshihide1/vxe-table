@@ -77,14 +77,14 @@ export default {
         { key: "severe", label: "重症", _style: "min-width:70px" },
         { key: "deaths", label: "死者", _style: "min-width:70px" },
         { key: "pcr", label: "PCR検査", _style: "min-width:70px" },
-        { key: "population", label: "人口", _style: "min-width:70px" }
-      ]
+        { key: "population", label: "人口", _style: "min-width:70px" },
+      ],
     };
   },
 
   computed: {
     ...mapState(["allCoronaData"]),
-    ...mapGetters(["prefDataFilter", "comparison"])
+    ...mapGetters(["prefDataFilter", "comparison"]),
   },
   watch: {
     chartSet() {
@@ -92,7 +92,7 @@ export default {
     },
     allCoronaData() {
       this.coronaTable(this.allCoronaData);
-    }
+    },
   },
   methods: {
     coronaTable(data) {
@@ -112,19 +112,19 @@ export default {
           deathsRatio: this.comparison(data[i], "deaths"),
           pcr: Number(data[i]["pcr"].today),
           pcrRatio: this.comparison(data[i], "pcr"),
-          population: Number(data[i]["population"].today)
+          population: Number(data[i]["population"].today),
         });
       }
     },
     chartCheck(prefCode) {
       let pref = [];
-      prefCode.forEach(code => {
+      prefCode.forEach((code) => {
         console.log(this.prefDataFilter(code));
         pref.push(this.prefDataFilter(code)[0]);
       });
       this.$store.commit("chart", pref);
-    }
-  }
+    },
+  },
 };
 </script>
 
@@ -134,7 +134,7 @@ export default {
 }
 .position-relative th {
   color: white;
-  background-color: #0F6347;
+  background-color: #3e3d37;
 }
 .table__plus {
   font-size: 0.7rem;

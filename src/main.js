@@ -5,6 +5,8 @@ import store from './store'
 import 'chart.js'
 
 import { freeSet } from '@coreui/icons'
+import CoreuiVueCharts from '@coreui/vue-chartjs'
+Vue.use(CoreuiVueCharts)
 import CoreuiVue from '@coreui/vue';
 Vue.use(CoreuiVue);
 new Vue({

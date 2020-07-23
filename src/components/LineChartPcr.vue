@@ -10,11 +10,9 @@ export default {
     return {
       datacollection: {},
       options: {},
-      coronaTransition: [],
       date: [],
+      pcr: [],
       cases: [],
-      discharge: [],
-      hospitalize: [],
     };
   },
   watch: {
@@ -24,16 +22,14 @@ export default {
   },
   methods: {
     setRatio() {
-      this.cases = [];
-      this.discharge = [];
+      this.pcr = [];
       this.date = [];
       let data1 = this.ratio.slice(0, this.ratio.length - 1);
       let data2 = this.ratio.slice(1, this.ratio.length);
       for (let i in data1) {
         this.date.unshift(data1[i].date.slice(5).replace("-", "月") + "日");
+        this.pcr.unshift(data1[i].pcr - data2[i].pcr);
         this.cases.unshift(data1[i].cases - data2[i].cases);
-        this.discharge.unshift(data1[i].discharge - data2[i].discharge);
-        this.hospitalize.unshift(data1[i].hospitalize - data2[i].hospitalize);
       }
       this.totalChart();
     },
@@ -42,25 +38,11 @@ export default {
         labels: this.date,
         datasets: [
           {
-            label: ["感染者"],
+            label: ["PCR検査の推移"],
             pointBackgroundColor: "#fff",
             borderWidth: 3,
-            borderColor: "#D7366A",
-            data: this.cases,
-          },
-          {
-            label: ["退院者"],
-            pointBackgroundColor: "#fff",
-            borderWidth: 3,
-            borderColor: "#2BBA2B",
-            data: this.discharge,
-          },
-          {
-            label: ["入院中"],
-            pointBackgroundColor: "#fff",
-            borderWidth: 3,
-            borderColor: "#F1CD42",
-            data: this.hospitalize,
+            borderColor: "#673FC4",
+            data: this.pcr,
           },
         ],
       }),

@@ -4,18 +4,18 @@ import { mapState } from "vuex";
 export default {
   extends: Pie,
   computed: {
-    ...mapState(["prefData"])
+    ...mapState(["prefData"]),
   },
   data() {
     return {
       datacollection: {},
-      options: {}
+      options: {},
     };
   },
   watch: {
     prefData() {
       this.totalChart();
-    }
+    },
   },
   methods: {
     totalChart() {
@@ -24,37 +24,33 @@ export default {
         labels: [
           `${total.prefecture}：入院中(現在)`,
           "重症(現在)",
-          "死者(累計)"
+          "死者(累計)",
         ],
         datasets: [
           {
             label: [""],
-            backgroundColor: [
-              "#3A6BA5",
-              "#5C5344",
-              "#F24C0C"
-            ],
+            backgroundColor: ["#3A6BA5", "#F1CD42", "#F24C0C"],
             pointBackgroundColor: "black",
             borderWidth: 1,
             pointBorderColor: "#249EBF",
             data: [
               total["hospitalize"].today,
               total["severe"].today,
-              total["deaths"].today
-            ]
-          }
-        ]
+              total["deaths"].today,
+            ],
+          },
+        ],
       }),
         (this.options = {
           scales: {},
           legend: {
-            display: true
+            display: true,
           },
           responsive: true,
-          maintainAspectRatio: false
+          maintainAspectRatio: false,
         });
       this.renderChart(this.datacollection, this.options);
-    }
-  }
+    },
+  },
 };
 </script>

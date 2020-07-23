@@ -79,7 +79,7 @@ export default new Vuex.Store({
     comparison: () => (data, value) => {
       let name = value;
       return `+${data[name].today - data[name].yesterday}`
-    } 
+    }
   },
   modules: {
   }
