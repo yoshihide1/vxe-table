@@ -33,18 +33,16 @@ export default new Vuex.Store({
       state.updateChart = prefData
     },
     byPref(state, prefData) {
-      console.log(prefData)
       state.byPrefData = prefData
     }
   },
   actions: {
-   async byPrefecture({ commit }, req) {
-     console.log(req)
-     const params = {
-       id: req
-     }
-    let res = await  axios.get("https://node-api-corona.herokuapp.com/api/v1/pref/", { params })
-     commit('byPref', res.data)
+    async byPrefecture({ commit }, req) {
+      const params = {
+        id: req
+      }
+      let res = await axios.get("https://node-api-corona.herokuapp.com/api/v1/pref/", { params })
+      commit('byPref', res.data)
     },
     async coronaTotal({ dispatch, commit }) {
       let res = await axios.get("https://node-api-corona.herokuapp.com/api/v1/total/")
