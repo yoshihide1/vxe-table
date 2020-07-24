@@ -42,9 +42,11 @@ export default {
   watch: {
     selected() {
       this.$store.commit("newPrefTotal", this.prefDataFilter(this.selected));
+      this.$store.dispatch("byPrefecture", this.selected);
     },
     allCoronaData() {
       this.$store.commit("newPrefTotal", this.prefDataFilter(this.selected));
+      this.$store.dispatch("byPrefecture", this.selected);
     },
     prefData() {
       this.prefFilter(this.prefData);

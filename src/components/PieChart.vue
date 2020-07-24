@@ -21,20 +21,14 @@ export default {
     totalChart() {
       let total = this.prefData;
       (this.datacollection = {
-        labels: [
-          "PCR検査(累計)",
-          "感染者(累計)"
-        ],
+        labels: ["PCR検査(累計)", "感染者(累計)"],
         datasets: [
           {
             label: [""],
             backgroundColor: ["blue", "red"],
             borderWidth: 0,
             pointBorderColor: "#249EBF",
-            data: [
-              total["pcr"].today,
-              total["cases"].today,
-            ],
+            data: [total["pcr"].today, total["cases"].today],
           },
         ],
       }),

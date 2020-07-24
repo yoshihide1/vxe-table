@@ -21,6 +21,8 @@ export default {
   },
   methods: {
     setPref() {
+      this.date = [];
+      this.pcr = [];
       let data1 = this.byPrefData.slice(1, this.byPrefData.length);
       let data2 = this.byPrefData.slice(0, this.byPrefData.length - 1);
       for (let i in data1) {

@@ -24,6 +24,10 @@ export default {
   },
   methods: {
     setPref() {
+      this.date = [];
+      this.cases = [];
+      this.discharge = [];
+      this.hospitalize = [];
       let data1 = this.byPrefData.slice(1, this.byPrefData.length);
       let data2 = this.byPrefData.slice(0, this.byPrefData.length - 1);
       for (let i in data1) {
@@ -47,7 +51,7 @@ export default {
             label: ["感染者"],
             pointBackgroundColor: "#fff",
             backgroundColor: "rgba(255,0,0,0.1)",
-            borderWidth: 3,
+            borderWidth: 1,
             borderColor: "#D7366A",
             data: this.cases,
           },
@@ -55,7 +59,7 @@ export default {
             label: ["入院"],
             pointBackgroundColor: "#fff",
             backgroundColor: "rgba(255,255,0,0.1)",
-            borderWidth: 3,
+            borderWidth: 1,
             borderColor: "#F1CD42",
             data: this.hospitalize,
           },
@@ -63,7 +67,7 @@ export default {
             label: ["退院"],
             pointBackgroundColor: "#fff",
             backgroundColor: "rgba(0,0,0,0)",
-            borderWidth: 2,
+            borderWidth: 1,
             borderColor: "#2BBA2B",
             data: this.discharge,
           },
@@ -71,7 +75,7 @@ export default {
       }),
         (this.options = {
           scales: {
-             yAxes: [
+            yAxes: [
               {
                 ticks: {
                   stepSize: 100,

@@ -94,7 +94,6 @@ export default {
   watch: {},
   created() {
     this.$store.dispatch("coronaTotal");
-    this.$store.dispatch("byPrefecture", "13");
   },
   methods: {},
 };
