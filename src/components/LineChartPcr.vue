@@ -58,6 +58,10 @@ export default {
               },
             ],
           },
+          title: {
+            display: true,
+            text: "全国",
+          },
           legend: {
             display: true,
           },

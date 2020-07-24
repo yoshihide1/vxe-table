@@ -49,14 +49,14 @@ export default {
             borderColor: "#D7366A",
             data: this.cases,
           },
-            {
-              label: ["入院中"],
-              pointBackgroundColor: "#fff",
-              backgroundColor: "rgba(255,255,0,0.1)",
-              borderWidth: 3,
-              borderColor: "#F1CD42",
-              data: this.hospitalize,
-            },
+          {
+            label: ["入院中"],
+            pointBackgroundColor: "#fff",
+            backgroundColor: "rgba(255,255,0,0.1)",
+            borderWidth: 3,
+            borderColor: "#F1CD42",
+            data: this.hospitalize,
+          },
           {
             label: ["退院者"],
             pointBackgroundColor: "#fff",
@@ -69,6 +69,10 @@ export default {
       }),
         (this.options = {
           scales: {},
+          title: {
+            display: true,
+            text: "全国",
+          },
           legend: {
             display: true,
           },
