@@ -4,7 +4,7 @@ import { mapState } from "vuex";
 export default {
   extends: Line,
   computed: {
-    ...mapState(["ratio"]),
+    ...mapState(["byPrefData"]),
   },
   data() {
     return {
@@ -18,24 +18,27 @@ export default {
     };
   },
   watch: {
-    ratio() {
-      this.setRatio();
+    byPrefData() {
+      this.setPref();
     },
   },
   methods: {
-    setRatio() {
-      this.cases = [];
-      this.discharge = [];
-      this.date = [];
-      let data1 = this.ratio.slice(0, this.ratio.length - 1);
-      let data2 = this.ratio.slice(1, this.ratio.length);
+    setPref() {
+      console.log(this.byPrefData.length);
+      let data1 = this.byPrefData.slice(1, this.byPrefData.length);
+      let data2 = this.byPrefData.slice(0, this.byPrefData.length - 1);
       for (let i in data1) {
-        this.date.unshift(data1[i].date.slice(5).replace("-", "月") + "日");
-        this.cases.unshift(data1[i].cases - data2[i].cases);
-        this.discharge.unshift(data1[i].discharge - data2[i].discharge);
-        this.hospitalize.unshift(data1[i].hospitalize - data2[i].hospitalize);
+        this.date.push(this.dateFormat(data1[i].created_at));
+        this.cases.push(data1[i].cases - data2[i].cases);
+        this.discharge.push(data1[i].discharge - data2[i].discharge);
+        this.hospitalize.push(data1[i].hospitalize - data2[i].hospitalize);
       }
       this.totalChart();
+    },
+    dateFormat(value) {
+      const a = value.slice(4, 6);
+      const b = value.slice(6, 9);
+      return `${a}月${b}日`;
     },
     totalChart() {
       (this.datacollection = {
@@ -71,7 +74,7 @@ export default {
           scales: {},
           title: {
             display: true,
-            text: "全国",
+            text: this.byPrefData[0].prefecture,
           },
           legend: {
             display: true,

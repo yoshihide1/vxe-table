@@ -9,6 +9,7 @@
         <lineChartPcr class="chart__pcr" />
       </CCard>
     </CCol>
+
     <CCol col="13" sm="13">
       <CCard bodyWrapper>
         <lineChart />
@@ -23,6 +24,13 @@
         <domesticPrefecture />
       </CCol>
     </CRow>
+
+        <CCol col="13" sm="13">
+      <CCard bodyWrapper>
+        <lineChartPref class="chart__pref" />
+      </CCard>
+    </CCol>
+
     <CRow>
       <CCol col="12" sm="8">
         <CCard bodyWrapper>
@@ -50,6 +58,7 @@ import barChart from "@/components/BarChart";
 import pieChart from "@/components/PieChart";
 import lineChart from "@/components/LineChart";
 import lineChartPcr from "@/components/LineChartPcr";
+import lineChartPref from "@/components/LineChartPref";
 
 import updated from "@/components/updated";
 
@@ -63,6 +72,7 @@ export default {
     pieChart,
     lineChart,
     lineChartPcr,
+    lineChartPref,
     updated,
   },
   data() {
@@ -76,6 +86,7 @@ export default {
   watch: {},
   created() {
     this.$store.dispatch("coronaTotal");
+    this.$store.dispatch("byPrefecture", "13");
   },
   methods: {},
 };
@@ -98,5 +109,8 @@ p {
 }
 .chart__pcr {
   height: 150px;
+}
+.chart__pref {
+  height: 250px;
 }
 </style>
