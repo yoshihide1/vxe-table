@@ -10,11 +10,8 @@ export default {
     return {
       datacollection: {},
       options: {},
-      coronaTransition: [],
       date: [],
-      cases: [],
-      discharge: [],
-      hospitalize: [],
+      pcr: [],
     };
   },
   watch: {
@@ -28,9 +25,7 @@ export default {
       let data2 = this.byPrefData.slice(0, this.byPrefData.length - 1);
       for (let i in data1) {
         this.date.push(this.dateFormat(data1[i].created_at));
-        this.cases.push(data1[i].cases - data2[i].cases);
-        this.discharge.push(data1[i].discharge - data2[i].discharge);
-        this.hospitalize.push(data1[i].hospitalize - data2[i].hospitalize);
+        this.pcr.push(data1[i].pcr - data2[i].pcr);
       }
       this.totalChart();
     },
@@ -44,37 +39,21 @@ export default {
         labels: this.date,
         datasets: [
           {
-            label: ["感染者"],
+            label: ["PCR検査"],
             pointBackgroundColor: "#fff",
-            backgroundColor: "rgba(255,0,0,0.1)",
-            borderWidth: 3,
-            borderColor: "#D7366A",
-            data: this.cases,
-          },
-          {
-            label: ["入院"],
-            pointBackgroundColor: "#fff",
-            backgroundColor: "rgba(255,255,0,0.1)",
-            borderWidth: 3,
-            borderColor: "#F1CD42",
-            data: this.hospitalize,
-          },
-          {
-            label: ["退院"],
-            pointBackgroundColor: "#fff",
-            backgroundColor: "rgba(0,0,0,0)",
+            backgroundColor: "rgba(0,0,255,0.1)",
             borderWidth: 2,
-            borderColor: "#2BBA2B",
-            data: this.discharge,
+            borderColor: "#673FC4",
+            data: this.pcr,
           },
         ],
       }),
         (this.options = {
           scales: {
-             yAxes: [
+            yAxes: [
               {
                 ticks: {
-                  stepSize: 100,
+                  stepSize: 1000,
                 },
               },
             ],

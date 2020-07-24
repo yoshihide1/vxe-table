@@ -22,20 +22,18 @@ export default {
       let total = this.prefData;
       (this.datacollection = {
         labels: [
-          "入院中(現在)",
-          "重症(現在)",
-          "死者(累計)",
+          "PCR検査(累計)",
+          "感染者(累計)"
         ],
         datasets: [
           {
             label: [""],
-            backgroundColor: ["#3A6BA5", "#F1CD42", "#F24C0C"],
+            backgroundColor: ["blue", "red"],
             borderWidth: 0,
             pointBorderColor: "#249EBF",
             data: [
-              total["hospitalize"].today,
-              total["severe"].today,
-              total["deaths"].today,
+              total["pcr"].today,
+              total["cases"].today,
             ],
           },
         ],

@@ -38,7 +38,7 @@ export default {
         labels: this.date,
         datasets: [
           {
-            label: ["PCR検査の推移"],
+            label: ["PCR検査"],
             pointBackgroundColor: "#fff",
             backgroundColor: "rgba(0,0,255,0.1)",
             borderWidth: 3,

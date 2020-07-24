@@ -91,7 +91,13 @@ export default new Vuex.Store({
     },
     comparison: () => (data, value) => {
       let name = value;
-      return `+${data[name].today - data[name].yesterday}`
+      let today = data[name].today
+      let yesterday = data[name].yesterday
+      if ((today - yesterday) >= 0) {
+        return `+${today - yesterday}`
+      } else {
+        return `${today - yesterday}`
+      }
     }
   },
   modules: {

@@ -24,13 +24,19 @@
         <domesticPrefecture />
       </CCol>
     </CRow>
+    <CRow>
 
-        <CCol col="13" sm="13">
+        <CCol col="12" sm="5">
+      <CCard bodyWrapper>
+        <lineChartPrefPcr class="chart__pref" />
+      </CCard>
+    </CCol>
+        <CCol col="12" sm="7">
       <CCard bodyWrapper>
         <lineChartPref class="chart__pref" />
       </CCard>
     </CCol>
-
+    </CRow>
     <CRow>
       <CCol col="12" sm="8">
         <CCard bodyWrapper>
@@ -59,6 +65,7 @@ import pieChart from "@/components/PieChart";
 import lineChart from "@/components/LineChart";
 import lineChartPcr from "@/components/LineChartPcr";
 import lineChartPref from "@/components/LineChartPref";
+import lineChartPrefPcr from "@/components/LineChartPrefPcr";
 
 import updated from "@/components/updated";
 
@@ -73,6 +80,7 @@ export default {
     lineChart,
     lineChartPcr,
     lineChartPref,
+    lineChartPrefPcr,
     updated,
   },
   data() {
@@ -111,6 +119,6 @@ p {
   height: 150px;
 }
 .chart__pref {
-  height: 250px;
+  height: 200px;
 }
 </style>
