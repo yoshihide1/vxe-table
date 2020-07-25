@@ -115,7 +115,7 @@ export default {
     comparison(today, yesterday) {
       this.comparisonPcr = `+${this.numComma(today.pcr - yesterday.pcr)}`;
       this.comparisonCases = `+${this.numComma(today.cases - yesterday.cases)}`;
-      let num = today.deaths - yesterday.deaths-2;
+      let num = today.deaths - yesterday.deaths;
       if (num > 0) {
         this.comparisonDeaths = `+${num}`;
       } else {
