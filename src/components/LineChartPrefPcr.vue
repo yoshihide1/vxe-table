@@ -46,6 +46,8 @@ export default {
             backgroundColor: "rgba(0,0,255,0.1)",
             borderWidth: 2,
             borderColor: "#673FC4",
+            radius: 2,
+            hitRadius: 3,
             data: this.pcr,
           },
         ],
@@ -63,6 +65,8 @@ export default {
           title: {
             display: true,
             text: this.byPrefData[0].prefecture,
+            fontSize: 15,
+            padding: 0,
           },
           legend: {
             display: true,

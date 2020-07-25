@@ -40,9 +40,11 @@ export default {
           {
             label: ["PCR検査"],
             pointBackgroundColor: "#fff",
+            pointBorderWidth: 2,
             backgroundColor: "rgba(0,0,255,0.1)",
             borderWidth: 3,
             borderColor: "#673FC4",
+            hitRadius: 5,
             data: this.pcr,
           },
         ],
@@ -60,7 +62,9 @@ export default {
           },
           title: {
             display: true,
-            text: "全国",
+            text: "日本国内",
+            fontSize: 15,
+            padding: 0,
           },
           legend: {
             display: true,

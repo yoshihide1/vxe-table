@@ -44,34 +44,46 @@ export default {
           {
             label: ["感染者"],
             pointBackgroundColor: "#fff",
+            pointBorderWidth: 2,
             backgroundColor: "rgba(255,0,0,0.1)",
             borderWidth: 3,
             borderColor: "#D7366A",
+            hitRadius: 5,
+
             data: this.cases,
           },
           {
             label: ["入院"],
             pointBackgroundColor: "#fff",
+            pointBorderWidth: 2,
             backgroundColor: "rgba(255,255,0,0.1)",
             borderWidth: 3,
             borderColor: "#F1CD42",
+            hitRadius: 5,
             data: this.hospitalize,
           },
           {
             label: ["退院"],
             pointBackgroundColor: "#fff",
+            pointBorderWidth: 2,
             backgroundColor: "rgba(0,0,0,0)",
             borderWidth: 3,
             borderColor: "#2BBA2B",
+            hitRadius: 5,
+
             data: this.discharge,
           },
         ],
       }),
         (this.options = {
-          scales: {},
+          scales: {
+            scaleLabel: {},
+          },
           title: {
             display: true,
-            text: "全国",
+            text: "日本国内",
+            fontSize: 15,
+            padding: 0,
           },
           legend: {
             display: true,

@@ -40,7 +40,7 @@ export default {
         this.datacollection.datasets.push({
           label: `${pref.prefecture}(累計)`,
           backgroundColor: this.randomColor(),
-          borderWidth: 1,
+          borderWidth: 0,
           borderColor: "black",
           pointBorderColor: "glay",
           data: [
@@ -64,8 +64,7 @@ export default {
           {
             label: "全国(累計)",
             backgroundColor: this.randomColor(),
-            borderWidth: 1,
-            borderColor: "black",
+            borderWidth: 0,
             data: [
               total.cases,
               total.hospitalize,
@@ -77,8 +76,7 @@ export default {
           {
             label: `${prefData.prefecture}(累計)`,
             backgroundColor: this.randomColor(),
-            borderWidth: 1,
-            borderColor: "black",
+            borderWidth: 0,
             data: [
               prefData["cases"].today,
               prefData["hospitalize"].today,
@@ -111,6 +109,10 @@ export default {
         },
         legend: {
           display: true,
+          labels: {
+          }
+        },
+        tooltips: {
         },
         responsive: true,
         maintainAspectRatio: false,

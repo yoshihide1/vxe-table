@@ -129,6 +129,9 @@ export default {
 </script>
 
 <style>
+.font__unit{
+  font-size: 0.7rem;
+}
 .header__title {
   font-size: 1.1rem;
 }

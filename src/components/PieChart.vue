@@ -37,10 +37,14 @@ export default {
           title: {
             display: true,
             text: total.prefecture,
+            fontSize: 15,
+            padding: 0
           },
           legend: {
             display: true,
+            labels: {},
           },
+          tooltips: {},
           responsive: true,
           maintainAspectRatio: false,
         });
