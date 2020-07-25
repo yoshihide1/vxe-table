@@ -19,14 +19,20 @@
         </template>
         <template #cases="{item}">
           <td>
-            {{item.cases}}
-            <span class="table__plus">{{ item.casesRatio}}</span>
+            {{ item.cases }}
+            <span
+              class="table__plus"
+              :style="{color: numCheck(item.casesRatio)}"
+            >{{ item.casesRatio }}</span>
           </td>
         </template>
         <template #hospitalize="{item}">
           <td>
-            {{item.hospitalize}}
-            <span class="table__plus">{{ item.hospitalizeRatio}}</span>
+            {{ item.hospitalize }}
+            <span
+              class="table__plus"
+              :style="{color: numCheck(item.hospitalizeRatio)}"
+            >{{ item.hospitalizeRatio }}</span>
           </td>
         </template>
         <template #discharge="{item}">
@@ -38,13 +44,19 @@
         <template #severe="{item}">
           <td>
             {{ item.severe }}
-            <span class="table__plus">{{ item.severeRatio }}</span>
+            <span
+              class="table__plus"
+              :style="{color: numCheck(item.severeRatio)}"
+            >{{ item.severeRatio }}</span>
           </td>
         </template>
         <template #deaths="{item}">
           <td>
             {{ item.deaths }}
-            <span class="table__plus">{{ item.deathsRatio }}</span>
+            <span
+              class="table__plus"
+              :style="{color: numCheck(item.deathsRatio)}"
+            >{{ item.deathsRatio }}</span>
           </td>
         </template>
         <template #pcr="{item}">
@@ -70,21 +82,21 @@ export default {
       tableData: [],
       fields: [
         { key: "checkbox", label: "", sorter: false },
-        { key: "prefecture", label: "都道府県", sorter: false },
-        { key: "cases", label: "感染者", _style: "min-width:70px" },
-        { key: "hospitalize", label: "入院中", _style: "min-width:70px" },
-        { key: "discharge", label: "退院", _style: "min-width:70px" },
-        { key: "severe", label: "重症", _style: "min-width:70px" },
-        { key: "deaths", label: "死者", _style: "min-width:70px" },
-        { key: "pcr", label: "PCR検査", _style: "min-width:70px" },
-        { key: "population", label: "人口", _style: "min-width:70px" },
+        { key: "prefecture", label: "都道府県", sorter: false, _style: "min-width:95px"  },
+        { key: "cases", label: "感染者", _style: "min-width:80px" },
+        { key: "hospitalize", label: "入院中", _style: "min-width:80px" },
+        { key: "discharge", label: "退院", _style: "min-width:80px" },
+        { key: "severe", label: "重症", _style: "min-width:80px" },
+        { key: "deaths", label: "死者", _style: "min-width:80px" },
+        { key: "pcr", label: "PCR検査", _style: "min-width:95px" },
+        { key: "population", label: "人口", _style: "min-width:80px" },
       ],
     };
   },
 
   computed: {
     ...mapState(["allCoronaData"]),
-    ...mapGetters(["prefDataFilter", "comparison"]),
+    ...mapGetters(["prefDataFilter", "comparison", "numCheck"]),
   },
   watch: {
     chartSet() {
@@ -129,16 +141,12 @@ export default {
 </script>
 
 <style>
-.test {
-  font-size: 2rem;
-}
 .position-relative th {
   color: white;
   background-color: #3e3d37;
 }
 .table__plus {
   font-size: 0.7rem;
-  color: red;
 }
 .table__good {
   font-size: 0.7rem;

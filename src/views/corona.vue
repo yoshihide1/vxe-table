@@ -25,17 +25,16 @@
       </CCol>
     </CRow>
     <CRow>
-
-        <CCol col="12" sm="5">
-      <CCard bodyWrapper>
-        <lineChartPrefPcr class="chart__pref" />
-      </CCard>
-    </CCol>
-        <CCol col="12" sm="7">
-      <CCard bodyWrapper>
-        <lineChartPref class="chart__pref" />
-      </CCard>
-    </CCol>
+      <CCol col="12" sm="5">
+        <CCard bodyWrapper>
+          <lineChartPrefPcr class="chart__pref" />
+        </CCard>
+      </CCol>
+      <CCol col="12" sm="7">
+        <CCard bodyWrapper>
+          <lineChartPref class="chart__pref" />
+        </CCard>
+      </CCol>
     </CRow>
     <CRow>
       <CCol col="12" sm="8">
@@ -84,12 +83,7 @@ export default {
     updated,
   },
   data() {
-    return {
-      pc: false,
-      sp: false,
-      repkaceWidth: 768,
-      windowSize: 0,
-    };
+    return {};
   },
   watch: {},
   created() {

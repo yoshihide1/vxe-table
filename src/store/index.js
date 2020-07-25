@@ -44,11 +44,13 @@ export default new Vuex.Store({
       let res = await axios.get("https://node-api-corona.herokuapp.com/api/v1/pref/", { params })
       commit('byPref', res.data)
     },
+    
     async coronaTotal({ dispatch, commit }) {
       let res = await axios.get("https://node-api-corona.herokuapp.com/api/v1/total/")
       commit('ratio', res.data)
       dispatch('coronaTwoDay')
     },
+
     async coronaTwoDay({ commit }) {
       let res = await axios.get("https://node-api-corona.herokuapp.com/api/v1/2day/")
       let today = []
@@ -84,17 +86,30 @@ export default new Vuex.Store({
     prefDataFilter: (state) => (id) => {
       return state.allCoronaData.filter(pref => pref.pref_id == id)
     },
+
     numComma: () => (num) => {
       return String(num).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,")
     },
+
+    numCheck: () => (num) => {
+      if (num > 0) {
+        return "red";
+      } else {
+        return "blue";
+      }
+    },
+
     comparison: () => (data, value) => {
       let name = value;
       let today = data[name].today
       let yesterday = data[name].yesterday
-      if ((today - yesterday) >= 0) {
-        return `+${today - yesterday}`
+      let num = today - yesterday
+      if (num === 0) {
+        return `±${num}`
+      } else if (num > 0) {
+        return `+${num}`
       } else {
-        return `${today - yesterday}`
+        return num
       }
     }
   },

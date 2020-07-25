@@ -88,25 +88,7 @@ export default {
   },
   computed: {
     ...mapState(["ratio"]),
-    ...mapGetters(["numComma"]),
-    datasetsPie() {
-      return [
-        {
-          data: [this.comparisonCases, this.comparisonPcr],
-          borderWidth: 1,
-          backgroundColor: ["#ff1e1e", "blue"],
-          label: "感染者",
-        },
-      ];
-    },
-    options() {
-      return {
-        maintainAspectRatio: false,
-        legend: {
-          display: false,
-        },
-      };
-    },
+    ...mapGetters(["numComma", "numCheck"]),
   },
   watch: {
     ratio() {

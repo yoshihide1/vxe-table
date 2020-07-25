@@ -55,7 +55,6 @@ export default {
   },
   methods: {
     prefFilter(pref) {
-      console.log(pref);
       let now =
         pref["cases"].today -
         pref["discharge"].today -
