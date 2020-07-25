@@ -34,7 +34,8 @@
         rightFooter="死者"
         :leftHeader="comparisonDeaths"
         leftFooter="前日比"
-        class="w-100 death"
+        id="death"
+        class="w-100 death__plus"
       >
         <div class="col py-3">
           <p>
@@ -114,7 +115,14 @@ export default {
     comparison(today, yesterday) {
       this.comparisonPcr = `+${this.numComma(today.pcr - yesterday.pcr)}`;
       this.comparisonCases = `+${this.numComma(today.cases - yesterday.cases)}`;
-      this.comparisonDeaths = `+${today.deaths - yesterday.deaths}`;
+      let num = today.deaths - yesterday.deaths-2;
+      if (num > 0) {
+        this.comparisonDeaths = `+${num}`;
+      } else {
+        this.comparisonDeaths = `±${num}`;
+        let d = document.getElementById("death");
+        d.classList.replace("death__plus", "death");
+      }
     },
   },
 };
@@ -133,7 +141,10 @@ export default {
 .case .col:nth-child(3) .text-value-lg {
   color: blue;
 }
-.death .col:nth-child(3) .text-value-lg {
+.death__plus .col:nth-child(3) .text-value-lg {
   color: #ff1e1e;
+}
+.death .col:nth-child(3) .text-value-lg {
+  color: blue;
 }
 </style>
