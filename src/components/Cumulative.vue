@@ -34,8 +34,8 @@
         rightFooter="死者"
         :leftHeader="comparisonDeaths"
         leftFooter="前日比"
-        id="death"
         class="w-100 death__plus"
+        ref="death"
       >
         <div class="col py-3">
           <p>
@@ -120,7 +120,7 @@ export default {
         this.comparisonDeaths = `+${num}`;
       } else {
         this.comparisonDeaths = `±${num}`;
-        let d = document.getElementById("death");
+        let d = this.$refs.death.$el;
         d.classList.replace("death__plus", "death");
       }
     },
@@ -129,7 +129,7 @@ export default {
 </script>
 
 <style>
-.font__unit{
+.font__unit {
   font-size: 0.7rem;
 }
 .header__title {

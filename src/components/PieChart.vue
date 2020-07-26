@@ -26,7 +26,7 @@ export default {
           {
             label: [""],
             backgroundColor: ["blue", "red"],
-            borderWidth: 0,
+            borderWidth: 2,
             pointBorderColor: "#249EBF",
             data: [total["pcr"].today, total["cases"].today],
           },
@@ -42,9 +42,7 @@ export default {
           },
           legend: {
             display: true,
-            labels: {},
           },
-          tooltips: {},
           responsive: true,
           maintainAspectRatio: false,
         });

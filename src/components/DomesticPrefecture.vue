@@ -7,7 +7,8 @@
         :rightFooter="'前日比：' + comparisonCases"
         :leftHeader="' 人口の ' + prefNowPercentage"
         :leftFooter="prefName + 'の人口' + prefPopulation"
-        class="w-100 case__small"
+        class="w-100 case__plus"
+        ref="case"
       >
         <span class="py-4 header__title">
           <select v-model="selected">
@@ -55,15 +56,25 @@ export default {
   },
   methods: {
     prefFilter(pref) {
-      let now =
-        pref["cases"].today -
-        pref["discharge"].today -
-        (pref["deaths"].today - pref["deaths"].yesterday);
+      let a = pref["cases"].today - pref["discharge"].today;
+      let b = pref["deaths"].today - pref["deaths"].yesterday;
+      let now = a - b;
+      let prefNow = this.comparison(this.prefData, "cases");
       let percentage = (now / pref["population"].today) * 100;
       this.prefNowCase = this.numComma(now);
       this.prefNowPercentage = Math.floor(percentage * 100000) / 100000 + "%";
       this.prefName = pref["prefecture"];
       this.prefPopulation = this.numComma(pref["population"].today);
+      this.check(prefNow);
+    },
+    check(data) {
+      let d = this.$refs.case.$el;
+      this.comparisonCases = data;
+      if (data > 0) {
+        d.classList.replace("case__minus", "case__plus");
+      } else {
+        d.classList.replace("case__plus", "case__minus");
+      }
     },
   },
 };

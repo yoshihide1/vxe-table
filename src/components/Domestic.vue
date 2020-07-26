@@ -7,7 +7,8 @@
         :rightFooter="'前日比：' + comparisonCases + '※感染者ー退院者'"
         :leftHeader="nowPercentage"
         :leftFooter="'国内の人口:' + population + '人'"
-        class="w-100 case__small"
+        class="w-100 case__plus"
+        ref="case"
       >
         <span class="py-4 header__title">
           感染者
@@ -31,7 +32,7 @@ export default {
   },
   computed: {
     ...mapState(["ratio"]),
-    ...mapGetters(["numComma"]),
+    ...mapGetters(["numComma", "numCheck"]),
   },
   watch: {
     ratio() {
@@ -49,7 +50,9 @@ export default {
       if (a - b >= 0) {
         this.comparisonCases = `+${a - b}`;
       } else {
-        this.comparisonCases = `-${a - b}`;
+        this.comparisonCases = `${a - b}`;
+        let d = this.$refs.case.$el
+        d.classList.replace("case__plus", "case__minus" )
       }
     },
   },
@@ -57,7 +60,10 @@ export default {
 </script>
 
 <style>
-.case__small .col:nth-child(1) .text-uppercase {
+.case__plus .col:nth-child(1) .text-uppercase {
   color: red !important;
+}
+.case__minus .col:nth-child(1) .text-uppercase {
+  color: blue !important;
 }
 </style>
