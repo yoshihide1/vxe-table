@@ -109,11 +109,9 @@ export default {
         },
         legend: {
           display: true,
-          labels: {
-          }
+          labels: {},
         },
-        tooltips: {
-        },
+        tooltips: {},
         responsive: true,
         maintainAspectRatio: false,
       };

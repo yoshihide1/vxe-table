@@ -46,7 +46,7 @@ export default {
       let b = yesterday.cases - yesterday.discharge - yesterday.deaths;
       let percentage = (a / today.population) * 100;
       this.nowCase = this.numComma(a);
-      this.nowPercentage = Math.floor(percentage * 100000) / 100000;
+      this.nowPercentage = String(Math.floor(percentage * 100000) / 100000);
       if (a - b >= 0) {
         this.comparisonCases = `+${a - b}人`;
       } else {

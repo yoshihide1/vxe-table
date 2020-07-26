@@ -108,8 +108,8 @@ export default {
       let death = (ratio.deaths / ratio.cases) * 100;
       let pcr = (ratio.pcr / ratio.population) * 100;
       let cases = (ratio.cases / ratio.population) * 100;
-      this.pcrPercentage = Math.floor(pcr * 10000) / 10000;
-      this.casesPercentage = Math.floor(cases * 10000) / 10000;
+      this.pcrPercentage = String(Math.floor(pcr * 10000) / 10000);
+      this.casesPercentage = String(Math.floor(cases * 10000) / 10000);
       this.deathPercentage = Math.floor(death * 100) / 100 + "%";
     },
     comparison(today, yesterday) {
