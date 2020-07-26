@@ -23,7 +23,7 @@ export default new Vuex.Store({
       state.allCoronaData = data
     },
     newPrefTotal(state, newPref) {//getters経由
-      state.prefData = newPref[0]
+      state.prefData = newPref
     },
     chart(state, prefData) {
       state.chartPlus = []
@@ -44,7 +44,7 @@ export default new Vuex.Store({
       let res = await axios.get("https://node-api-corona.herokuapp.com/api/v1/pref/", { params })
       commit('byPref', res.data)
     },
-    
+
     async coronaTotal({ dispatch, commit }) {
       let res = await axios.get("https://node-api-corona.herokuapp.com/api/v1/total/")
       commit('ratio', res.data)
@@ -84,7 +84,7 @@ export default new Vuex.Store({
   },
   getters: {
     prefDataFilter: (state) => (id) => {
-      return state.allCoronaData.filter(pref => pref.pref_id == id)
+      return state.allCoronaData.find(pref => pref.pref_id == id)
     },
 
     numComma: () => (num) => {

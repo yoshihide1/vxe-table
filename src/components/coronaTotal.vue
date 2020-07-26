@@ -82,7 +82,12 @@ export default {
       tableData: [],
       fields: [
         { key: "checkbox", label: "", sorter: false },
-        { key: "prefecture", label: "都道府県", sorter: false, _style: "min-width:95px"  },
+        {
+          key: "prefecture",
+          label: "都道府県",
+          sorter: false,
+          _style: "min-width:95px",
+        },
         { key: "cases", label: "感染者", _style: "min-width:80px" },
         { key: "hospitalize", label: "入院中", _style: "min-width:80px" },
         { key: "discharge", label: "退院", _style: "min-width:80px" },
@@ -131,8 +136,7 @@ export default {
     chartCheck(prefCode) {
       let pref = [];
       prefCode.forEach((code) => {
-        console.log(this.prefDataFilter(code));
-        pref.push(this.prefDataFilter(code)[0]);
+        pref.push(this.prefDataFilter(code));
       });
       this.$store.commit("chart", pref);
     },
