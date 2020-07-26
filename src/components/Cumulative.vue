@@ -7,7 +7,7 @@
         :rightFooter="cases"
         :leftHeader="comparisonPcr"
         :leftFooter="pcr"
-        class="w-100 case"
+        class="w-100 case font__symbol__h"
       >
         <div class="col py-3">
           <p>
@@ -31,10 +31,10 @@
       <CWidgetBrand
         color="info"
         :rightHeader="deaths"
-        rightFooter="死者"
+        :rightFooter="'死者' + ':' +deathPercentage"
         :leftHeader="comparisonDeaths"
         leftFooter="前日比"
-        class="w-100 death__plus"
+        class="w-100 death__plus font__symbol__h"
         ref="death"
       >
         <div class="col py-3">
@@ -54,7 +54,7 @@
         right-footer="感染者"
         :left-header="pcrPercentage"
         left-footer="PCR検査"
-        class="w-100"
+        class="w-100 font__symbol__cumulative"
       >
         <div class="col py-3">
           <p>
@@ -100,16 +100,16 @@ export default {
   },
   methods: {
     cumulative(ratio) {
-      this.pcr = `(${this.numComma(ratio.pcr)})`;
-      this.cases = `(${this.numComma(ratio.cases)})`;
+      this.pcr = `(${this.numComma(ratio.pcr)}人)`;
+      this.cases = `(${this.numComma(ratio.cases)}人)`;
       this.deaths = this.numComma(ratio.deaths);
     },
     percentage(ratio) {
       let death = (ratio.deaths / ratio.cases) * 100;
       let pcr = (ratio.pcr / ratio.population) * 100;
       let cases = (ratio.cases / ratio.population) * 100;
-      this.pcrPercentage = Math.floor(pcr * 10000) / 10000 + "%";
-      this.casesPercentage = Math.floor(cases * 10000) / 10000 + "%";
+      this.pcrPercentage = Math.floor(pcr * 10000) / 10000;
+      this.casesPercentage = Math.floor(cases * 10000) / 10000;
       this.deathPercentage = Math.floor(death * 100) / 100 + "%";
     },
     comparison(today, yesterday) {
@@ -149,5 +149,23 @@ export default {
 }
 .death .col:nth-child(3) .text-value-lg {
   color: blue;
+}
+.font__symbol__cumulative .col:nth-child(1) .text-value-lg::after {
+  content: "%";
+  font-size: 0.8rem;
+}
+.font__symbol__cumulative .col:nth-child(3) .text-value-lg::after {
+  content: "%";
+  font-size: 0.8rem;
+}
+.font__symbol__h .col:nth-child(1) .text-value-lg::after {
+  content: "人";
+  font-size: 0.8rem;
+  color: black;
+}
+.font__symbol__h .col:nth-child(3) .text-value-lg::after {
+  content: "人";
+  font-size: 0.8rem;
+  color: black;
 }
 </style>

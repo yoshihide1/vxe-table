@@ -7,7 +7,7 @@
         :rightFooter="'前日比：' + comparisonCases + '※感染者ー退院者'"
         :leftHeader="nowPercentage"
         :leftFooter="'国内の人口:' + population + '人'"
-        class="w-100 case__plus"
+        class="w-100 case__plus font__symbol__domestic"
         ref="case"
       >
         <span class="py-4 header__title">
@@ -46,13 +46,13 @@ export default {
       let b = yesterday.cases - yesterday.discharge - yesterday.deaths;
       let percentage = (a / today.population) * 100;
       this.nowCase = this.numComma(a);
-      this.nowPercentage = Math.floor(percentage * 100000) / 100000 + "%";
+      this.nowPercentage = Math.floor(percentage * 100000) / 100000;
       if (a - b >= 0) {
-        this.comparisonCases = `+${a - b}`;
+        this.comparisonCases = `+${a - b}人`;
       } else {
-        this.comparisonCases = `${a - b}`;
-        let d = this.$refs.case.$el
-        d.classList.replace("case__plus", "case__minus" )
+        this.comparisonCases = `${a - b}人`;
+        let d = this.$refs.case.$el;
+        d.classList.replace("case__plus", "case__minus");
       }
     },
   },
@@ -65,5 +65,13 @@ export default {
 }
 .case__minus .col:nth-child(1) .text-uppercase {
   color: blue !important;
+}
+.font__symbol__domestic .col:nth-child(1) .text-value-lg::after {
+  content: "人";
+  font-size: 0.8rem;
+}
+.font__symbol__domestic .col:nth-child(3) .text-value-lg::after {
+  content: "%";
+  font-size: 0.8rem;
 }
 </style>

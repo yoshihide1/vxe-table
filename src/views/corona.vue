@@ -95,7 +95,6 @@ export default {
 
 <style lang="scss">
 $info: #3e3d37;
-
 @import "~@coreui/coreui/scss/coreui";
 p {
   padding: 0;

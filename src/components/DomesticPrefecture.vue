@@ -4,10 +4,10 @@
       <CWidgetBrand
         color="info"
         :rightHeader="prefNowCase"
-        :rightFooter="'前日比：' + comparisonCases"
+        :rightFooter="'前日比：' + comparisonCases + '人'"
         :leftHeader="' 人口の ' + prefNowPercentage"
-        :leftFooter="prefName + 'の人口' + prefPopulation"
-        class="w-100 case__plus"
+        :leftFooter="prefName + 'の人口' + prefPopulation + '人'"
+        class="w-100 case__plus font__symbol__pref"
         ref="case"
       >
         <span class="py-4 header__title">
@@ -62,7 +62,7 @@ export default {
       let prefNow = this.comparison(this.prefData, "cases");
       let percentage = (now / pref["population"].today) * 100;
       this.prefNowCase = this.numComma(now);
-      this.prefNowPercentage = Math.floor(percentage * 100000) / 100000 + "%";
+      this.prefNowPercentage = Math.floor(percentage * 100000) / 100000;
       this.prefName = pref["prefecture"];
       this.prefPopulation = this.numComma(pref["population"].today);
       this.check(prefNow);
@@ -81,4 +81,12 @@ export default {
 </script>
 
 <style>
+.font__symbol__pref .col:nth-child(1) .text-value-lg::after {
+  content: "人";
+  font-size: 0.8rem;
+}
+.font__symbol__pref .col:nth-child(3) .text-value-lg::after {
+  content: "%";
+  font-size: 0.8rem;
+}
 </style>
