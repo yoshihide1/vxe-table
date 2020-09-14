@@ -92,11 +92,9 @@ export default new Vuex.Store({
     },
 
     numCheck: () => (num) => {
-      if (num > 0) {
-        return "red";
-      } else {
-        return "blue";
-      }
+      if (num > 0) return "red";
+      if (num < 0) return "blue";
+      return "green"
     },
 
     comparison: () => (data, value) => {
@@ -104,15 +102,9 @@ export default new Vuex.Store({
       let today = data[name].today
       let yesterday = data[name].yesterday
       let num = today - yesterday
-      if (num === 0) {
-        return `±${num}`
-      } else if (num > 0) {
-        return `+${num}`
-      } else {
-        return num
-      }
+      if (num === 0) return `±${num}`
+      if (num > 0) return `+${num}`
+      return num
     }
   },
-  modules: {
-  }
 })
