@@ -97,6 +97,11 @@ export default new Vuex.Store({
       return "green"
     },
 
+    dischargeAndPcr: () => (num) => {
+      if (num > 0) return "blue"
+      return "green"
+    },
+
     comparison: () => (data, value) => {
       let name = value;
       let today = data[name].today

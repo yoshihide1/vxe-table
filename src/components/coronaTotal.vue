@@ -38,7 +38,10 @@
         <template #discharge="{item}">
           <td>
             {{ item.discharge }}
-            <span class="table__good">{{ item.dischargeRatio }}</span>
+            <span
+              class="table__plus"
+              :style="{color: dischargeAndPcr(item.dischargeRatio)}"
+            >{{ item.dischargeRatio }}</span>
           </td>
         </template>
         <template #severe="{item}">
@@ -62,7 +65,10 @@
         <template #pcr="{item}">
           <td>
             {{ item.pcr }}
-            <span class="table__good">{{ item.pcrRatio }}</span>
+            <span
+              class="table__plus"
+              :style="{color: dischargeAndPcr(item.pcrRatio)}"
+            >{{item.pcrRatio }}</span>
           </td>
         </template>
         <template #population="{item}">
@@ -101,7 +107,12 @@ export default {
 
   computed: {
     ...mapState(["allCoronaData"]),
-    ...mapGetters(["prefDataFilter", "comparison", "numCheck"]),
+    ...mapGetters([
+      "prefDataFilter",
+      "comparison",
+      "numCheck",
+      "dischargeAndPcr",
+    ]),
   },
   watch: {
     chartSet() {
@@ -152,8 +163,8 @@ export default {
 .table__plus {
   font-size: 0.7rem;
 }
-.table__good {
+/* .table__good {
   font-size: 0.7rem;
   color: blue;
-}
+} */
 </style>
