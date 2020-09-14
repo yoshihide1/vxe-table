@@ -113,23 +113,23 @@ export default {
   },
   methods: {
     coronaTable(data) {
-      for (let i in data) {
+      for (let i of data) {
         this.tableData.push({
-          pref_id: Number(data[i].pref_id),
-          prefecture: data[i].prefecture,
-          cases: Number(data[i]["cases"].today),
-          casesRatio: this.comparison(data[i], "cases"),
-          hospitalize: Number(data[i]["hospitalize"].today),
-          hospitalizeRatio: this.comparison(data[i], "hospitalize"),
-          discharge: Number(data[i]["discharge"].today),
-          dischargeRatio: this.comparison(data[i], "discharge"),
-          severe: Number(data[i]["severe"].today),
-          severeRatio: this.comparison(data[i], "severe"),
-          deaths: Number(data[i]["deaths"].today),
-          deathsRatio: this.comparison(data[i], "deaths"),
-          pcr: Number(data[i]["pcr"].today),
-          pcrRatio: this.comparison(data[i], "pcr"),
-          population: Number(data[i]["population"].today),
+          pref_id: Number(i.pref_id),
+          prefecture: i.prefecture,
+          cases: Number(i["cases"].today),
+          casesRatio: this.comparison(i, "cases"),
+          hospitalize: Number(i["hospitalize"].today),
+          hospitalizeRatio: this.comparison(i, "hospitalize"),
+          discharge: Number(i["discharge"].today),
+          dischargeRatio: this.comparison(i, "discharge"),
+          severe: Number(i["severe"].today),
+          severeRatio: this.comparison(i, "severe"),
+          deaths: Number(i["deaths"].today),
+          deathsRatio: this.comparison(i, "deaths"),
+          pcr: Number(i["pcr"].today),
+          pcrRatio: this.comparison(i, "pcr"),
+          population: Number(i["population"].today),
         });
       }
     },
