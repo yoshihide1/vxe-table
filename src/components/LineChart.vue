@@ -49,7 +49,7 @@ export default {
             borderWidth: 3,
             borderColor: "#D7366A",
             hitRadius: 5,
-
+            radius: 2,
             data: this.cases,
           },
           {
@@ -60,6 +60,7 @@ export default {
             borderWidth: 3,
             borderColor: "#F1CD42",
             hitRadius: 5,
+            radius: 2,
             data: this.hospitalize,
           },
           {
@@ -70,7 +71,7 @@ export default {
             borderWidth: 3,
             borderColor: "#2BBA2B",
             hitRadius: 5,
-
+            radius: 2,
             data: this.discharge,
           },
         ],

@@ -64,19 +64,19 @@ export default new Vuex.Store({
       }
       let allData = []
       for (let x = 0; x < today.length; x++) {
-        let todayData = today[x]
-        let yesterdayData = yesterday[x]
+        let t = today[x]
+        let y = yesterday[x]
         allData.push({
-          pref_id: todayData['pref_id'],
-          prefecture: todayData['prefecture'],
-          cases: { today: todayData['cases'], yesterday: yesterdayData['cases'] },
-          hospitalize: { today: todayData['hospitalize'], yesterday: yesterdayData['hospitalize'] },
-          discharge: { today: todayData['discharge'], yesterday: yesterdayData['discharge'] },
-          deaths: { today: todayData['deaths'], yesterday: yesterdayData['deaths'] },
-          severe: { today: todayData['severe'], yesterday: yesterdayData['severe'] },
-          pcr: { today: todayData['pcr'], yesterday: yesterdayData['pcr'] },
-          population: { today: todayData['population'], yesterday: yesterdayData['population'] },
-          created_at: { today: todayData['created_at'], yesterday: yesterdayData['created_at'] }
+          pref_id: t['pref_id'],
+          prefecture: t['prefecture'],
+          cases: { today: t['cases'], yesterday: y['cases'] },
+          hospitalize: { today: t['hospitalize'], yesterday: y['hospitalize'] },
+          discharge: { today: t['discharge'], yesterday: y['discharge'] },
+          deaths: { today: t['deaths'], yesterday: y['deaths'] },
+          severe: { today: t['severe'], yesterday: y['severe'] },
+          pcr: { today: t['pcr'], yesterday: y['pcr'] },
+          population: { today: t['population'], yesterday: y['population'] },
+          created_at: { today: t['created_at'], yesterday: y['created_at'] }
         })
       }
       commit("allPrefectures", allData)

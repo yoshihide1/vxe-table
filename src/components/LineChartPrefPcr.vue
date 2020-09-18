@@ -46,7 +46,7 @@ export default {
             backgroundColor: "rgba(0,0,255,0.1)",
             borderWidth: 2,
             borderColor: "#673FC4",
-            radius: 2,
+            radius: 1,
             hitRadius: 3,
             data: this.pcr,
           },
