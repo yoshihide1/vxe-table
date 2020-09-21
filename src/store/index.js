@@ -103,11 +103,8 @@ export const getters = {
     return "green"
   },
 
-  comparison: () => (data, value) => {
-    let name = value;
-    let today = data[name].today
-    let yesterday = data[name].yesterday
-    let num = today - yesterday
+  comparison: () => (data, item) => {
+    const num = data[item].today - data[item].yesterday
     if (num === 0) return `±${num}`
     if (num > 0) return `+${num}`
     return num
