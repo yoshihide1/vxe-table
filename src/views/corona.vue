@@ -55,7 +55,7 @@
 </template>
 
 <script>
-import coronaTotal from "@/components/coronaTotal";
+import coronaTotal from "@/components/CoronaTotal";
 import cumulative from "@/components/Cumulative";
 import domestic from "@/components/Domestic";
 import domesticPrefecture from "@/components/DomesticPrefecture";
@@ -66,7 +66,7 @@ import lineChartPcr from "@/components/LineChartPcr";
 import lineChartPref from "@/components/LineChartPref";
 import lineChartPrefPcr from "@/components/LineChartPrefPcr";
 
-import updated from "@/components/updated";
+import updated from "@/components/Updated";
 
 export default {
   components: {
