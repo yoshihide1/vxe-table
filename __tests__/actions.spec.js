@@ -15,9 +15,7 @@ jest.mock("axios", () => ({
 describe('api test', () => {
   it.skip('byPrefecturesのテスト', async () => {
     const commit = jest.fn()
-    console.log("commit:",{commit})
     const req = 13
-    console.log(req)
     await actions.byPrefecture({commit}, req)
     expect(url).toEqual(`https://node-api-corona.herokuapp.com/api/v1/pref/`)
     expect(body).toEqual({params:{id: req}})
@@ -27,6 +25,5 @@ describe('api test', () => {
     const commit = jest.fn()
     await actions.coronaTwoDay({commit})
     expect(url).toEqual('https://node-api-corona.herokuapp.com/api/v1/2day/')
-    console.log('twoDay',body)
   })
 })
