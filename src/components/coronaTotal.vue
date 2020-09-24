@@ -140,7 +140,7 @@ export default {
       }
     },
     chartCheck(prefCode) {
-      let pref = [];
+      const pref = [];
       prefCode.forEach((code) => {
         pref.push(this.prefDataFilter(code));
       });

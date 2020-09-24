@@ -56,11 +56,11 @@ export default {
   },
   methods: {
     prefFilter(pref) {
-      let a = pref["cases"].today - pref["discharge"].today;
-      let b = pref["deaths"].today - pref["deaths"].yesterday;
-      let now = a - b;
-      let prefNow = this.comparison(this.prefData, "cases");
-      let percentage = (now / pref["population"].today) * 100;
+      const a = pref["cases"].today - pref["discharge"].today;
+      const b = pref["deaths"].today - pref["deaths"].yesterday;
+      const now = a - b;
+      const prefNow = this.comparison(this.prefData, "cases");
+      const percentage = (now / pref["population"].today) * 100;
       this.prefNowCase = this.numComma(now);
       this.prefNowPercentage = Math.floor(percentage * 100000) / 100000;
       this.prefName = pref["prefecture"];
@@ -68,7 +68,7 @@ export default {
       this.check(prefNow);
     },
     check(data) {
-      let d = this.$refs.case.$el;
+      const d = this.$refs.case.$el;
       this.comparisonCases = data;
       if (data > 0) {
         d.classList.replace("case__minus", "case__plus");

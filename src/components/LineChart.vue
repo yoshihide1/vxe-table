@@ -27,8 +27,8 @@ export default {
       this.cases = [];
       this.discharge = [];
       this.date = [];
-      let data1 = this.ratio.slice(0, this.ratio.length - 1);
-      let data2 = this.ratio.slice(1, this.ratio.length);
+      const data1 = this.ratio.slice(0, this.ratio.length - 1);
+      const data2 = this.ratio.slice(1, this.ratio.length);
       for (let i in data1) {
         this.date.unshift(data1[i].date.slice(5).replace("-", "月") + "日");
         this.cases.unshift(data1[i].cases - data2[i].cases);

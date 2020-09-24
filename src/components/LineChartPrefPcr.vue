@@ -23,8 +23,8 @@ export default {
     setPref() {
       this.date = [];
       this.pcr = [];
-      let data1 = this.byPrefData.slice(1, this.byPrefData.length);
-      let data2 = this.byPrefData.slice(0, this.byPrefData.length - 1);
+      const data1 = this.byPrefData.slice(1, this.byPrefData.length);
+      const data2 = this.byPrefData.slice(0, this.byPrefData.length - 1);
       for (let i in data1) {
         this.date.push(this.dateFormat(data1[i].created_at));
         this.pcr.push(data1[i].pcr - data2[i].pcr);

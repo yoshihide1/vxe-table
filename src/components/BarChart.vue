@@ -24,12 +24,12 @@ export default {
   },
   methods: {
     randomColor() {
-      let max = 255;
-      let min = 0;
-      let color = [];
+      const max = 255;
+      const min = 0;
+      const color = [];
       let i = 0;
       while (i < 3) {
-        let colorCode = Math.floor(Math.random() * (max + 1 - min)) + min;
+        const colorCode = Math.floor(Math.random() * (max + 1 - min)) + min;
         color.push(colorCode);
         i++;
       }
@@ -56,8 +56,8 @@ export default {
     },
     totalAndPref(pref) {
       this.datacollection.datasets = [];
-      let total = this.ratio[0];
-      let prefData = this.prefData;
+      const total = this.ratio[0];
+      const prefData = this.prefData;
       this.datacollection = {
         labels: ["感染者", "入院中", "退院", "重症", "死者"],
         datasets: [
