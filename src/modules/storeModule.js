@@ -24,7 +24,7 @@ export const state = {
     "prefecture": "東京都",
     "cases": "24046",
     "population": "13942856",
-    "deaths": "390",
+    "deaths": "391",
     "pcr": "411359",
     "hospitalize": "2278",
     "severe": "25",
