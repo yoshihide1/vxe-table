@@ -1,41 +1,46 @@
-import { createLocalVue, shallowMount } from '@vue/test-utils'
+import { mount, createLocalVue, shallowMount } from '@vue/test-utils'
 import Vuex from 'vuex'
-import { initStore } from '../src/modules/storeModule'
-import Cumulative from '../src/components/Cumulative.vue'
-import axios from 'axios'
+import initStore from '@/modules/storeModule.js'
+import Cumulative from '@/components/Cumulative.vue'
 
-let store
-let localVue
-let wrapper
 
-beforeEach(() => {
-  localVue = createLocalVue()
-  localVue.use(Vuex)
-  store = new Vuex.Store(initStore())
-  wrapper = shallowMount(Cumulative, {store, localVue})
-})
+const localVue = createLocalVue()
+localVue.use(Vuex)
 
 describe('Cumulative.vue', () => {
-  const methods = Cumulative.methods
-  it('sample', async() => {
-    await wrapper.setData({pcr: 100})
-    // console.log(wrapper.vm.count)
-    // console.log(wrapper.vm.pcr)
-    // expect(methods.).toBe(408414)
-    // console.log(store.state.ratio)
+  let getters
+  let store
+  let wrapper
+  let vm
+
+  beforeEach(() => {
+    getters = {
+      numComma: jest.fn()
+    }
+    store = new Vuex.Store({
+      state: {
+        ratio:{
+        pref_id: "13",
+        prefecture: "東京都",
+        cases: "23828",
+        population: "13942856",
+        deaths: "390",
+        pcr: "408414",
+        hospitalize: "2230",
+        severe: "26",
+        discharge: "21208",
+        created_at: "20200919"
+    }},
+      getters
+    })
+    wrapper = shallowMount(Cumulative, { store, localVue})
+    vm = wrapper.vm
   })
-})
-
-import Cumulative from '../src/components/Cumilative'
-import {mount} from '@vue/test-utils'
-describe('Cumulative.vue', () => {
-  it('表示の確認', () => {
-   const wrapper = mount(Cumulative)
-   const result = wrapper.vm.methods.cumulative({ratio: {
-      pcr: 111,
-      cases: 222,
-      deaths:333
-    }})
-    console.log(result)
+  it('%表示が正しいか', () => {
+    vm.percentage(vm.$store.state.ratio)
+    expect(vm.pcrPercentage).toBe('2.9291')
+    expect(vm.casesPercentage).toBe('0.1708')
+    expect(vm.deathPercentage).toBe('1.63%')
+    console.log("store",vm.$store.state)
   })
 })
