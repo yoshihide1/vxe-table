@@ -103,6 +103,7 @@ export default {
       this.pcr = `(${this.numComma(ratio.pcr)}人)`;
       this.cases = `(${this.numComma(ratio.cases)}人)`;
       this.deaths = this.numComma(ratio.deaths);
+      return this.pcr
     },
     percentage(ratio) {
       const death = (ratio.deaths / ratio.cases) * 100;

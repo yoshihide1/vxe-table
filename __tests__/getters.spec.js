@@ -1,5 +1,5 @@
-import { getters, actions } from '../src/store/index.js'
-import prefData from '../src/assets/testData.json'
+import { getters } from '../src/store/index.js'
+import testData from '../src/assets/testData.json'
 
 
 describe('getters', () => {
@@ -7,7 +7,7 @@ describe('getters', () => {
     allCoronaData: []
   }
   it('都道府県別を抽出', () => {
-    state.allCoronaData = prefData
+    state.allCoronaData = testData
     const prefFilter = getters.prefDataFilter(state)
     expect(prefFilter(13)).toEqual({
       pref_id: 13,
@@ -26,10 +26,10 @@ describe('getters', () => {
   })
 
   it('カンマのチェック', () => {
-    const comma = getters.numComma()
-    expect(comma(1000000)).toBe('1,000,000')
-    expect(comma(1000)).toBe('1,000')
-    expect(comma(100)).toBe('100')
+    const numComma = getters.numComma()
+    expect(numComma(1000000)).toBe('1,000,000')
+    expect(numComma(1000)).toBe('1,000')
+    expect(numComma(100)).toBe('100')
   })
 
   it('テーブル部分の退院数、PCR検査数以外の文字色チェック', () => {
