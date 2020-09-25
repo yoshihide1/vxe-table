@@ -1,7 +1,7 @@
 import { actions, mutations, getters } from '../store/index'
 import { cloneDeep } from 'lodash'
 
-const state = {
+export const state = {
   allCoronaData: [],
   prefData: [],
   chartPlus: [],

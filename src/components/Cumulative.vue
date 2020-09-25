@@ -121,7 +121,7 @@ export default {
       } else {
         this.comparisonDeaths = `±${num}`;
         const d = this.$refs.death.$el;
-        d.classList.replace("death__plus", "death");
+        d.classList.replace("death__plus", "death");//testに引っかかる
       }
     },
   },
