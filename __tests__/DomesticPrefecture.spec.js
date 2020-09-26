@@ -3,9 +3,11 @@ import Vuex from 'vuex'
 import { getters } from '@/store/index.js'
 import { state } from '@/modules/storeModule.js'
 import DomesticPrefecture from '@/components/DomesticPrefecture.vue'
+import CoreuiVue from '@coreui/vue';
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
+localVue.use(CoreuiVue);
 
 describe('DomesticPrefecture.vue', () => {
   let store

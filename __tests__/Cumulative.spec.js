@@ -3,10 +3,12 @@ import Vuex from 'vuex'
 import { getters } from '@/store/index.js'
 import { state } from '@/modules/storeModule.js'
 import Cumulative from '@/components/Cumulative.vue'
+import CoreuiVue from '@coreui/vue';
 
 
 const localVue = createLocalVue()
 localVue.use(Vuex)
+localVue.use(CoreuiVue);
 
 describe('Cumulative.vue', () => {
   let store
