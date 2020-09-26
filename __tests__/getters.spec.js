@@ -52,4 +52,9 @@ describe('getters', () => {
     expect(numCheck(num1, 'item')).toBe(`+${num1.item.today - num1.item.yesterday}`)
     expect(numCheck(num2, 'item')).toBe(`±${num2.item.today - num2.item.yesterday}`)
   })
+
+  it('日付の表示', () => {
+    const dateFormat = getters.dateFormat()
+    expect(dateFormat('20201001')).toBe('10月01日')
+  })
 })
