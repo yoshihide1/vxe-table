@@ -23,7 +23,7 @@ export default {
     },
   },
   methods: {
-    setRatio() {
+    setRatio(test = false) {
       this.cases = [];
       this.discharge = [];
       this.date = [];
@@ -35,6 +35,7 @@ export default {
         this.discharge.unshift(data1[i].discharge - data2[i].discharge);
         this.hospitalize.unshift(data1[i].hospitalize - data2[i].hospitalize);
       }
+      if (test) return;
       this.totalChart();
     },
     totalChart() {

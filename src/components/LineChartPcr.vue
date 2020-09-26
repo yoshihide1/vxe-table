@@ -21,7 +21,7 @@ export default {
     },
   },
   methods: {
-    setRatio() {
+    setRatio(test = false) {
       this.pcr = [];
       this.date = [];
       const data1 = this.ratio.slice(0, this.ratio.length - 1);
@@ -31,6 +31,7 @@ export default {
         this.pcr.unshift(data1[i].pcr - data2[i].pcr);
         this.cases.unshift(data1[i].cases - data2[i].cases);
       }
+      if (test) return
       this.totalChart();
     },
     totalChart() {

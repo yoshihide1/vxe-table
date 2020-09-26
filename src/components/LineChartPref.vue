@@ -1,10 +1,11 @@
 <script>
 import { Line } from "vue-chartjs";
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
   extends: Line,
   computed: {
     ...mapState(["byPrefData"]),
+    ...mapGetters(["dateFormat"]),
   },
   data() {
     return {
@@ -23,7 +24,7 @@ export default {
     },
   },
   methods: {
-    setPref(test = "") {
+    setPref(test = false) {
       this.date = [];
       this.cases = [];
       this.discharge = [];
@@ -36,13 +37,8 @@ export default {
         this.discharge.push(data1[i].discharge - data2[i].discharge);
         this.hospitalize.push(data1[i].hospitalize - data2[i].hospitalize);
       }
-      if(test) return
+      if (test) return;
       this.totalChart();
-    },
-    dateFormat(value) {
-      const a = value.slice(4, 6);
-      const b = value.slice(6, 9);
-      return `${a}月${b}日`;
     },
     totalChart() {
       (this.datacollection = {
