@@ -108,6 +108,12 @@ export const getters = {
     if (num === 0) return `±${num}`
     if (num > 0) return `+${num}`
     return num
+  },
+
+  dateFormat: () => (date) => {
+    const a = date.slice(4, 6)
+    const b = date.slice(6, 9)
+    return `${a}月${b}日`;
   }
 }
 export default new Vuex.Store({
