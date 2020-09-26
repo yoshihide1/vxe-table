@@ -23,7 +23,7 @@ export default {
     },
   },
   methods: {
-    setPref() {
+    setPref(test = "") {
       this.date = [];
       this.cases = [];
       this.discharge = [];
@@ -36,6 +36,7 @@ export default {
         this.discharge.push(data1[i].discharge - data2[i].discharge);
         this.hospitalize.push(data1[i].hospitalize - data2[i].hospitalize);
       }
+      if(test) return
       this.totalChart();
     },
     dateFormat(value) {

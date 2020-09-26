@@ -2,7 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import store from './store'
-import 'chart.js'
+// import 'chart.js'
 
 import { freeSet } from '@coreui/icons'
 import CoreuiVueCharts from '@coreui/vue-chartjs'

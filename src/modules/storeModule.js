@@ -68,7 +68,54 @@ export const state = {
       created_at: "20200920"
     },
   ],
-  byPrefData: []
+  byPrefData: [
+    {
+      "pref_id": "23",
+      "cases": "4999",
+      "pcr": "67306",
+      "hospitalize": "368",
+      "discharge": "4554",
+      "created_at": "20200919",
+      "prefecture": "愛知県"
+    },
+    {
+      "pref_id": "23",
+      "cases": "5039",
+      "pcr": "68206",
+      "hospitalize": "377",
+      "discharge": "4584",
+      "created_at": "20200920",
+      "prefecture": "愛知県"
+    },
+    {
+      "pref_id": "23",
+      "cases": "5070",
+      "pcr": "68983",
+      "hospitalize": "393",
+      "discharge": "4598",
+      "created_at": "20200921",
+      "prefecture": "愛知県"
+    },
+    {
+      "pref_id": "23",
+      "cases": "5103",
+      "pcr": "69242",
+      "hospitalize": "410",
+      "discharge": "4612",
+      "created_at": "20200922",
+      "prefecture": "愛知県"
+    },
+    {
+      "pref_id": "23",
+      "cases": "5122",
+      "pcr": "69521",
+      "hospitalize": "408",
+      "discharge": "4633",
+      "created_at": "20200923",
+      "prefecture": "愛知県"
+    },
+
+  ]
 }
 
 export const initStore = () => {
