@@ -12,7 +12,9 @@
       >
         <span class="py-4 header__title">
           <select v-model="selected">
-            <option v-for="pref in prefs" :key="pref.code" :value="pref.code">{{ pref.name }}</option>
+            <option v-for="pref in prefs" :key="pref.code" :value="pref.code">
+              {{ pref.name }}
+            </option>
           </select>
         </span>
         <span class="header__title__sub">(現在)</span>
@@ -55,7 +57,8 @@ export default {
     },
   },
   methods: {
-    prefFilter(pref) {
+    //test>test用の引数
+    prefFilter(pref, test = "") {
       const a = pref["cases"].today - pref["discharge"].today;
       const b = pref["deaths"].today - pref["deaths"].yesterday;
       const now = a - b;
@@ -65,12 +68,14 @@ export default {
       this.prefNowPercentage = Math.floor(percentage * 100000) / 100000;
       this.prefName = pref["prefecture"];
       this.prefPopulation = this.numComma(pref["population"].today);
+      if (test) return; //test時ここで止める為
       this.check(prefNow);
     },
-    check(data) {
-      const d = this.$refs.case.$el;
+    check(data, test = "") {
       this.comparisonCases = data;
-      if (data > 0) {
+      if (test) return;
+      const d = this.$refs.case.$el;
+      if (this.comparisonCases > 0) {
         d.classList.replace("case__minus", "case__plus");
       } else {
         d.classList.replace("case__plus", "case__minus");
