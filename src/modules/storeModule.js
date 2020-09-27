@@ -52,7 +52,7 @@ export const state = {
       "hospitalize": "2375",
       "severe": "27",
       "discharge": "21540",
-      "created_at": "20200922",
+      "date": "2020-09-22",
       "prefecture": "東京都"
     },
     {
@@ -64,7 +64,7 @@ export const state = {
       "hospitalize": "2346",
       "severe": "27",
       "discharge": "21472",
-      "created_at": "20200921",
+      "date": "2020-09-21",
       "prefecture": "東京都"
     },
     {
@@ -76,7 +76,7 @@ export const state = {
       "hospitalize": "2278",
       "severe": "25",
       "discharge": "21378",
-      "created_at": "20200920",
+      "date": "2020-09-20",
       "prefecture": "東京都"
     },
     {
@@ -88,7 +88,7 @@ export const state = {
       "hospitalize": "2230",
       "severe": "26",
       "discharge": "21208",
-      "created_at": "20200919",
+      "date": "2020-09-19",
       "prefecture": "東京都"
     },
 
