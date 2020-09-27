@@ -25,8 +25,8 @@ describe('Domestic.vue', () => {
   it('method-now', () => {
     const value = vm.$store.state.ratio
     vm.now(value[1], value[0])//[1]today,[0]yesterday
-    expect(vm.nowCase).toBe('2,277')
-    expect(vm.nowPercentage).toBe('0.01633')
-    expect(vm.comparisonCases).toBe('+47人')
+    expect(vm.nowCase).toBe('2,346')
+    expect(vm.nowPercentage).toBe('0.01682')
+    expect(vm.comparisonCases).toBe('-29人')
   })
 })

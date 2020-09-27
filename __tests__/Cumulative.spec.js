@@ -25,21 +25,21 @@ describe('Cumulative.vue', () => {
   })
   it('method-cumulative', () => {
     vm.cumulative(vm.$store.state.ratio[0])
-    expect(vm.pcr).toBe('(408,414人)')
-    expect(vm.cases).toBe('(23,828人)')
-    expect(vm.deaths).toBe('390')//人は後付け
+    expect(vm.pcr).toBe('(412,653人)')
+    expect(vm.cases).toBe('(24,306人)')
+    expect(vm.deaths).toBe('391')//人は後付け
   })
   it('method-percentage', () => {
     vm.percentage(vm.$store.state.ratio[0])
-    expect(vm.pcrPercentage).toBe('2.9291')//文字列として%後付け
-    expect(vm.casesPercentage).toBe('0.1708')//文字列として%後付け
-    expect(vm.deathPercentage).toBe('1.63%')
+    expect(vm.pcrPercentage).toBe('2.9596')//文字列として%後付け
+    expect(vm.casesPercentage).toBe('0.1743')//文字列として%後付け
+    expect(vm.deathPercentage).toBe('1.6%')
   })
   it('method-comparison', () => {
     const value = vm.$store.state.ratio
-    vm.comparison(value[1], value[0])//[1]today,[0]yesterday
-    expect(vm.comparisonPcr).toBe('+2,945')
-    expect(vm.comparisonCases).toBe('+218')
+    vm.comparison(value[0], value[1])//[0]today,[1]yesterday
+    expect(vm.comparisonPcr).toBe('+1,294')
+    expect(vm.comparisonCases).toBe('+98')
     expect(vm.comparisonDeaths).toBe('+1')
   })
 
