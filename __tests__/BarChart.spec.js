@@ -1,6 +1,6 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils'
 import Vuex from 'vuex'
-import { state } from '@/modules/storeModule.js'
+import { state } from '@/modules/test-storeModule.js'
 import BarChart from '@/components/BarChart.vue'
 
 

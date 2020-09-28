@@ -1,7 +1,7 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils'
 import Vuex from 'vuex'
 import { getters } from '@/store/index.js'
-import { state } from '@/modules/storeModule.js'
+import { state } from '@/modules/test-storeModule.js'
 import Domestic from '@/components/Domestic.vue'
 import CoreuiVue from '@coreui/vue';
 
