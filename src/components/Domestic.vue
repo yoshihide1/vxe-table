@@ -42,16 +42,16 @@ export default {
   },
   methods: {
     now(today, yesterday) {
-      let a = today.cases - today.discharge - today.deaths;
-      let b = yesterday.cases - yesterday.discharge - yesterday.deaths;
-      let percentage = (a / today.population) * 100;
+      const a = today.cases - today.discharge - today.deaths;
+      const b = yesterday.cases - yesterday.discharge - yesterday.deaths;
+      const percentage = (a / today.population) * 100;
       this.nowCase = this.numComma(a);
       this.nowPercentage = String(Math.floor(percentage * 100000) / 100000);
       if (a - b >= 0) {
         this.comparisonCases = `+${a - b}人`;
       } else {
         this.comparisonCases = `${a - b}人`;
-        let d = this.$refs.case.$el;
+        const d = this.$refs.case.$el;
         d.classList.replace("case__plus", "case__minus");
       }
     },

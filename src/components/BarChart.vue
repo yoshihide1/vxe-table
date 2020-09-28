@@ -23,41 +23,10 @@ export default {
     },
   },
   methods: {
-    randomColor() {
-      let max = 255;
-      let min = 0;
-      let color = [];
-      let i = 0;
-      while (i < 3) {
-        let colorCode = Math.floor(Math.random() * (max + 1 - min)) + min;
-        color.push(colorCode);
-        i++;
-      }
-      return `rgb(${color})`;
-    },
-    plus(data) {
-      data.forEach((pref) => {
-        this.datacollection.datasets.push({
-          label: `${pref.prefecture}(累計)`,
-          backgroundColor: this.randomColor(),
-          borderWidth: 0,
-          borderColor: "black",
-          pointBorderColor: "glay",
-          data: [
-            pref["cases"].today,
-            pref["hospitalize"].today,
-            pref["discharge"].today,
-            pref["severe"].today,
-            pref["deaths"].today,
-          ],
-        });
-      });
-      this.renderChart(this.datacollection, this.options);
-    },
     totalAndPref(pref) {
       this.datacollection.datasets = [];
-      let total = this.ratio[0];
-      let prefData = this.prefData;
+      const total = this.ratio[0];
+      const prefData = this.prefData;
       this.datacollection = {
         labels: ["感染者", "入院中", "退院", "重症", "死者"],
         datasets: [
@@ -121,6 +90,38 @@ export default {
       } else {
         this.renderChart(this.datacollection, this.options);
       }
+    },
+    plus(data, test = false) {
+      data.forEach((pref) => {
+        this.datacollection.datasets.push({
+          label: `${pref.prefecture}(累計)`,
+          backgroundColor: this.randomColor(),
+          borderWidth: 0,
+          borderColor: "black",
+          pointBorderColor: "glay",
+          data: [
+            pref["cases"].today,
+            pref["hospitalize"].today,
+            pref["discharge"].today,
+            pref["severe"].today,
+            pref["deaths"].today,
+          ],
+        });
+      });
+      if(test) return
+      this.renderChart(this.datacollection, this.options);
+    },
+    randomColor() {
+      const max = 255;
+      const min = 0;
+      const color = [];
+      let i = 0;
+      while (i < 3) {
+        const colorCode = Math.floor(Math.random() * (max + 1 - min)) + min;
+        color.push(colorCode);
+        i++;
+      }
+      return `rgb(${color})`;
     },
   },
 };

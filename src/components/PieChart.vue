@@ -19,7 +19,7 @@ export default {
   },
   methods: {
     totalChart() {
-      let total = this.prefData;
+      const total = this.prefData;
       (this.datacollection = {
         labels: ["PCR検査(累計)", "感染者(累計)"],
         datasets: [

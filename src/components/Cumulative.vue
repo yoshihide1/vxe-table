@@ -105,9 +105,9 @@ export default {
       this.deaths = this.numComma(ratio.deaths);
     },
     percentage(ratio) {
-      let death = (ratio.deaths / ratio.cases) * 100;
-      let pcr = (ratio.pcr / ratio.population) * 100;
-      let cases = (ratio.cases / ratio.population) * 100;
+      const death = (ratio.deaths / ratio.cases) * 100;
+      const pcr = (ratio.pcr / ratio.population) * 100;
+      const cases = (ratio.cases / ratio.population) * 100;
       this.pcrPercentage = String(Math.floor(pcr * 10000) / 10000);
       this.casesPercentage = String(Math.floor(cases * 10000) / 10000);
       this.deathPercentage = Math.floor(death * 100) / 100 + "%";
@@ -115,12 +115,12 @@ export default {
     comparison(today, yesterday) {
       this.comparisonPcr = `+${this.numComma(today.pcr - yesterday.pcr)}`;
       this.comparisonCases = `+${this.numComma(today.cases - yesterday.cases)}`;
-      let num = today.deaths - yesterday.deaths;
+      const num = today.deaths - yesterday.deaths;
       if (num > 0) {
         this.comparisonDeaths = `+${num}`;
       } else {
         this.comparisonDeaths = `±${num}`;
-        let d = this.$refs.death.$el;
+        const d = this.$refs.death.$el;
         d.classList.replace("death__plus", "death");
       }
     },

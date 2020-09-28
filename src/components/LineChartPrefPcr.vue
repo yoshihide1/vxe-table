@@ -1,10 +1,11 @@
 <script>
 import { Line } from "vue-chartjs";
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
   extends: Line,
   computed: {
     ...mapState(["byPrefData"]),
+    ...mapGetters(["dateFormat"]),
   },
   data() {
     return {
@@ -20,21 +21,17 @@ export default {
     },
   },
   methods: {
-    setPref() {
+    setPref(test = false) {
       this.date = [];
       this.pcr = [];
-      let data1 = this.byPrefData.slice(1, this.byPrefData.length);
-      let data2 = this.byPrefData.slice(0, this.byPrefData.length - 1);
+      const data1 = this.byPrefData.slice(1, this.byPrefData.length);
+      const data2 = this.byPrefData.slice(0, this.byPrefData.length - 1);
       for (let i in data1) {
         this.date.push(this.dateFormat(data1[i].created_at));
         this.pcr.push(data1[i].pcr - data2[i].pcr);
       }
+      if (test) return;
       this.totalChart();
-    },
-    dateFormat(value) {
-      const a = value.slice(4, 6);
-      const b = value.slice(6, 9);
-      return `${a}月${b}日`;
     },
     totalChart() {
       (this.datacollection = {

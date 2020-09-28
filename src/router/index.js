@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Corona from '../views/corona.vue'
+import Corona from '@/views/Corona.vue'
 
 Vue.use(VueRouter)
 
