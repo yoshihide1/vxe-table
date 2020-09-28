@@ -19,7 +19,13 @@ describe('BarChart.vue', () => {
     wrapper = shallowMount(BarChart, { store, localVue })
     vm = wrapper.vm
   })
-  it('method-randomColor', () => {
-    expect(vm.randomColor()).toMatch(/((2[0-4]\d|25[0-5]|1\d{1,2}|[1-9]\d|\d)(,?)){2}(2[0-4]\d|25[0-5]|1\d{1,2}|[1-9]\d|\d)/)
+  it('method-randomColor', () => {//rgbの正規表現、例:rgb(232,121,223)
+    expect(vm.randomColor()).toMatch(/^rgb\(((2[0-4]\d|25[0-5]|1\d{1,2}|[1-9]\d|\d)(,?)){2}(2[0-4]\d|25[0-5]|1\d{1,2}|[1-9]\d|\d)\)/)
+  })
+  it('method-plus データが増えているか', () => {
+    vm.datacollection.datasets = []
+    expect(vm.datacollection.datasets.length).toBe(0)
+    vm.plus([vm.$store.state.ratio[0]], true)
+    expect(vm.datacollection.datasets.length).toBe(1)
   })
 })
