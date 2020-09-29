@@ -19,6 +19,16 @@ describe('BarChart.vue', () => {
     wrapper = shallowMount(BarChart, { store, localVue })
     vm = wrapper.vm
   })
+  it('method-totalDataSet', () => {
+    const totalData = vm.$store.state.ratio[0]
+    const result = { "borderWidth": 0, "data": ["24306", "2375", "21540", "27", "391"], "label": "全国(累計)" }
+    expect(vm.totalDataSet(totalData)).toStrictEqual(expect.objectContaining(result))
+  })
+  it('method-totalPrefDataSet', () => {
+    const prefData = vm.$store.state.prefData
+    const result = { "borderWidth": 0, "data": ["24046", "2278", "21378", "25", "391"], "label": "東京都(累計)" }
+    expect(vm.totalPrefDataSet(prefData)).toStrictEqual(expect.objectContaining(result))
+  })
   it('method-plus データが増えているか', () => {
     vm.datacollection.datasets = []
     expect(vm.datacollection.datasets.length).toBe(0)
