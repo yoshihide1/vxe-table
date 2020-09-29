@@ -60,8 +60,8 @@ export default {
       this.datacollection = {
         labels: ["感染者", "入院中", "退院", "重症", "死者"],
         datasets: [
-          this.totalDataSets(totalData),
-          this.totalPrefDatasets(prefData),
+          this.totalDataSet(totalData),
+          this.totalPrefDataSet(prefData),
         ],
       };
       this.options = {
