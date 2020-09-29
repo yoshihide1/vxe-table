@@ -1,5 +1,5 @@
-import { getters } from '../src/store/index.js'
-import testData from '../src/assets/testData.json'
+import { getters } from '@/store/index.js'
+import testData from '@/assets/testData.json'
 
 
 describe('getters', () => {
