@@ -23,37 +23,43 @@ export default {
     },
   },
   methods: {
+    totalDataSets(totalData) {
+      return {
+        label: "全国(累計)",
+        backgroundColor: this.randomColor(),
+        borderWidth: 0,
+        data: [
+          totalData.cases,
+          totalData.hospitalize,
+          totalData.discharge,
+          totalData.severe,
+          totalData.deaths,
+        ],
+      };
+    },
+    totalPrefDatasets(prefData) {
+      return {
+        label: `${prefData.prefecture}(累計)`,
+        backgroundColor: this.randomColor(),
+        borderWidth: 0,
+        data: [
+          prefData["cases"].today,
+          prefData["hospitalize"].today,
+          prefData["discharge"].today,
+          prefData["severe"].today,
+          prefData["deaths"].today,
+        ],
+      };
+    },
     totalAndPref(pref) {
       this.datacollection.datasets = [];
-      const total = this.ratio[0];
+      const totalData = this.ratio[0];
       const prefData = this.prefData;
       this.datacollection = {
         labels: ["感染者", "入院中", "退院", "重症", "死者"],
         datasets: [
-          {
-            label: "全国(累計)",
-            backgroundColor: this.randomColor(),
-            borderWidth: 0,
-            data: [
-              total.cases,
-              total.hospitalize,
-              total.discharge,
-              total.severe,
-              total.deaths,
-            ],
-          },
-          {
-            label: `${prefData.prefecture}(累計)`,
-            backgroundColor: this.randomColor(),
-            borderWidth: 0,
-            data: [
-              prefData["cases"].today,
-              prefData["hospitalize"].today,
-              prefData["discharge"].today,
-              prefData["severe"].today,
-              prefData["deaths"].today,
-            ],
-          },
+          this.totalDataSets(totalData),
+          this.totalPrefDatasets(prefData),
         ],
       };
       this.options = {
@@ -108,7 +114,7 @@ export default {
           ],
         });
       });
-      if(test) return
+      if (test) return;
       this.renderChart(this.datacollection, this.options);
     },
     randomColor() {

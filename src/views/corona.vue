@@ -65,8 +65,7 @@ import LineChart from "@/components/LineChart";
 import LineChartPcr from "@/components/LineChartPcr";
 import LineChartPref from "@/components/LineChartPref";
 import LineChartPrefPcr from "@/components/LineChartPrefPcr";
-
-import updated from "@/components/Updated";
+import Updated from "@/components/Updated";
 
 export default {
   components: {
