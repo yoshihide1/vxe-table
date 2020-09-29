@@ -1,86 +1,85 @@
 <template>
   <div class="container-fluid">
-    <updated class="date" />
+    <Updated class="date" />
 
-    <cumulative />
+    <Cumulative />
 
     <CCol col="13" sm="13">
       <CCard bodyWrapper>
-        <lineChartPcr class="chart__pcr" />
+        <LineChartPcr class="chart__pcr" />
       </CCard>
     </CCol>
 
     <CCol col="13" sm="13">
       <CCard bodyWrapper>
-        <lineChart />
+        <LineChart />
       </CCard>
     </CCol>
     <CRow>
       <CCol col="12" sm="6">
-        <domestic />
+        <Domestic />
       </CCol>
 
       <CCol col="12" sm="6">
-        <domesticPrefecture />
+        <DomesticPrefecture />
       </CCol>
     </CRow>
     <CRow>
       <CCol col="12" sm="5">
         <CCard bodyWrapper>
-          <lineChartPrefPcr class="chart__pref" />
+          <LineChartPrefPcr class="chart__pref" />
         </CCard>
       </CCol>
       <CCol col="12" sm="7">
         <CCard bodyWrapper>
-          <lineChartPref class="chart__pref" />
+          <LineChartPref class="chart__pref" />
         </CCard>
       </CCol>
     </CRow>
     <CRow>
       <CCol col="12" sm="8">
         <CCard bodyWrapper>
-          <barChart />
+          <BarChart />
         </CCard>
       </CCol>
       <CCol col="12" sm="4">
         <CCard bodyWrapper>
-          <pieChart />
+          <PieChart />
         </CCard>
       </CCol>
     </CRow>
     <CCol col="13" sm="13">
-      <coronaTotal />
+      <CoronaTotal />
     </CCol>
   </div>
 </template>
 
 <script>
-import coronaTotal from "@/components/CoronaTotal";
-import cumulative from "@/components/Cumulative";
-import domestic from "@/components/Domestic";
-import domesticPrefecture from "@/components/DomesticPrefecture";
-import barChart from "@/components/BarChart";
-import pieChart from "@/components/PieChart";
-import lineChart from "@/components/LineChart";
-import lineChartPcr from "@/components/LineChartPcr";
-import lineChartPref from "@/components/LineChartPref";
-import lineChartPrefPcr from "@/components/LineChartPrefPcr";
-
-import updated from "@/components/Updated";
+import CoronaTotal from "@/components/CoronaTotal";
+import Cumulative from "@/components/Cumulative";
+import Domestic from "@/components/Domestic";
+import DomesticPrefecture from "@/components/DomesticPrefecture";
+import BarChart from "@/components/BarChart";
+import PieChart from "@/components/PieChart";
+import LineChart from "@/components/LineChart";
+import LineChartPcr from "@/components/LineChartPcr";
+import LineChartPref from "@/components/LineChartPref";
+import LineChartPrefPcr from "@/components/LineChartPrefPcr";
+import Updated from "@/components/Updated";
 
 export default {
   components: {
-    coronaTotal,
-    cumulative,
-    domestic,
-    domesticPrefecture,
-    barChart,
-    pieChart,
-    lineChart,
-    lineChartPcr,
-    lineChartPref,
-    lineChartPrefPcr,
-    updated,
+    CoronaTotal,
+    Cumulative,
+    Domestic,
+    DomesticPrefecture,
+    BarChart,
+    PieChart,
+    LineChart,
+    LineChartPcr,
+    LineChartPref,
+    LineChartPrefPcr,
+    Updated,
   },
   data() {
     return {};

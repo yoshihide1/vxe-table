@@ -1,6 +1,7 @@
 <script>
 import { Bar } from "vue-chartjs";
 import { mapState } from "vuex";
+import randomColor from "randomcolor";
 export default {
   extends: Bar,
   computed: {
@@ -12,6 +13,7 @@ export default {
       options: {},
       total: null,
       prefTotal: null,
+      randomColor: randomColor({ luminosity: "dark" }),
     };
   },
   watch: {
@@ -23,37 +25,43 @@ export default {
     },
   },
   methods: {
+    totalDataSet(totalData) {
+      return {
+        label: "全国(累計)",
+        backgroundColor: randomColor({ luminosity: "dark" }),
+        borderWidth: 0,
+        data: [
+          totalData.cases,
+          totalData.hospitalize,
+          totalData.discharge,
+          totalData.severe,
+          totalData.deaths,
+        ],
+      };
+    },
+    totalPrefDataSet(prefData) {
+      return {
+        label: `${prefData.prefecture}(累計)`,
+        backgroundColor: randomColor({ luminosity: "dark" }),
+        borderWidth: 0,
+        data: [
+          prefData["cases"].today,
+          prefData["hospitalize"].today,
+          prefData["discharge"].today,
+          prefData["severe"].today,
+          prefData["deaths"].today,
+        ],
+      };
+    },
     totalAndPref(pref) {
       this.datacollection.datasets = [];
-      const total = this.ratio[0];
+      const totalData = this.ratio[0];
       const prefData = this.prefData;
       this.datacollection = {
         labels: ["感染者", "入院中", "退院", "重症", "死者"],
         datasets: [
-          {
-            label: "全国(累計)",
-            backgroundColor: this.randomColor(),
-            borderWidth: 0,
-            data: [
-              total.cases,
-              total.hospitalize,
-              total.discharge,
-              total.severe,
-              total.deaths,
-            ],
-          },
-          {
-            label: `${prefData.prefecture}(累計)`,
-            backgroundColor: this.randomColor(),
-            borderWidth: 0,
-            data: [
-              prefData["cases"].today,
-              prefData["hospitalize"].today,
-              prefData["discharge"].today,
-              prefData["severe"].today,
-              prefData["deaths"].today,
-            ],
-          },
+          this.totalDataSet(totalData),
+          this.totalPrefDataSet(prefData),
         ],
       };
       this.options = {
@@ -95,7 +103,7 @@ export default {
       data.forEach((pref) => {
         this.datacollection.datasets.push({
           label: `${pref.prefecture}(累計)`,
-          backgroundColor: this.randomColor(),
+          backgroundColor: randomColor({ luminosity: "dark" }),
           borderWidth: 0,
           borderColor: "black",
           pointBorderColor: "glay",
@@ -108,20 +116,8 @@ export default {
           ],
         });
       });
-      if(test) return
+      if (test) return;
       this.renderChart(this.datacollection, this.options);
-    },
-    randomColor() {
-      const max = 255;
-      const min = 0;
-      const color = [];
-      let i = 0;
-      while (i < 3) {
-        const colorCode = Math.floor(Math.random() * (max + 1 - min)) + min;
-        color.push(colorCode);
-        i++;
-      }
-      return `rgb(${color})`;
     },
   },
 };

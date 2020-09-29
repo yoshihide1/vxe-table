@@ -1,6 +1,5 @@
-import { shallowMount, createLocalVue } from '@vue/test-utils'
+import { createLocalVue } from '@vue/test-utils'
 import Vuex from 'vuex'
-import Corona from '@/views/Corona'
 
 const localVue = createLocalVue()
 

@@ -19,8 +19,15 @@ describe('BarChart.vue', () => {
     wrapper = shallowMount(BarChart, { store, localVue })
     vm = wrapper.vm
   })
-  it('method-randomColor', () => {//rgbの正規表現、例:rgb(232,121,223)
-    expect(vm.randomColor()).toMatch(/^rgb\(((2[0-4]\d|25[0-5]|1\d{1,2}|[1-9]\d|\d)(,?)){2}(2[0-4]\d|25[0-5]|1\d{1,2}|[1-9]\d|\d)\)/)
+  it('method-totalDataSet', () => {
+    const totalData = vm.$store.state.ratio[0]
+    const result = { "borderWidth": 0, "data": ["24306", "2375", "21540", "27", "391"], "label": "全国(累計)" }
+    expect(vm.totalDataSet(totalData)).toStrictEqual(expect.objectContaining(result))
+  })
+  it('method-totalPrefDataSet', () => {
+    const prefData = vm.$store.state.prefData
+    const result = { "borderWidth": 0, "data": ["24046", "2278", "21378", "25", "391"], "label": "東京都(累計)" }
+    expect(vm.totalPrefDataSet(prefData)).toStrictEqual(expect.objectContaining(result))
   })
   it('method-plus データが増えているか', () => {
     vm.datacollection.datasets = []
