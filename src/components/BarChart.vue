@@ -1,6 +1,7 @@
 <script>
 import { Bar } from "vue-chartjs";
 import { mapState } from "vuex";
+import randomColor from "randomcolor";
 export default {
   extends: Bar,
   computed: {
@@ -12,6 +13,7 @@ export default {
       options: {},
       total: null,
       prefTotal: null,
+      randomColor: randomColor({ luminosity: "dark" }),
     };
   },
   watch: {
@@ -23,10 +25,10 @@ export default {
     },
   },
   methods: {
-    totalDataSets(totalData) {
+    totalDataSet(totalData) {
       return {
         label: "全国(累計)",
-        backgroundColor: this.randomColor(),
+        backgroundColor: randomColor({ luminosity: "dark" }),
         borderWidth: 0,
         data: [
           totalData.cases,
@@ -37,10 +39,10 @@ export default {
         ],
       };
     },
-    totalPrefDatasets(prefData) {
+    totalPrefDataSet(prefData) {
       return {
         label: `${prefData.prefecture}(累計)`,
-        backgroundColor: this.randomColor(),
+        backgroundColor: randomColor({ luminosity: "dark" }),
         borderWidth: 0,
         data: [
           prefData["cases"].today,
@@ -101,7 +103,7 @@ export default {
       data.forEach((pref) => {
         this.datacollection.datasets.push({
           label: `${pref.prefecture}(累計)`,
-          backgroundColor: this.randomColor(),
+          backgroundColor: randomColor({ luminosity: "dark" }),
           borderWidth: 0,
           borderColor: "black",
           pointBorderColor: "glay",
@@ -116,18 +118,6 @@ export default {
       });
       if (test) return;
       this.renderChart(this.datacollection, this.options);
-    },
-    randomColor() {
-      const max = 255;
-      const min = 0;
-      const color = [];
-      let i = 0;
-      while (i < 3) {
-        const colorCode = Math.floor(Math.random() * (max + 1 - min)) + min;
-        color.push(colorCode);
-        i++;
-      }
-      return `rgb(${color})`;
     },
   },
 };
