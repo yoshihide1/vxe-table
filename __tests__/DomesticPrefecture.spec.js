@@ -23,7 +23,7 @@ describe('DomesticPrefecture.vue', () => {
     vm = wrapper.vm
   })
   it('method-prefFilter', () => {
-    vm.prefFilter(vm.$store.state.prefData, 'test')
+    vm.prefFilter(vm.$store.state.prefData, true)
     expect(vm.prefNowCase).toBe('2,667')
     expect(vm.prefNowPercentage).toBe(0.01912)
     expect(vm.prefName).toBe('東京都')
@@ -32,7 +32,7 @@ describe('DomesticPrefecture.vue', () => {
   it('method-check', () => {
     const value = vm.$store.state.prefData
     const result = `+${value.cases.today - value.cases.yesterday}`
-    vm.check(result, 'test')
+    vm.check(result, true)
     expect(vm.comparisonCases).toBe('+218')
   })
 })

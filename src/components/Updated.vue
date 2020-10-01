@@ -27,7 +27,6 @@ export default {
       const c = a.slice(5, 7);
       const d = a.slice(8, 10);
       this.updated = `最終更新日${b}年${c}月${d}日`;
-      return this.updated//test
     }
   }
 };
