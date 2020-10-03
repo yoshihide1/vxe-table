@@ -1,10 +1,11 @@
 <script>
 import { Line } from "vue-chartjs";
-import { mapState } from "vuex";
+import { mapState, mapGetters } from "vuex";
 export default {
   extends: Line,
   computed: {
     ...mapState(["ratio"]),
+    ...mapGetters(["chartOptions"])
   },
   data() {
     return {
@@ -57,29 +58,7 @@ export default {
           },
         ],
       }),
-        (this.options = {
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  suggestedMin: 0,
-                  stepSize: 5000,
-                },
-              },
-            ],
-          },
-          title: {
-            display: true,
-            text: "日本国内",
-            fontSize: 15,
-            padding: 0,
-          },
-          legend: {
-            display: true,
-          },
-          responsive: true,
-          maintainAspectRatio: false,
-        });
+        (this.options = this.chartOptions("日本国内"));
 
       this.renderChart(this.datacollection, this.options);
     },

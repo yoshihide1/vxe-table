@@ -116,7 +116,7 @@ export const getters = {
     return `${a}月${b}日`;
   },
 
-  chartOptions: () => (title) => {
+  chartOptions: () => (title = "") => {
     return {
       scales: {
         scaleLabel: {},

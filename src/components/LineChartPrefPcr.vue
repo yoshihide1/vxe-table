@@ -5,7 +5,7 @@ export default {
   extends: Line,
   computed: {
     ...mapState(["byPrefData"]),
-    ...mapGetters(["dateFormat"]),
+    ...mapGetters(["dateFormat", "chartOptions"]),
   },
   data() {
     return {
@@ -49,28 +49,7 @@ export default {
           },
         ],
       }),
-        (this.options = {
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  stepSize: 1000,
-                },
-              },
-            ],
-          },
-          title: {
-            display: true,
-            text: this.byPrefData[0].prefecture,
-            fontSize: 15,
-            padding: 0,
-          },
-          legend: {
-            display: true,
-          },
-          responsive: true,
-          maintainAspectRatio: false,
-        });
+        (this.options = this.chartOptions(this.byPrefData[0].prefecture));
 
       this.renderChart(this.datacollection, this.options);
     },
