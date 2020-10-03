@@ -24,6 +24,6 @@ describe('Updatede', () => {
     vm.lastUpdate("2020-10-25")
     expect(vm.updated).toBe("最終更新日2020年10月25日")
     vm.lastUpdate("2020-05-09")
-    expect(vm.lastUpdate("2020-05-09")).toBe("最終更新日2020年05月09日")
+    expect(vm.updated).toBe("最終更新日2020年05月09日")
   })
 })
