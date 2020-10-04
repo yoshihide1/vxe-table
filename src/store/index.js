@@ -113,7 +113,7 @@ export const getters = {
   dateFormat: () => (date) => {
     const a = date.slice(4, 6)
     const b = date.slice(6, 9)
-    return `${a}月${b}日`;
+    return `${Number(a)}月${b}日`;
   },
 
   chartOptions: () => (title = "") => {

@@ -5,7 +5,7 @@ export default {
   extends: Line,
   computed: {
     ...mapState(["ratio"]),
-    ...mapGetters(["chartOptions"])
+    ...mapGetters(["chartOptions", "dateFormat"]),
   },
   data() {
     return {
@@ -28,18 +28,12 @@ export default {
       const data1 = this.ratio.slice(0, this.ratio.length - 1);
       const data2 = this.ratio.slice(1, this.ratio.length);
       for (let i in data1) {
-        this.date.unshift(this.dateFormat(data1[i].date));
+        this.date.unshift(this.dateFormat(data1[i].date.replace(/[-]/g, "")));
         this.pcr.unshift(data1[i].pcr - data2[i].pcr);
         this.cases.unshift(data1[i].cases - data2[i].cases);
       }
       if (test) return;
       this.totalChart();
-    },
-    dateFormat(date) {
-      if (date) {
-        return date.slice(5).replace("-", "月") + "日";
-      }
-      return;
     },
     totalChart() {
       (this.datacollection = {
