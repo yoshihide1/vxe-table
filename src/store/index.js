@@ -115,25 +115,6 @@ export const getters = {
     const b = date.slice(6, 9)
     return `${Number(a)}月${b}日`;
   },
-
-  chartOptions: () => (title = "") => {
-    return {
-      scales: {
-        scaleLabel: {},
-      },
-      title: {
-        display: true,
-        text: title,
-        fontSize: 15,
-        padding: 0,
-      },
-      legend: {
-        display: true,
-      },
-      responsive: true,
-      maintainAspectRatio: false,
-    }
-  }
 }
 export default new Vuex.Store({
   state,

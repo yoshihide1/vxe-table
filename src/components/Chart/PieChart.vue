@@ -1,11 +1,11 @@
 <script>
 import { Pie } from "vue-chartjs";
-import { mapGetters, mapState } from "vuex";
+import { chartOptions } from "../../modules/chartModule.js";
+import { mapState } from "vuex";
 export default {
   extends: Pie,
   computed: {
     ...mapState(["prefData"]),
-    ...mapGetters(["chartOptions"]),
   },
   data() {
     return {
@@ -33,7 +33,7 @@ export default {
           },
         ],
       }),
-        (this.options = this.chartOptions(total.prefecture));
+        (this.options = chartOptions(total.prefecture));
 
       this.renderChart(this.datacollection, this.options);
     },

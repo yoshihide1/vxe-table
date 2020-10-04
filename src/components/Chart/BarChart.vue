@@ -1,12 +1,12 @@
 <script>
 import { Bar } from "vue-chartjs";
-import { mapGetters, mapState } from "vuex";
+import { chartOptions } from "../../modules/chartModule.js";
+import { mapState } from "vuex";
 import randomColor from "randomcolor";
 export default {
   extends: Bar,
   computed: {
     ...mapState(["ratio", "prefData", "chartPlus"]),
-    ...mapGetters(["chartOptions"]),
   },
   data() {
     return {
@@ -14,7 +14,6 @@ export default {
       options: {},
       total: null,
       prefTotal: null,
-      randomColor: randomColor({ luminosity: "dark" }),
     };
   },
   watch: {
@@ -65,7 +64,7 @@ export default {
           this.totalPrefDataSet(prefData),
         ],
       };
-      this.options = this.chartOptions();
+      this.options = chartOptions();
 
       if (pref) {
         this.plus(pref);
