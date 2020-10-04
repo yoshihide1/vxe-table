@@ -59,12 +59,12 @@ import CoronaTotal from "@/components/CoronaTotal";
 import Cumulative from "@/components/Cumulative";
 import Domestic from "@/components/Domestic";
 import DomesticPrefecture from "@/components/DomesticPrefecture";
-import BarChart from "@/components/BarChart";
-import PieChart from "@/components/PieChart";
-import LineChart from "@/components/LineChart";
-import LineChartPcr from "@/components/LineChartPcr";
-import LineChartPref from "@/components/LineChartPref";
-import LineChartPrefPcr from "@/components/LineChartPrefPcr";
+import BarChart from "@/components/Chart/BarChart";
+import PieChart from "@/components/Chart/PieChart";
+import LineChart from "@/components/Chart/LineChart";
+import LineChartPcr from "@/components/Chart/LineChartPcr";
+import LineChartPref from "@/components/Chart/LineChartPref";
+import LineChartPrefPcr from "@/components/Chart/LineChartPrefPcr";
 import Updated from "@/components/Updated";
 
 export default {
