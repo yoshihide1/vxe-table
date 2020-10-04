@@ -2,10 +2,10 @@ import { createLocalVue, shallowMount } from '@vue/test-utils'
 import Vuex from 'vuex'
 import { state } from '@/modules/test-storeModule.js'
 import { getters } from '@/store/index.js'
-import LineChartPref from '@/components/LineChartPref.vue'
-import LineChartPrefPcr from '@/components/LineChartPrefPcr.vue'
-import LineChart from '@/components/LineChart.vue'
-import LineChartPcr from '@/components/LineChartPcr.vue'
+import LineChartPref from '@/components/Chart/LineChartPref.vue'
+import LineChartPrefPcr from '@/components/Chart/LineChartPrefPcr.vue'
+import LineChart from '@/components/Chart/LineChart.vue'
+import LineChartPcr from '@/components/Chart/LineChartPcr.vue'
 
 
 const localVue = createLocalVue()
