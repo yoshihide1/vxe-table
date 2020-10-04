@@ -1,11 +1,12 @@
 <script>
 import { Line } from "vue-chartjs";
+import { lineChartDataSet, chartOptions } from "../../modules/chartModule.js";
 import { mapState, mapGetters } from "vuex";
 export default {
   extends: Line,
   computed: {
     ...mapState(["ratio"]),
-    ...mapGetters(["chartOptions", "dateFormat"]),
+    ...mapGetters(["dateFormat"]),
   },
   data() {
     return {
@@ -43,42 +44,12 @@ export default {
       (this.datacollection = {
         labels: this.date,
         datasets: [
-          {
-            label: ["感染者"],
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 2,
-            backgroundColor: "rgba(255,0,0,0.1)",
-            borderWidth: 3,
-            borderColor: "#D7366A",
-            hitRadius: 5,
-            radius: 2,
-            data: this.cases,
-          },
-          {
-            label: ["入院"],
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 2,
-            backgroundColor: "rgba(255,255,0,0.1)",
-            borderWidth: 3,
-            borderColor: "#F1CD42",
-            hitRadius: 5,
-            radius: 2,
-            data: this.hospitalize,
-          },
-          {
-            label: ["退院"],
-            pointBackgroundColor: "#fff",
-            pointBorderWidth: 2,
-            backgroundColor: "rgba(0,0,0,0)",
-            borderWidth: 3,
-            borderColor: "#2BBA2B",
-            hitRadius: 5,
-            radius: 2,
-            data: this.discharge,
-          },
+          lineChartDataSet("感染者", "rgba(255,0,0,0.1)", "#D7366A", this.cases),
+          lineChartDataSet("入院", "rgba(255,255,0,0.1)", "#F1CD42", this.hospitalize),
+          lineChartDataSet("退院", "rgba(0,0,0,0)", "#2BBA2B", this.discharge),
         ],
       }),
-        (this.options = this.chartOptions("日本国内"));
+        (this.options = chartOptions("日本国内"));
 
       this.renderChart(this.datacollection, this.options);
     },
