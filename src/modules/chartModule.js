@@ -2,7 +2,7 @@ export const lineChartDataSet = (label, backColor, borderColor, data) => {
   return {
     label: label,
     pointBackgroundColor: "#fff",
-    pointBorderWidth: 2,
+    pointBorderWidth: 1,
     backgroundColor: backColor,
     borderWidth: 3,
     borderColor: borderColor,

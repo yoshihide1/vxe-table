@@ -1,11 +1,12 @@
 <script>
 import { Line } from "vue-chartjs";
+import { lineChartDataSet, chartOptions } from "../../modules/chartModule.js";
 import { mapState, mapGetters } from "vuex";
 export default {
   extends: Line,
   computed: {
     ...mapState(["byPrefData"]),
-    ...mapGetters(["dateFormat", "chartOptions"]),
+    ...mapGetters(["dateFormat"]),
   },
   data() {
     return {
@@ -37,19 +38,10 @@ export default {
       (this.datacollection = {
         labels: this.date,
         datasets: [
-          {
-            label: ["PCR検査"],
-            pointBackgroundColor: "#fff",
-            backgroundColor: "rgba(0,0,255,0.1)",
-            borderWidth: 2,
-            borderColor: "#673FC4",
-            radius: 1,
-            hitRadius: 3,
-            data: this.pcr,
-          },
+          lineChartDataSet("PCR検査", "rgba(0,0,255,0.1)", "#673FC4", this.pcr),
         ],
       }),
-        (this.options = this.chartOptions(this.byPrefData[0].prefecture));
+        (this.options = chartOptions(this.byPrefData[0].prefecture));
 
       this.renderChart(this.datacollection, this.options);
     },
