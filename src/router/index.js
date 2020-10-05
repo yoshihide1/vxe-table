@@ -1,14 +1,14 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Corona from '@/views/Corona.vue'
+import App from '@/App.vue'
 
 Vue.use(VueRouter)
 
-  const routes = [
+const routes = [
   {
     path: '/',
-    name: 'corona',
-    component: Corona
+    name: 'app',
+    component: App
   },
 ]
 

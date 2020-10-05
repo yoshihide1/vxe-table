@@ -1,9 +1,20 @@
 <template>
   <div id="app">
-    <router-view />
+    <Corona />
   </div>
 </template>
+<script>
+import Corona from "./views/Corona"
+export default {
+  components: {
+    Corona
+  },
+    mounted() {
+    console.log("mounted!!!")
+  },
 
+}
+</script>
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
