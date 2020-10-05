@@ -1,27 +1,26 @@
 <template>
   <div id="app">
-    <!-- <Loading v-show="loading" /> -->
-    <Corona v-show="!loading"/>
+    <Loading v-show="loading" />
+    <Corona v-show="!loading" />
   </div>
 </template>
 <script>
-import Corona from "./views/Corona"
-// import Loading from "./components/Loading"
+import Corona from "./views/Corona";
+import Loading from "./components/Loading";
 export default {
   components: {
     Corona,
-    // Loading
+    Loading,
   },
   data() {
     return {
-      loading: true
-    }
+      loading: true,
+    };
   },
-    mounted() {
-        this.loading = false
+  mounted() {
+      this.loading = false;
   },
-
-}
+};
 </script>
 <style lang="scss">
 #app {

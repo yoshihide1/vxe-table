@@ -15,15 +15,10 @@ export default {};
 
 <style scoped>
 .loading {
-  position: relative;
-  height: 50vw;
+ position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
 }
-.set__center {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  margin: auto;
-}
+
 </style>
