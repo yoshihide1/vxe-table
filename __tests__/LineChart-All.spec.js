@@ -1,7 +1,7 @@
 import { createLocalVue, shallowMount } from '@vue/test-utils'
 import Vuex from 'vuex'
 import { state } from '@/modules/test-storeModule.js'
-import { getters } from '@/store/index.js'
+import { getters } from '@/store/module/getters.js'
 import LineChartPref from '@/components/Chart/LineChartPref.vue'
 import LineChartPrefPcr from '@/components/Chart/LineChartPrefPcr.vue'
 import LineChart from '@/components/Chart/LineChart.vue'

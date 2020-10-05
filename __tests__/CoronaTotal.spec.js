@@ -1,6 +1,6 @@
 import {createLocalVue, shallowMount} from '@vue/test-utils'
 import Vuex from 'vuex'
-import { getters } from '@/store/index.js'
+import { getters } from '@/store/module/getters.js'
 import {state} from '@/modules/test-storeModule.js'
 import CoronaTotal from '@/components/CoronaTotal.vue'
 import CoreuiVue from '@coreui/vue'

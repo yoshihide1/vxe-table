@@ -1,4 +1,4 @@
-import { getters } from '@/store/index.js'
+import { getters } from '@/store/module/getters.js'
 import testData from '@/assets/testData.json'
 
 
