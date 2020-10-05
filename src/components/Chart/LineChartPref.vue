@@ -1,5 +1,6 @@
 <script>
 import { Line } from "vue-chartjs";
+import {lineChartDataSet, chartOptions} from "../../modules/chartModule.js"
 import { mapState, mapGetters } from "vuex";
 export default {
   extends: Line,
@@ -11,8 +12,11 @@ export default {
     return {
       datacollection: {},
       options: {},
+      coronaTransition: [],
       date: [],
-      pcr: [],
+      cases: [],
+      discharge: [],
+      hospitalize: [],
     };
   },
   watch: {
@@ -23,12 +27,16 @@ export default {
   methods: {
     setPref(test = false) {
       this.date = [];
-      this.pcr = [];
+      this.cases = [];
+      this.discharge = [];
+      this.hospitalize = [];
       const data1 = this.byPrefData.slice(1, this.byPrefData.length);
       const data2 = this.byPrefData.slice(0, this.byPrefData.length - 1);
       for (let i in data1) {
         this.date.push(this.dateFormat(data1[i].created_at));
-        this.pcr.push(data1[i].pcr - data2[i].pcr);
+        this.cases.push(data1[i].cases - data2[i].cases);
+        this.discharge.push(data1[i].discharge - data2[i].discharge);
+        this.hospitalize.push(data1[i].hospitalize - data2[i].hospitalize);
       }
       if (test) return;
       this.totalChart();
@@ -37,40 +45,12 @@ export default {
       (this.datacollection = {
         labels: this.date,
         datasets: [
-          {
-            label: ["PCR検査"],
-            pointBackgroundColor: "#fff",
-            backgroundColor: "rgba(0,0,255,0.1)",
-            borderWidth: 2,
-            borderColor: "#673FC4",
-            radius: 1,
-            hitRadius: 3,
-            data: this.pcr,
-          },
+          lineChartDataSet("感染者", "rgba(255,0,0,0.1)", "#D7366A", this.cases),
+          lineChartDataSet("入院", "rgba(255,255,0,0.1)", "#F1CD42", this.hospitalize),
+          lineChartDataSet("退院", "rgba(0,0,0,0)", "#2BBA2B", this.discharge)
         ],
       }),
-        (this.options = {
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  stepSize: 1000,
-                },
-              },
-            ],
-          },
-          title: {
-            display: true,
-            text: this.byPrefData[0].prefecture,
-            fontSize: 15,
-            padding: 0,
-          },
-          legend: {
-            display: true,
-          },
-          responsive: true,
-          maintainAspectRatio: false,
-        });
+        (this.options = chartOptions(this.byPrefData[0].prefecture));
 
       this.renderChart(this.datacollection, this.options);
     },

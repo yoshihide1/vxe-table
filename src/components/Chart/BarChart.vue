@@ -1,5 +1,6 @@
 <script>
 import { Bar } from "vue-chartjs";
+import { chartOptions } from "../../modules/chartModule.js";
 import { mapState } from "vuex";
 import randomColor from "randomcolor";
 export default {
@@ -13,7 +14,6 @@ export default {
       options: {},
       total: null,
       prefTotal: null,
-      randomColor: randomColor({ luminosity: "dark" }),
     };
   },
   watch: {
@@ -64,34 +64,7 @@ export default {
           this.totalPrefDataSet(prefData),
         ],
       };
-      this.options = {
-        scales: {
-          yAxes: [
-            {
-              ticks: {
-                beginAtZero: true,
-              },
-              gridLines: {
-                display: true,
-              },
-            },
-          ],
-          xAxes: [
-            {
-              gridLines: {
-                display: false,
-              },
-            },
-          ],
-        },
-        legend: {
-          display: true,
-          labels: {},
-        },
-        tooltips: {},
-        responsive: true,
-        maintainAspectRatio: false,
-      };
+      this.options = chartOptions();
 
       if (pref) {
         this.plus(pref);
@@ -101,20 +74,7 @@ export default {
     },
     plus(data, test = false) {
       data.forEach((pref) => {
-        this.datacollection.datasets.push({
-          label: `${pref.prefecture}(累計)`,
-          backgroundColor: randomColor({ luminosity: "dark" }),
-          borderWidth: 0,
-          borderColor: "black",
-          pointBorderColor: "glay",
-          data: [
-            pref["cases"].today,
-            pref["hospitalize"].today,
-            pref["discharge"].today,
-            pref["severe"].today,
-            pref["deaths"].today,
-          ],
-        });
+        this.datacollection.datasets.push(this.totalPrefDataSet(pref));
       });
       if (test) return;
       this.renderChart(this.datacollection, this.options);

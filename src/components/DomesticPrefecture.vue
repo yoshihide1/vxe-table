@@ -58,7 +58,7 @@ export default {
   },
   methods: {
     //test>test用の引数
-    prefFilter(pref, test = "") {
+    prefFilter(pref, test = false) {
       const a = pref["cases"].today - pref["discharge"].today;
       const b = pref["deaths"].today - pref["deaths"].yesterday;
       const now = a - b;
@@ -71,7 +71,7 @@ export default {
       if (test) return; //test時ここで止める為
       this.check(prefNow);
     },
-    check(data, test = "") {
+    check(data, test = false) {
       this.comparisonCases = data;
       if (test) return;
       const d = this.$refs.case.$el;

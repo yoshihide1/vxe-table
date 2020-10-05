@@ -1,5 +1,6 @@
 <script>
 import { Pie } from "vue-chartjs";
+import { chartOptions } from "../../modules/chartModule.js";
 import { mapState } from "vuex";
 export default {
   extends: Pie,
@@ -32,20 +33,8 @@ export default {
           },
         ],
       }),
-        (this.options = {
-          scales: {},
-          title: {
-            display: true,
-            text: total.prefecture,
-            fontSize: 15,
-            padding: 0
-          },
-          legend: {
-            display: true,
-          },
-          responsive: true,
-          maintainAspectRatio: false,
-        });
+        (this.options = chartOptions(total.prefecture));
+
       this.renderChart(this.datacollection, this.options);
     },
   },
