@@ -1,16 +1,24 @@
 <template>
   <div id="app">
-    <Corona />
+    <!-- <Loading v-show="loading" /> -->
+    <Corona v-show="!loading"/>
   </div>
 </template>
 <script>
 import Corona from "./views/Corona"
+// import Loading from "./components/Loading"
 export default {
   components: {
-    Corona
+    Corona,
+    // Loading
+  },
+  data() {
+    return {
+      loading: true
+    }
   },
     mounted() {
-    console.log("mounted!!!")
+        this.loading = false
   },
 
 }
